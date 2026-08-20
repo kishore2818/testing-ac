@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
@@ -18,7 +19,7 @@ export default function Navbar() {
   const pathname = usePathname()
 
   const { scrollY } = useScroll()
-  const shadow = useTransform(scrollY, [0, 80], ['0 0px 0px rgba(0,0,0,0)', '0 2px 16px rgba(0,0,0,0.08)'])
+  const shadow = useTransform(scrollY, [0, 80], ['0 0px 0px rgba(0,0,0,0)', '0 4px 20px rgba(0,0,0,0.06)'])
 
   return (
     <motion.header
@@ -26,15 +27,18 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 220, damping: 30 }}
       style={{ boxShadow: shadow }}
-      className="fixed top-0 left-0 right-0 z-[1000] h-16 md:h-[72px] bg-white border-b border-[var(--border)]"
+      className="fixed top-0 left-0 right-0 z-[1000] h-16 md:h-[72px] bg-white/90 backdrop-blur-md border-b border-[var(--border)] transition-all duration-300"
     >
       <div className="site-container h-full flex items-center justify-between gap-4">
 
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0 group z-50">
-          <img
-            src="https://res.cloudinary.com/ddg5ao8e7/image/upload/v1777438069/adler-contracts/logo.png"
+          <Image
+            src="/logo.png"
             alt="Adler Contracts"
+            width={180}
+            height={52}
+            priority
             className="h-9 md:h-11 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
           />
         </Link>

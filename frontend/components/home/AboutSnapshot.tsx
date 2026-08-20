@@ -5,6 +5,7 @@ import { CheckCircle } from 'lucide-react'
 import SectionLabel from '../shared/SectionLabel'
 import ScrollReveal, { fadeLeft, fadeRight } from '../shared/ScrollReveal'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function AboutSnapshot() {
   return (
@@ -83,9 +84,11 @@ export default function AboutSnapshot() {
                 <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[var(--primary)] z-20 m-4 pointer-events-none" />
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[var(--primary)] z-20 m-4 pointer-events-none" />
 
-                <img 
+                <Image 
                   src="/images/hero/workers/worker-5.png" 
                   alt="Adler Contracts Engineering Team" 
+                  fill
+                  sizes="(max-width: 768px) 90vw, 400px"
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
                 />
               </div>

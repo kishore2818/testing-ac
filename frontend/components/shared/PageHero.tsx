@@ -1,11 +1,12 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 
 export default function PageHero({ 
   title, 
   subtitle, 
-  image = "/images/hero/panel-2.jpg" 
+  image = "/images/hero/panel-1.jpg" 
 }: { 
   title: string; 
   subtitle?: string; 
@@ -14,9 +15,12 @@ export default function PageHero({
   return (
     <section className="relative overflow-hidden border-b border-[var(--border)] pt-24 pb-10 md:pt-[140px] md:pb-[80px]">
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src={image}
           alt={title}
+          fill
+          priority
+          sizes="100vw"
           className="w-full h-full object-cover"
         />
         {/* Dark translucent overlay instead of solid white */}
