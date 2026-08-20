@@ -62,17 +62,17 @@ export default function Enquiry() {
         boxShadow: "inset 0 0 40px rgba(124, 179, 66, 0.08)"
       }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-white py-12 md:py-24 relative overflow-hidden h-full flex flex-col justify-center border-t lg:border-l lg:border-t-0 lg:border-[var(--border)] group"
+      className="bg-white py-6 md:py-16 relative overflow-hidden h-full flex flex-col justify-center border-t lg:border-l lg:border-t-0 lg:border-[var(--border)] group"
     >
       
       {/* Background Radial Light Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,var(--primary-soft)_0%,transparent_65%)] pointer-events-none group-hover:scale-110 transition-transform duration-700" />
 
-      <div className="site-container max-w-2xl relative z-10 transition-transform duration-500 group-hover:scale-[1.01]">
+      <div className="site-container max-w-2xl md:max-w-xl lg:max-w-lg mx-auto relative z-10 transition-transform duration-500 group-hover:scale-[1.01]">
         
-        <div className="text-left md:text-center mb-8 md:mb-12">
+        <div className="text-left md:text-center mb-6 md:mb-12">
           <SectionLabel text="Request a Quote" color="accent" />
-          <h2 className="font-cormorant md:font-bebas text-4xl md:text-6xl text-[var(--accent)] tracking-wider">
+          <h2 className="font-cormorant md:font-bebas text-4xl md:text-4xl text-[var(--accent)] tracking-wider">
             READY TO POWER UP YOUR <span className="text-[var(--primary)]">PROJECT?</span>
           </h2>
           <p className="font-inter text-[var(--gray)] mt-4 max-w-xl mx-auto text-sm md:text-base">
@@ -84,33 +84,33 @@ export default function Enquiry() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-            className="bg-white border border-[var(--border)] border-t-[4px] border-t-[var(--primary)] rounded-[1.5rem] md:rounded-sm p-5 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] relative"
+            className="bg-white border border-[var(--border)] border-t-[4px] border-t-[var(--primary)] rounded-[1.5rem] md:rounded-sm p-4 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.05)] relative"
           >
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 md:gap-y-6">
             
             <div className="space-y-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Full Name</label>
-              <input required name="from_name" type="text" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="John Doe" />
+              <input required name="from_name" type="text" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="John Doe" />
             </div>
 
             <div className="space-y-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Company Name</label>
-              <input name="company" type="text" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="Acme Industries" />
+              <input name="company" type="text" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="Acme Industries" />
             </div>
 
             <div className="space-y-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Email Address</label>
-              <input required name="email" type="email" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="john@example.com" />
+              <input required name="email" type="email" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="john@example.com" />
             </div>
 
             <div className="space-y-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Phone Number</label>
-              <input required name="phone" type="tel" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="+91 90350 27395" />
+              <input required name="phone" type="tel" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="+91 90350 27395" />
             </div>
 
             <div className="space-y-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Service Required</label>
-              <select name="service" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all appearance-none cursor-pointer">
+              <select name="service" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all appearance-none cursor-pointer">
                 <option value="Panel Design & Mfg">Electrical Panel Design & Mfg</option>
                 <option value="Turnkey Projects">Turnkey Projects</option>
                 <option value="AMC">Annual Maintenance (AMC)</option>
@@ -121,12 +121,12 @@ export default function Enquiry() {
 
             <div className="space-y-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Project Location</label>
-              <input name="location" type="text" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="City, State" />
+              <input name="location" type="text" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all" placeholder="City, State" />
             </div>
 
             <div className="space-y-2 md:col-span-2">
               <label className="font-rajdhani uppercase tracking-widest text-xs font-bold text-[var(--primary)]">Project Details</label>
-              <textarea required name="message" rows={4} className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-[var(--black)] font-inter text-sm input-glow transition-all resize-none" placeholder="Provide brief requirements, specifications, or challenges..." />
+              <textarea required name="message" rows={4} className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-sm px-3 py-2 md:px-4 md:py-3 text-[var(--black)] font-inter text-sm input-glow transition-all resize-none" placeholder="Provide brief requirements, specifications, or challenges..." />
             </div>
 
             <div className="md:col-span-2 mt-4">

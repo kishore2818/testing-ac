@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export default function AboutSnapshot() {
   return (
-    <section className="bg-white py-12 md:py-16 overflow-hidden">
+    <section className="bg-white pt-12 pb-4 md:py-16 overflow-hidden">
       <div className="site-container">
         
         {/* Centered Section Header */}

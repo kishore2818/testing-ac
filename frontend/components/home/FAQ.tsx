@@ -29,13 +29,13 @@ export default function FAQ() {
         backgroundColor: "#fcfdfe" 
       }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-[var(--gray-bg)] py-12 lg:py-24 h-full flex flex-col justify-center relative overflow-hidden group transition-colors"
+      className="bg-[var(--gray-bg)] py-12 md:py-16 h-full flex flex-col justify-center relative overflow-hidden group transition-colors"
     >
-      <div className="site-container max-w-2xl relative z-10 transition-transform duration-500 group-hover:scale-[1.01]">
+      <div className="site-container max-w-2xl md:max-w-xl lg:max-w-lg mx-auto relative z-10 transition-transform duration-500 group-hover:scale-[1.01]">
         
         <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
           <SectionLabel text="Got Questions?" color="accent" />
-          <h2 className="font-cormorant md:font-bebas text-4xl md:text-6xl text-[var(--accent)] tracking-wider">
+          <h2 className="font-cormorant md:font-bebas text-4xl md:text-4xl text-[var(--accent)] tracking-wider">
             FREQUENTLY ASKED <span className="text-[var(--primary)]">QUESTIONS</span>
           </h2>
         </div>
@@ -50,7 +50,7 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                   className="w-full px-4 md:px-6 py-4 md:py-5 flex justify-between items-center text-left hover:bg-gray-50 transition-colors gap-3"
                 >
-                  <span className={`font-poppins md:font-rajdhani text-sm md:text-xl font-semibold md:font-bold tracking-[0.08em] md:tracking-widest uppercase transition-colors ${isOpen ? 'text-[var(--primary)]' : 'text-[var(--black)]'}`}>
+                  <span className={`font-poppins md:font-rajdhani text-sm md:text-base font-semibold md:font-bold tracking-[0.08em] md:tracking-widest uppercase transition-colors ${isOpen ? 'text-[var(--primary)]' : 'text-[var(--black)]'}`}>
                     {faq.q}
                   </span>
                   <motion.div

@@ -18,27 +18,27 @@ export default function ContactPage() {
         <section className="bg-white py-12 md:py-24">
           <div className="site-container grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
             
-            <div className="space-y-8">
-               <div className="bg-[var(--gray-bg)] p-5 md:p-8 border-l-4 border-[var(--primary)] rounded-[1.25rem] md:rounded-none">
-                 <h3 className="font-rajdhani text-xl font-bold uppercase mb-2">Head Office – Belagavi</h3>
-                 <p className="font-inter text-[var(--gray)]">Plot No 1/A RS No. 43/2A,<br/>Saraf Enclave, Azam Nagar Circle,<br/>Belagavi – 590 010, Karnataka</p>
+            <div className="space-y-4 md:space-y-8">
+               <div className="bg-[var(--gray-bg)] p-4 md:p-8 border-l-4 border-[var(--primary)] rounded-[1rem] md:rounded-none">
+                 <h3 className="font-rajdhani text-lg md:text-xl font-bold uppercase mb-1 md:mb-2">Head Office – Belagavi</h3>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]">Plot No 1/A RS No. 43/2A,<br/>Saraf Enclave, Azam Nagar Circle,<br/>Belagavi – 590 010, Karnataka</p>
                </div>
                
-               <div className="bg-[var(--gray-bg)] p-5 md:p-8 border-l-4 border-[var(--accent)] rounded-[1.25rem] md:rounded-none">
-                 <h3 className="font-rajdhani text-xl font-bold uppercase mb-2">Branch Office – Bengaluru</h3>
-                 <p className="font-inter text-[var(--gray)]">Bengaluru, Karnataka</p>
+               <div className="bg-[var(--gray-bg)] p-4 md:p-8 border-l-4 border-[var(--accent)] rounded-[1rem] md:rounded-none">
+                 <h3 className="font-rajdhani text-lg md:text-xl font-bold uppercase mb-1 md:mb-2">Branch Office – Bengaluru</h3>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]">Bengaluru, Karnataka</p>
                </div>
 
-               <div className="bg-[var(--gray-bg)] p-5 md:p-8 border-l-4 border-[var(--primary)] rounded-[1.25rem] md:rounded-none">
-                 <h3 className="font-rajdhani text-xl font-bold uppercase mb-2">Phone &amp; Email</h3>
-                 <p className="font-inter text-[var(--gray)]"><a href="tel:+919035027395" className="hover:text-[var(--primary)] transition-colors">+91 90350 27395</a></p>
-                 <p className="font-inter text-[var(--gray)]"><a href="mailto:Priya@adlercontracts.com" className="hover:text-[var(--primary)] transition-colors">Priya@adlercontracts.com</a></p>
+               <div className="bg-[var(--gray-bg)] p-4 md:p-8 border-l-4 border-[var(--primary)] rounded-[1rem] md:rounded-none">
+                 <h3 className="font-rajdhani text-lg md:text-xl font-bold uppercase mb-1 md:mb-2">Phone &amp; Email</h3>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]"><a href="tel:+919035027395" className="hover:text-[var(--primary)] transition-colors">+91 90350 27395</a></p>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]"><a href="mailto:Priya@adlercontracts.com" className="hover:text-[var(--primary)] transition-colors">Priya@adlercontracts.com</a></p>
                </div>
 
-               <div className="bg-[var(--gray-bg)] p-5 md:p-8 border-l-4 border-[var(--primary)] rounded-[1.25rem] md:rounded-none">
-                 <h3 className="font-rajdhani text-xl font-bold uppercase mb-2">Business Hours</h3>
-                 <p className="font-inter text-[var(--gray)]">Monday - Saturday: 9:00 AM - 6:30 PM (IST)</p>
-                 <p className="font-inter text-[var(--gray)]">Contact: Mrs. Priya Acharya</p>
+               <div className="bg-[var(--gray-bg)] p-4 md:p-8 border-l-4 border-[var(--primary)] rounded-[1rem] md:rounded-none">
+                 <h3 className="font-rajdhani text-lg md:text-xl font-bold uppercase mb-1 md:mb-2">Business Hours</h3>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]">Monday - Saturday: 9:00 AM - 6:30 PM (IST)</p>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]">Contact: Mrs. Priya Acharya</p>
                </div>
             </div>
 

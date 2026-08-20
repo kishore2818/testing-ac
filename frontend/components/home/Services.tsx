@@ -12,7 +12,7 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
   const displayedServices = showAll ? services : services.slice(0, 3)
 
   return (
-    <section className={`py-14 md:py-32 ${showAll ? 'bg-[var(--gray-bg)] border-b border-[var(--border)]' : 'bg-white'}`}>
+    <section className={`pt-6 pb-14 md:py-32 ${showAll ? 'bg-[var(--gray-bg)] border-b border-[var(--border)]' : 'bg-white'}`}>
       <div className="site-container">
         
         <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
@@ -24,7 +24,7 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
         </div>
 
         <ScrollReveal animation={staggerContainer}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
             {displayedServices.map((service, idx) => {
               const IconComponent = (LucideIcons[service.icon as keyof typeof LucideIcons] as LucideIcon) || LucideIcons.HelpCircle
 
@@ -33,7 +33,7 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
                   key={service.slug}
                   variants={fadeUp}
                   whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(0,0,0,0.08)' }}
-                  className={`group bg-white p-5 md:p-8 relative rounded-[1.25rem] md:rounded-sm shadow-sm border border-[var(--border)] overflow-hidden flex-col h-full ${idx >= 2 ? 'hidden md:flex' : 'flex'}`}
+                  className={`group bg-white p-3 md:p-8 relative rounded-[1rem] md:rounded-sm shadow-sm border border-[var(--border)] overflow-hidden flex-col h-full ${idx >= 2 ? 'hidden md:flex' : 'flex'}`}
                 >
                   {/* Red top border that grows on hover */}
                   <div className="absolute top-0 left-0 h-1 bg-[var(--primary)] w-0 group-hover:w-full transition-all duration-500" />
@@ -41,22 +41,22 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
                   <motion.div 
                     whileHover={{ rotate: [0, -15, 15, -15, 0] }}
                     transition={{ duration: 0.6 }}
-                    className="mb-5 md:mb-8 p-4 bg-[var(--primary-soft)] w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-2xl md:rounded-sm text-[var(--primary)] origin-center"
+                    className="mb-3 md:mb-8 p-3 md:p-4 bg-[var(--primary-soft)] w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-xl md:rounded-sm text-[var(--primary)] origin-center"
                   >
-                    <IconComponent size={32} strokeWidth={1.5} />
+                    <IconComponent className="w-5 h-5 md:w-8 md:h-8" strokeWidth={1.5} />
                   </motion.div>
                   
-                  <h3 className="font-poppins md:font-rajdhani text-xl md:text-2xl font-semibold md:font-bold uppercase tracking-[0.08em] md:tracking-wider mb-2 md:mb-3 text-[var(--accent)]">
+                  <h3 className="font-poppins md:font-rajdhani text-[13px] md:text-2xl font-semibold md:font-bold uppercase tracking-[0.08em] md:tracking-wider mb-1 md:mb-3 text-[var(--accent)] leading-tight">
                     {service.title}
                   </h3>
                   
-                  <p className="font-inter text-[var(--gray)] text-sm mb-5 md:mb-6 leading-relaxed line-clamp-3 md:line-clamp-4 flex-grow">
+                  <p className="font-inter text-[var(--gray)] text-[10px] md:text-sm mb-3 md:mb-6 leading-relaxed line-clamp-3 md:line-clamp-4 flex-grow">
                     {service.description}
                   </p>
                   
                   <Link 
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-2 font-poppins md:font-rajdhani text-xs md:text-sm font-semibold md:font-bold uppercase tracking-[0.16em] md:tracking-widest text-[var(--black)] group-hover:text-[var(--primary)] transition-colors"
+                    className="inline-flex items-center gap-1 md:gap-2 font-poppins md:font-rajdhani text-[9px] md:text-sm font-semibold md:font-bold uppercase tracking-[0.16em] md:tracking-widest text-[var(--black)] group-hover:text-[var(--primary)] transition-colors mt-auto"
                   >
                     Learn More 
                     <span className="group-hover:translate-x-1 transition-transform">→</span>

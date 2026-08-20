@@ -42,20 +42,20 @@ export default function WhyUs() {
           </Link>
         </div>
 
-        {/* 2x2 Feature Grid */}
-        <ScrollReveal animation={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
+        {/* 4 Feature Grid for Laptop */}
+        <ScrollReveal animation={staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-full md:max-w-6xl mx-auto">
           {reasons.map((r, i) => (
             <motion.div
               key={i}
               variants={fadeUp}
               whileHover={{ scale: 1.03, borderColor: 'var(--primary)' }}
-              className="bg-white p-5 md:p-8 rounded-[1.25rem] md:rounded-sm shadow-sm border border-[var(--border)] transition-colors hover:bg-[var(--primary-soft)] cursor-pointer group"
+              className="bg-white p-4 md:p-5 rounded-[1rem] md:rounded-sm shadow-sm border border-[var(--border)] transition-colors hover:bg-[var(--primary-soft)] cursor-pointer group"
             >
-              <div className="w-14 h-14 rounded-full bg-[var(--primary-glow)] flex items-center justify-center mb-6 border border-[var(--primary)]/20 group-hover:bg-[var(--primary)] group-hover:text-white transition-all text-[var(--primary)]">
-                <r.icon size={24} strokeWidth={1.5} />
+              <div className="w-10 h-10 md:w-10 md:h-10 rounded-full bg-[var(--primary-glow)] flex items-center justify-center mb-4 md:mb-4 border border-[var(--primary)]/20 group-hover:bg-[var(--primary)] group-hover:text-white transition-all text-[var(--primary)]">
+                <r.icon className="w-5 h-5 md:w-5 md:h-5" strokeWidth={1.5} />
               </div>
-              <h3 className="font-poppins md:font-rajdhani text-lg md:text-xl font-semibold md:font-bold uppercase mb-2 md:mb-3 text-[var(--accent)]">{r.title}</h3>
-              <p className="font-inter text-sm text-[var(--gray)] line-clamp-3">
+              <h3 className="font-poppins md:font-rajdhani text-[13px] md:text-base font-semibold md:font-bold uppercase mb-1 md:mb-2 text-[var(--accent)] leading-tight">{r.title}</h3>
+              <p className="font-inter text-[11px] md:text-xs text-[var(--gray)] line-clamp-1 md:line-clamp-none">
                 {r.desc}
               </p>
             </motion.div>

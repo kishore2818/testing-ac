@@ -41,21 +41,28 @@ export default function CoreValues() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-10 md:mb-24">
+        <div className="flex flex-col gap-6 md:gap-8 mb-10 md:mb-24">
           {values.map((v, i) => (
             <motion.div 
               key={v.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-5 md:p-8 border border-[var(--border)] rounded-[1.25rem] md:rounded-sm text-left md:text-center hover:shadow-lg transition-all"
+              className={`group flex flex-col ${i % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-start md:items-center gap-6 md:gap-8 p-6 md:p-8 md:bg-[var(--gray-bg)] border border-[var(--border)] md:border-2 md:border-[var(--primary)]/10 rounded-[1.5rem] md:rounded-[2.5rem] hover:border-[var(--primary)] transition-all bg-white shadow-sm hover:shadow-xl relative overflow-hidden`}
             >
-              <div className="inline-flex p-4 bg-[var(--primary-soft)] text-[var(--primary)] rounded-full mb-6 text-2xl">
-                <v.icon size={32} />
+              {/* Decorative Glow on Hover */}
+              <div className={`absolute top-1/2 -translate-y-1/2 ${i % 2 !== 0 ? 'left-0' : 'right-0'} w-48 h-48 bg-[var(--primary-soft)] rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+              
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-white border border-[var(--border)] group-hover:border-[var(--primary)] text-[var(--primary)] rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(124,179,66,0.2)] transition-all duration-500 relative z-10">
+                <v.icon className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1.5} />
               </div>
-              <h4 className="font-poppins md:font-rajdhani text-xl md:text-2xl font-semibold md:font-bold uppercase mb-2 md:mb-3">{v.title}</h4>
-              <p className="font-inter text-sm text-[var(--gray)]">{v.description}</p>
+
+              <div className={`text-left ${i % 2 !== 0 ? 'md:text-right flex-col md:items-end' : 'md:text-left flex-col md:items-start'} flex-grow relative z-10 w-full flex`}>
+                <div className="font-rajdhani text-[var(--primary)] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-2">0{i + 1}</div>
+                <h4 className="font-cormorant md:font-bebas text-3xl md:text-4xl text-[var(--accent)] mb-2 md:mb-3 leading-none">{v.title}</h4>
+                <p className="font-inter text-sm md:text-base text-[var(--gray)] md:max-w-xl">{v.description}</p>
+              </div>
             </motion.div>
           ))}
         </div>

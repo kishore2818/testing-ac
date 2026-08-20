@@ -75,24 +75,24 @@ export default function Framework() {
           ))}
         </div>
 
-        <div className="bg-[var(--accent)] text-white p-6 md:p-12 rounded-[1.5rem] md:rounded-sm overflow-hidden relative">
+        <div className="bg-[var(--accent)] text-white p-4 md:p-12 rounded-[1rem] md:rounded-sm overflow-hidden relative">
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 blur-[100px] -mb-48 -mr-48 rounded-full" />
           <div className="relative z-10">
-            <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
-              <div className="w-20 h-20 bg-white/10 rounded-sm flex items-center justify-center shrink-0">
-                <BookOpen size={40} />
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mb-6 md:mb-12">
+              <div className="w-10 h-10 md:w-20 md:h-20 bg-white/10 rounded-md md:rounded-sm flex items-center justify-center shrink-0">
+                <BookOpen className="w-5 h-5 md:w-10 md:h-10" strokeWidth={1.5} />
               </div>
               <div>
-                <h3 className="font-cormorant md:font-bebas text-3xl md:text-4xl mb-2">Skill and Safety Training</h3>
-                <p className="font-inter text-blue-100 max-w-xl">Investing in our people ensures long-term reliability. We conduct regular training sessions for various critical procedures.</p>
+                <h3 className="font-cormorant md:font-bebas text-[20px] md:text-4xl mb-1 md:mb-2">Skill and Safety Training</h3>
+                <p className="font-inter text-[10px] md:text-base text-blue-100 max-w-xl">Investing in our people ensures long-term reliability. We conduct regular training sessions for various critical procedures.</p>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 md:gap-y-4 gap-x-12">
               {trainingItems.map((item, i) => (
-                <div key={i} className="flex items-center gap-3 border-b border-white/10 py-3">
-                  <div className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full" />
-                  <span className="font-rajdhani text-sm font-bold uppercase tracking-widest leading-none">{item}</span>
+                <div key={i} className="flex items-center gap-2 md:gap-3 border-b border-white/10 py-2 md:py-3">
+                  <div className="w-1 h-1 md:w-1.5 md:h-1.5 bg-[var(--primary)] rounded-full shrink-0" />
+                  <span className="font-rajdhani text-[9px] md:text-sm font-bold uppercase tracking-widest leading-none">{item}</span>
                 </div>
               ))}
             </div>

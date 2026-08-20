@@ -43,7 +43,7 @@ export default function OngoingProjects() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           {/* --- FIRST ROW: ONGOING PROJECTS --- */}
           {activeProjects.map((project, index) => (
             <motion.div
@@ -55,7 +55,7 @@ export default function OngoingProjects() {
               whileHover={{ y: -6, boxShadow: '0 28px 50px rgba(15,23,42,0.08)' }}
               className={`section-shell overflow-hidden rounded-[1.5rem] border border-[var(--border)] block bg-white`}
             >
-              <div className="relative h-48 md:h-52 overflow-hidden bg-gray-100">
+              <div className="relative h-28 md:h-52 overflow-hidden bg-gray-100">
                 <img src={project.image} alt={project.name} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
                 {/* Active Badge */}
@@ -65,19 +65,19 @@ export default function OngoingProjects() {
                 </div>
               </div>
 
-              <div className="p-5 md:p-7 flex flex-col h-full">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="font-poppins text-[11px] uppercase tracking-[0.2em] text-[var(--primary)]">
+              <div className="p-3 md:p-7 flex flex-col h-full">
+                <div className="flex items-center justify-between mb-2 md:mb-4">
+                  <div className="font-poppins text-[8px] md:text-[11px] uppercase tracking-[0.1em] md:tracking-[0.2em] text-[var(--primary)]">
                     {project.client} • {project.location}
                   </div>
                 </div>
-                <h3 className="mt-1 font-cormorant text-3xl text-[var(--black)] leading-tight">{project.name}</h3>
-                <p className="mt-3 font-inter text-sm leading-relaxed text-[var(--gray)] line-clamp-3">
+                <h3 className="mt-1 font-cormorant text-xl md:text-3xl text-[var(--black)] leading-tight">{project.name}</h3>
+                <p className="mt-2 md:mt-3 font-inter text-[10px] md:text-sm leading-relaxed text-[var(--gray)] line-clamp-2 md:line-clamp-3">
                   {project.description}
                 </p>
 
-                <div className="mt-auto pt-6 space-y-2">
-                  <div className="flex justify-between font-poppins text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--black-soft)]">
+                <div className="mt-auto pt-4 md:pt-6 space-y-2">
+                  <div className="flex justify-between font-poppins text-[8px] md:text-[11px] font-semibold uppercase tracking-[0.1em] md:tracking-[0.18em] text-[var(--black-soft)]">
                     <span>Execution Progress</span>
                     <span>{project.progress}%</span>
                   </div>
@@ -106,7 +106,7 @@ export default function OngoingProjects() {
               whileHover={{ y: -6, boxShadow: '0 28px 50px rgba(15,23,42,0.08)' }}
               className="section-shell overflow-hidden rounded-[1.5rem] border border-[var(--border)] block"
             >
-              <div className="relative h-48 md:h-52 overflow-hidden bg-[var(--black)]">
+              <div className="relative h-28 md:h-52 overflow-hidden bg-[var(--black)]">
                 <img src={project.image} alt={project.name} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/65 to-transparent" />
                 {/* Completed Badge */}
@@ -118,18 +118,18 @@ export default function OngoingProjects() {
                 </div>
               </div>
 
-              <div className="p-5 md:p-7 flex flex-col h-full">
-                <div className="font-poppins text-[11px] uppercase tracking-[0.2em] text-[var(--gray-dark)]">
+              <div className="p-3 md:p-7 flex flex-col h-full">
+                <div className="font-poppins text-[8px] md:text-[11px] uppercase tracking-[0.1em] md:tracking-[0.2em] text-[var(--gray-dark)] mb-1 md:mb-0">
                   {project.client} • {project.location}
                 </div>
-                <h3 className="mt-3 font-cormorant text-2xl md:text-3xl text-[var(--black)]">{project.name}</h3>
-                <p className="mt-3 font-inter text-sm leading-relaxed text-[var(--gray)]">
+                <h3 className="mt-1 md:mt-3 font-cormorant text-xl md:text-3xl text-[var(--black)]">{project.name}</h3>
+                <p className="mt-2 md:mt-3 font-inter text-[10px] md:text-sm leading-relaxed text-[var(--gray)] line-clamp-2 md:line-clamp-3">
                   {project.description}
                 </p>
                 
-                <div className="mt-auto pt-6 flex justify-between items-center border-t border-[var(--border)]">
-                    <span className="font-inter text-xs text-[var(--gray)]">{project.type}</span>
-                    <span className="font-poppins text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">100% Delivered</span>
+                <div className="mt-auto pt-3 md:pt-6 flex justify-between items-center border-t border-[var(--border)]">
+                    <span className="font-inter text-[9px] md:text-xs text-[var(--gray)]">{project.type}</span>
+                    <span className="font-poppins text-[8px] md:text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">100% Delivered</span>
                 </div>
               </div>
             </motion.div>

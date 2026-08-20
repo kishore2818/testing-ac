@@ -35,7 +35,7 @@ export default function EngineeringCore() {
           <p className="font-inter text-gray-400 max-w-2xl mx-auto">From blueprint to breadboard, our systematic approach ensures every project is delivered with speed and quality.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
           {steps.map((step, i) => (
             <motion.div 
               key={i}
@@ -43,16 +43,16 @@ export default function EngineeringCore() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="relative p-5 md:p-8 border border-white/10 bg-white/5 rounded-[1.25rem] md:rounded-sm overflow-hidden group"
+              className="relative p-3 md:p-8 border border-white/10 bg-white/5 rounded-[1rem] md:rounded-sm overflow-hidden group flex flex-col h-full"
             >
-              <div className="absolute top-0 right-0 p-4 font-bebas text-6xl text-white/5 group-hover:text-[var(--primary)]/10 transition-colors uppercase">
+              <div className="absolute top-0 right-0 p-2 md:p-4 font-bebas text-4xl md:text-6xl text-white/5 group-hover:text-[var(--primary)]/10 transition-colors uppercase">
                 0{i + 1}
               </div>
-              <div className="text-[var(--primary)] mb-6">
-                <step.icon size={40} strokeWidth={1.5} />
+              <div className="text-[var(--primary)] mb-3 md:mb-6">
+                <step.icon className="w-6 h-6 md:w-10 md:h-10" strokeWidth={1.5} />
               </div>
-              <h3 className="font-cormorant md:font-bebas text-2xl mb-2 md:mb-3 tracking-wide">{step.title}</h3>
-              <p className="font-inter text-sm text-gray-400 leading-relaxed">{step.desc}</p>
+              <h3 className="font-cormorant md:font-bebas text-[15px] md:text-2xl mb-1 md:mb-3 tracking-wide leading-tight">{step.title}</h3>
+              <p className="font-inter text-[10px] md:text-sm text-gray-400 leading-relaxed flex-grow">{step.desc}</p>
             </motion.div>
           ))}
         </div>

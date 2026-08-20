@@ -86,17 +86,17 @@ function AutoHighlightingStats() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 lg:hidden">
+      <div className="grid grid-cols-2 gap-2 lg:hidden">
         {statsData.map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 + i * 0.08 }}
-            className="rounded-[1.25rem] border border-white/15 bg-white/10 p-4 backdrop-blur-xl"
+            className="rounded-[1rem] border border-white/15 bg-white/10 p-3 backdrop-blur-xl"
           >
-            <div className="font-cormorant text-3xl text-white leading-none">{stat.end}{stat.suffix}</div>
-            <div className="mt-2 font-poppins text-[10px] uppercase tracking-[0.18em] text-white/75">{stat.label}</div>
+            <div className="font-cormorant text-2xl sm:text-3xl text-white leading-none">{stat.end}{stat.suffix}</div>
+            <div className="mt-1 font-poppins text-[9px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.18em] text-white/75">{stat.label}</div>
           </motion.div>
         ))}
       </div>
@@ -153,7 +153,7 @@ export default function Hero() {
   const words = "Powering possibilities with reliable electrical solutions.".split(" ")
 
   return (
-    <section className="relative min-h-[560px] md:min-h-[600px] lg:h-screen w-full overflow-hidden bg-[var(--gray-bg)] flex items-center">
+    <section className="relative min-h-[100dvh] md:min-h-[600px] lg:h-screen w-full overflow-hidden bg-[var(--gray-bg)] flex items-center">
 
       {/* Slideshow Background */}
       <div className="absolute inset-0 z-0">
@@ -181,7 +181,7 @@ export default function Hero() {
         <div className="w-px h-14 sm:h-20 bg-gradient-to-b from-transparent via-[var(--primary)] to-transparent opacity-100" />
       </div>
 
-      <div className="site-container relative z-20 pt-24 pb-8 md:pt-20 md:pb-0">
+      <div className="site-container relative z-20 pt-20 pb-4 md:pt-20 md:pb-0">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12 w-full">
 
           {/* Main Content */}
@@ -197,7 +197,7 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <h1 className="font-cormorant md:font-bebas text-[clamp(2.85rem,10vw,5.5rem)] text-white leading-[0.92] tracking-tight mb-4 sm:mb-6 drop-shadow-2xl max-w-3xl">
+            <h1 className="font-cormorant md:font-bebas text-[clamp(2.5rem,10vw,5.5rem)] text-white leading-[1.05] md:leading-[0.92] tracking-tight mb-3 sm:mb-6 drop-shadow-2xl max-w-3xl">
               {words.map((word, i) => (
                 <motion.span
                   key={i}
@@ -215,7 +215,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="font-inter text-white/85 text-sm sm:text-lg md:text-xl max-w-2xl mb-6 sm:mb-8 leading-relaxed font-normal"
+              className="font-inter text-white/85 text-[13px] sm:text-lg md:text-xl max-w-2xl mb-5 sm:mb-8 leading-relaxed font-normal"
             >
               Adler Contracts delivers turnkey electrical systems for industrial, commercial, and institutional projects, from design and planning to installation and commissioning.
             </motion.p>

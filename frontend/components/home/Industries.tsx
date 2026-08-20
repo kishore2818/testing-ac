@@ -22,7 +22,7 @@ export default function Industries() {
 
         <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
           <SectionLabel text="Industries We Serve" color="accent" />
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-3 md:gap-4">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-3 md:gap-4 border-2 border-dashed border-[var(--primary)]/60 rounded-[2rem] p-4 md:p-8 bg-white/40 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <Zap className="w-8 h-8 md:w-10 md:h-10 text-[var(--primary)] animate-pulse mb-1 md:mb-0" />
             <h2 className="font-cormorant md:font-bebas text-4xl md:text-6xl uppercase text-[var(--accent)] tracking-wider">
               Powering <span className="text-[var(--primary)] text-shadow-glow">Every Sector</span>
@@ -30,13 +30,14 @@ export default function Industries() {
           </div>
         </div>
 
-        <ScrollReveal animation={staggerContainer} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <ScrollReveal animation={staggerContainer} className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {industries.map((ind, idx) => (
             <motion.div
               key={ind.name}
               variants={fadeUp}
               whileHover={{ y: -10, scale: 1.02, borderColor: 'var(--primary)' }}
-              className={`group relative bg-white border border-[var(--border)] overflow-hidden rounded-[1.25rem] md:rounded-sm transition-all duration-300 min-h-[300px] md:min-h-[340px] flex-col justify-end shadow-sm hover:shadow-xl ${idx >= 2 ? 'hidden md:flex' : 'flex'}`}
+              tabIndex={0}
+              className={`group relative bg-[var(--black)] border border-[var(--border)] overflow-hidden rounded-[1rem] md:rounded-sm transition-all duration-300 h-40 md:min-h-[340px] flex-col justify-end shadow-sm hover:shadow-xl focus:outline-none focus:shadow-xl ${idx >= 4 ? 'hidden md:flex' : 'flex'}`}
             >
               {/* Background Image with slight darkening for contrast at the top */}
               <div 
@@ -44,16 +45,18 @@ export default function Industries() {
                 style={{ backgroundImage: `url(${ind.image})` }}
               />
               
-              {/* Solid White to Transparent Gradient Overlay */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-white via-white/95 to-black/30 group-hover:to-black/10 transition-colors duration-500" />
+              {/* Dark Gradient Overlay for clearer real images */}
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/30 to-transparent transition-colors duration-500" />
 
-              <div className="relative z-20 p-6 md:p-8 mt-auto">
-                <h3 className="font-poppins md:font-rajdhani text-xl md:text-2xl font-semibold md:font-bold uppercase tracking-[0.08em] md:tracking-wider mb-2 text-[var(--accent)] group-hover:text-[var(--primary)] transition-colors duration-300">
+              <div className="relative z-20 p-3 md:p-8 mt-auto">
+                <h3 className="font-poppins md:font-rajdhani text-[13px] md:text-2xl font-semibold md:font-bold uppercase tracking-[0.08em] md:tracking-wider text-white group-hover:text-[var(--primary)] transition-colors duration-300">
                   {ind.name}
                 </h3>
-                <p className="font-inter text-sm text-[var(--gray)] group-hover:text-[var(--black)] transition-colors duration-300">
-                  {ind.desc}
-                </p>
+                <div className="max-h-0 overflow-hidden opacity-0 translate-y-2 md:translate-y-4 group-hover:max-h-[200px] group-hover:opacity-100 group-hover:translate-y-0 group-focus:max-h-[200px] group-focus:opacity-100 group-focus:translate-y-0 transition-all duration-500 ease-in-out">
+                  <p className="font-inter text-[10px] md:text-sm text-white/80 group-hover:text-white group-focus:text-white mt-1 md:mt-2 line-clamp-3">
+                    {ind.desc}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

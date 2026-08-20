@@ -15,7 +15,7 @@ const partners = [
 
 export default function Partners() {
   return (
-    <section className="py-12 md:py-24 bg-white">
+    <section className="pt-4 pb-10 md:py-24 bg-white">
       <div className="site-container">
         
         <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
@@ -24,7 +24,7 @@ export default function Partners() {
           <p className="font-inter text-[var(--gray)] max-w-2xl mt-4">We partner with the best to deliver the best – with partners who strengthen our promise of quality and trust.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           {partners.map((p, i) => (
             <motion.div 
               key={p.name}
@@ -33,15 +33,15 @@ export default function Partners() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               whileHover={{ y: -5, borderColor: 'var(--primary)' }}
-              className="p-5 md:p-8 border border-[var(--border)] rounded-[1.25rem] md:rounded-sm group transition-all"
+              className="p-3 md:p-8 border border-[var(--border)] rounded-[1rem] md:rounded-sm group transition-all flex flex-col justify-center h-full"
             >
-              <div className="font-bebas text-2xl mb-1 text-[var(--accent)] group-hover:text-[var(--primary)] transition-colors">{p.name}</div>
-              <div className="font-rajdhani text-xs uppercase tracking-[0.2em] font-bold text-[var(--gray-light)]">{p.role}</div>
+              <div className="font-bebas text-[16px] md:text-2xl mb-1 text-[var(--accent)] group-hover:text-[var(--primary)] transition-colors leading-tight">{p.name}</div>
+              <div className="font-rajdhani text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] font-bold text-[var(--gray-light)]">{p.role}</div>
             </motion.div>
           ))}
           
-          <div className="p-8 bg-[var(--gray-bg)] border border-dashed border-[var(--border)] rounded-sm flex items-center justify-center text-center">
-            <span className="font-rajdhani text-xs uppercase tracking-widest font-bold text-[var(--gray-light)]">And 20+ other MEP specialists</span>
+          <div className="p-4 md:p-8 bg-[var(--gray-bg)] border border-dashed border-[var(--border)] rounded-[1rem] md:rounded-sm flex items-center justify-center text-center h-full">
+            <span className="font-rajdhani text-[10px] md:text-xs uppercase tracking-widest font-bold text-[var(--gray-light)]">And 20+ other MEP specialists</span>
           </div>
         </div>
 

@@ -70,7 +70,7 @@ export default function ProjectsPage() {
             {loading ? (
               <div className="py-24 text-center font-inter text-[var(--gray)]">Loading projects...</div>
             ) : (
-              <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
                 <AnimatePresence mode="popLayout">
                   {filteredProjects.map((project, i) => (
                     <motion.div
@@ -79,22 +79,22 @@ export default function ProjectsPage() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="bg-white border border-[var(--border)] rounded-[1.25rem] md:rounded-sm p-5 hover:shadow-lg transition-shadow group flex flex-col h-full"
+                      className="bg-white border border-[var(--border)] rounded-[1rem] md:rounded-sm p-3 md:p-5 hover:shadow-lg transition-shadow group flex flex-col h-full"
                     >
-                      <div className="mb-4 overflow-hidden h-40 bg-[var(--gray-bg)] rounded-sm">
+                      <div className="mb-3 md:mb-4 overflow-hidden h-24 md:h-40 bg-[var(--gray-bg)] rounded-sm">
                         <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
-                      <div className="flex justify-between items-start mb-2">
-                        <span className="font-rajdhani text-[10px] font-bold text-[var(--primary)] uppercase tracking-wider">{project.type}</span>
-                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded-full uppercase ${project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
+                      <div className="flex justify-between items-start mb-1 md:mb-2 flex-col md:flex-row gap-1">
+                        <span className="font-rajdhani text-[8px] md:text-[10px] font-bold text-[var(--primary)] uppercase tracking-wider">{project.type}</span>
+                        <span className={`text-[7px] md:text-[8px] font-bold px-1.5 py-0.5 rounded-full uppercase ${project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
                           {project.status}
                         </span>
                       </div>
-                      <h4 className="font-cormorant md:font-bebas text-2xl md:text-xl mb-1 text-[var(--black)]">{project.name}</h4>
-                      <p className="font-inter text-[11px] text-[var(--gray)] mb-4 flex-grow">{project.description}</p>
-                      <div className="pt-4 border-t border-[var(--border)] mt-auto flex justify-between items-center">
-                        <span className="font-rajdhani text-[9px] font-bold text-[var(--black)] uppercase tracking-widest">{project.client}</span>
-                        <span className="font-rajdhani text-[9px] font-bold text-[var(--gray)] uppercase tracking-widest">{project.location}</span>
+                      <h4 className="font-cormorant md:font-bebas text-[16px] md:text-xl mb-1 text-[var(--black)] leading-tight">{project.name}</h4>
+                      <p className="font-inter text-[9px] md:text-[11px] text-[var(--gray)] mb-3 md:mb-4 flex-grow line-clamp-3">{project.description}</p>
+                      <div className="pt-2 md:pt-4 border-t border-[var(--border)] mt-auto flex flex-col md:flex-row md:justify-between items-start md:items-center gap-1">
+                        <span className="font-rajdhani text-[8px] md:text-[9px] font-bold text-[var(--black)] uppercase tracking-widest">{project.client}</span>
+                        <span className="font-rajdhani text-[7px] md:text-[9px] font-bold text-[var(--gray)] uppercase tracking-widest">{project.location}</span>
                       </div>
                     </motion.div>
                   ))}

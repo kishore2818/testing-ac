@@ -10,21 +10,13 @@ const navLinks = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
   { label: 'Projects', href: '/projects', icon: Briefcase },
   { label: 'Reviews', href: '/reviews', icon: MessageSquare },
-  { label: 'Settings', href: '/settings', icon: Settings },
 ]
 
 export default function AdminNavbar() {
   const pathname = usePathname()
   const router = useRouter()
 
-  async function handleLogout() {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' })
-    } finally {
-      router.push('/login')
-      router.refresh()
-    }
-  }
+
 
   return (
     <motion.header
@@ -69,7 +61,7 @@ export default function AdminNavbar() {
           <div className="w-[1px] h-6 bg-[var(--border)] mx-2" />
           
           <a
-            href="http://localhost:3000"
+            href="https://ac-seven-indol.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-full font-poppins text-[13px] font-semibold tracking-wide text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-all mr-2"
@@ -89,13 +81,7 @@ export default function AdminNavbar() {
             </motion.button>
           </Link>
 
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 rounded-full border border-[var(--border)] px-4 py-2 font-poppins text-[12px] font-semibold tracking-wide text-[var(--black-soft)] transition-all hover:border-[var(--primary)] hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
-          >
-            <LogOut size={15} />
-            Sign Out
-          </button>
+
         </nav>
 
         {/* Mobile Nav toggle could be added here if needed, but for admin a simple bar is usually enough for now */}
