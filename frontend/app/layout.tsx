@@ -20,6 +20,11 @@ export const metadata: Metadata = {
     'Adler Contracts — India\'s premier electrical panel specialists. Expert design, installation, and maintenance of MCC, PCC, and control panels.',
   keywords:
     'electrical panel design, MCC panel, PCC panel, industrial electrical, panel installation',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({

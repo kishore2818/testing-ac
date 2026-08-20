@@ -31,6 +31,11 @@ const rajdhani = Rajdhani({
 export const metadata: Metadata = {
   title: 'Adler Contracts | Admin Dashboard',
   description: 'Manage projects and reviews for Adler Contracts.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
