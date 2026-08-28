@@ -9,56 +9,58 @@ import ScrollReveal, { staggerContainer, fadeUp } from '../shared/ScrollReveal'
 import { services } from '@/data/services'
 
 export default function Services({ showAll = false }: { showAll?: boolean }) {
-  const displayedServices = showAll ? services : services.slice(0, 3)
+  const displayedServices = showAll ? services : services
 
   return (
-    <section className={`pt-6 pb-14 md:py-32 ${showAll ? 'bg-[var(--gray-bg)] border-b border-[var(--border)]' : 'bg-white'}`}>
+    <section className={`py-12 md:py-24 ${showAll ? 'bg-[var(--gray-bg)] border-b border-[var(--border)]' : 'bg-white'}`}>
       <div className="site-container">
         
-        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
-          <SectionLabel text="Our Expertise" color="accent" />
-          <h2 className="font-cormorant md:font-bebas text-4xl md:text-6xl uppercase text-[var(--accent)]">
-            {showAll ? 'Engineering' : 'Core'} <span className="text-[var(--primary)]">Services</span>
+        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-14">
+          <SectionLabel text="Industrial Engineering Capabilities" color="accent" />
+          <h2 className="font-inter font-semibold text-[26px] sm:text-[32px] lg:text-[38px] leading-tight text-[var(--black)] mt-2">
+            End-to-End <span className="text-[var(--primary)]">Industrial Services</span>
           </h2>
-          <p className="font-inter text-[var(--gray)] max-w-2xl mt-3 md:mt-4 text-sm md:text-base">We deliver comprehensive electrical solutions tailored to industrial, commercial, and infrastructure applications.</p>
+          <p className="font-inter text-[var(--gray)] max-w-2xl mt-3 text-sm md:text-base leading-relaxed">
+            Turnkey electrical contracting, HT/LT infrastructure, custom panel manufacturing, testing, and lifecycle AMC for demanding facilities.
+          </p>
         </div>
 
         <ScrollReveal animation={staggerContainer}>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {displayedServices.map((service, idx) => {
-              const IconComponent = (LucideIcons[service.icon as keyof typeof LucideIcons] as LucideIcon) || LucideIcons.HelpCircle
+              const IconComponent = (LucideIcons[service.icon as keyof typeof LucideIcons] as LucideIcon) || LucideIcons.Zap
 
               return (
                 <motion.div 
                   key={service.slug}
                   variants={fadeUp}
-                  whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(0,0,0,0.08)' }}
-                  className={`group bg-white p-3 md:p-8 relative rounded-[1rem] md:rounded-sm shadow-sm border border-[var(--border)] overflow-hidden flex-col h-full ${idx >= 2 ? 'hidden md:flex' : 'flex'}`}
+                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}
+                  className="group bg-white p-5 md:p-6 relative rounded-xl shadow-sm border border-[var(--border)] overflow-hidden flex flex-col h-full transition-all duration-300"
                 >
-                  {/* Red top border that grows on hover */}
+                  {/* Primary green top border accent */}
                   <div className="absolute top-0 left-0 h-1 bg-[var(--primary)] w-0 group-hover:w-full transition-all duration-500" />
                   
-                  <motion.div 
-                    whileHover={{ rotate: [0, -15, 15, -15, 0] }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-3 md:mb-8 p-3 md:p-4 bg-[var(--primary-soft)] w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-xl md:rounded-sm text-[var(--primary)] origin-center"
-                  >
-                    <IconComponent className="w-5 h-5 md:w-8 md:h-8" strokeWidth={1.5} />
-                  </motion.div>
+                  <div className="mb-4 p-3 bg-[var(--primary-soft)] w-12 h-12 flex items-center justify-center rounded-lg text-[var(--primary)] border border-[var(--primary)]/20">
+                    <IconComponent className="w-6 h-6" strokeWidth={1.75} />
+                  </div>
+
+                  <div className="font-inter text-[11px] font-bold uppercase tracking-wider text-[var(--primary)] mb-1">
+                    0{idx + 1}
+                  </div>
                   
-                  <h3 className="font-poppins md:font-rajdhani text-[13px] md:text-2xl font-semibold md:font-bold uppercase tracking-[0.08em] md:tracking-wider mb-1 md:mb-3 text-[var(--accent)] leading-tight">
+                  <h3 className="font-inter text-lg font-semibold text-[var(--black)] leading-snug mb-2 group-hover:text-[var(--primary)] transition-colors">
                     {service.title}
                   </h3>
                   
-                  <p className="font-inter text-[var(--gray)] text-[10px] md:text-sm mb-3 md:mb-6 leading-relaxed line-clamp-3 md:line-clamp-4 flex-grow">
+                  <p className="font-inter text-[var(--gray)] text-xs md:text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
                     {service.description}
                   </p>
                   
                   <Link 
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 md:gap-2 font-poppins md:font-rajdhani text-[9px] md:text-sm font-semibold md:font-bold uppercase tracking-[0.16em] md:tracking-widest text-[var(--black)] group-hover:text-[var(--primary)] transition-colors mt-auto"
+                    className="inline-flex items-center gap-1.5 font-inter text-xs font-bold text-[var(--black-soft)] group-hover:text-[var(--primary)] transition-colors mt-auto pt-2 border-t border-[var(--border)]"
                   >
-                    Learn More 
+                    Learn Details 
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                   
@@ -69,14 +71,14 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
         </ScrollReveal>
 
         {!showAll && (
-          <div className="text-left md:text-center mt-10 md:mt-20">
+          <div className="text-center mt-10 md:mt-14">
             <Link href="/services">
               <motion.button 
-                whileHover={{ y: -2, scale: 1.02 }}
+                whileHover={{ y: -2, scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full sm:w-auto px-8 md:px-12 py-4 bg-[var(--primary)] text-white font-poppins md:font-rajdhani font-semibold md:font-bold tracking-[0.18em] md:tracking-[0.2em] uppercase rounded-2xl md:rounded-sm shadow-xl hover:shadow-2xl transition-all"
+                className="px-8 py-3.5 bg-[var(--primary)] text-white font-inter font-bold text-sm rounded-lg shadow-md hover:bg-[var(--primary-dark)] transition-all"
               >
-                View All Services
+                Explore Full Engineering Scope →
               </motion.button>
             </Link>
           </div>

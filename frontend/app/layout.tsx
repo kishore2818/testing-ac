@@ -1,7 +1,14 @@
 import type { Metadata } from 'next'
-import { Outfit, Montserrat } from 'next/font/google'
+import { Inter, Outfit, Montserrat } from 'next/font/google'
 import './globals.css'
 import JsonLd from '@/components/shared/JsonLd'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  weight: ['400', '600', '700'],
+  display: 'swap',
+})
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -79,7 +86,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="h-full">
-      <body className={`min-h-full bg-white text-black antialiased overflow-x-hidden ${outfit.variable} ${montserrat.variable}`}>
+      <body className={`min-h-full bg-white text-black antialiased overflow-x-hidden ${inter.variable} ${outfit.variable} ${montserrat.variable}`}>
         <JsonLd />
         {children}
       </body>

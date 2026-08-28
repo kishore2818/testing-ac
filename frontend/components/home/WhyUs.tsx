@@ -2,67 +2,102 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { DraftingCompass, ShieldCheck, Zap, Diamond } from 'lucide-react'
+import { Layers, Factory, ShieldCheck, Clock } from 'lucide-react'
 import SectionLabel from '../shared/SectionLabel'
 import ScrollReveal, { staggerContainer, fadeUp } from '../shared/ScrollReveal'
 
 const reasons = [
-  { icon: DraftingCompass, title: 'Meticulous Planning', desc: 'Every project begins with detailed design and execution strategies for precision delivery.' },
-  { icon: ShieldCheck, title: 'Quality & Safety', desc: 'Uncompromising standards at every stage — from material selection to final commissioning.' },
-  { icon: Zap, title: 'Speed of Delivery', desc: 'Streamlined project management ensures we meet the tightest deadlines without compromise.' },
-  { icon: Diamond, title: 'Optimum Cost', desc: 'Transparent partnerships built on trust, delivering maximum value at competitive pricing.' },
+  { 
+    num: '01',
+    icon: Layers, 
+    title: 'End-to-End Execution', 
+    pipeline: 'Engineering → Procurement → Installation → Testing → Commissioning',
+    desc: 'Single-source responsibility for complete electrical infrastructure projects.' 
+  },
+  { 
+    num: '02',
+    icon: Factory, 
+    title: 'Industrial Expertise', 
+    pipeline: 'Manufacturing • Aerospace • Mobility • Processing',
+    desc: 'Deep domain experience in high-demand, mission-critical environments.' 
+  },
+  { 
+    num: '03',
+    icon: ShieldCheck, 
+    title: 'Safety & Quality', 
+    pipeline: 'Quality Checks • Safety Procedures • Trained Site Teams',
+    desc: 'Strict adherence to ISO/IEEE standards and EOHS safety protocols.' 
+  },
+  { 
+    num: '04',
+    icon: Clock, 
+    title: 'Reliable Delivery', 
+    pipeline: 'Disciplined PM • Schedule Focus • Cost Control',
+    desc: 'Predictable execution committed to performance, safety, and budget.' 
+  },
 ]
 
 export default function WhyUs() {
   return (
-    <motion.section 
-      initial={{ x: -150, opacity: 0 }}
-      whileInView={{ x: 0, opacity: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-[var(--gray-bg)] py-12 lg:py-24 h-full flex flex-col justify-center"
-    >
-      <div className="site-container max-w-2xl">
-        {/* Centered Section Header */}
-        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
+    <section className="bg-[var(--gray-bg)] py-12 lg:py-24 border-b border-[var(--border)]">
+      <div className="site-container">
+        
+        {/* Section Header */}
+        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-14">
           <SectionLabel text="The Adler Advantage" color="accent" />
-          <h2 className="font-cormorant md:font-bebas text-4xl md:text-6xl mb-3 md:mb-4 text-[var(--accent)] tracking-wider">
-            WHY CHOOSE <span className="text-[var(--primary)]">US</span>?
+          <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[40px] leading-tight text-[var(--black)] mt-2">
+            Why Industrial Clients <span className="text-[var(--primary)]">Choose Adler</span>
           </h2>
-          <p className="font-inter text-[var(--gray)] text-sm md:text-lg mb-6 md:mb-8 leading-relaxed max-w-2xl">
-            Our reputation is built on meticulous planning, robust project management, and a relentless focus on quality, safety, and speed. We deliver turnkey electrical solutions from design to commissioning — on time and within budget.
+          <p className="font-inter text-[var(--gray)] text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
+            Class I electrical contracting built on engineering rigor, uncompromising safety, and disciplined site project management.
           </p>
-          <Link href="/about">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              className="w-full sm:w-auto bg-[var(--primary)] text-white font-poppins md:font-rajdhani uppercase tracking-[0.18em] font-semibold md:font-bold px-6 md:px-8 py-3 rounded-2xl md:rounded-sm shadow-lg shadow-[var(--primary-glow)]"
-            >
-              Learn More
-            </motion.button>
-          </Link>
         </div>
 
-        {/* 4 Feature Grid for Laptop */}
-        <ScrollReveal animation={staggerContainer} className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-full md:max-w-6xl mx-auto">
-          {reasons.map((r, i) => (
+        {/* 4 Feature Grid */}
+        <ScrollReveal animation={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {reasons.map((r) => (
             <motion.div
-              key={i}
+              key={r.num}
               variants={fadeUp}
-              whileHover={{ scale: 1.03, borderColor: 'var(--primary)' }}
-              className="bg-white p-4 md:p-5 rounded-[1rem] md:rounded-sm shadow-sm border border-[var(--border)] transition-colors hover:bg-[var(--primary-soft)] cursor-pointer group"
+              whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}
+              className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-[var(--border)] transition-all hover:border-[var(--primary)] flex flex-col h-full"
             >
-              <div className="w-10 h-10 md:w-10 md:h-10 rounded-full bg-[var(--primary-glow)] flex items-center justify-center mb-4 md:mb-4 border border-[var(--primary)]/20 group-hover:bg-[var(--primary)] group-hover:text-white transition-all text-[var(--primary)]">
-                <r.icon className="w-5 h-5 md:w-5 md:h-5" strokeWidth={1.5} />
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-11 h-11 rounded-lg bg-[var(--primary-soft)] flex items-center justify-center text-[var(--primary)] border border-[var(--primary)]/20">
+                  <r.icon className="w-5 h-5" strokeWidth={1.75} />
+                </div>
+                <span className="font-inter font-bold text-xs text-[var(--primary-dark)] bg-[var(--primary-soft)] px-2.5 py-1 rounded-md">
+                  {r.num}
+                </span>
               </div>
-              <h3 className="font-poppins md:font-rajdhani text-[13px] md:text-base font-semibold md:font-bold uppercase mb-1 md:mb-2 text-[var(--accent)] leading-tight">{r.title}</h3>
-              <p className="font-inter text-[11px] md:text-xs text-[var(--gray)] line-clamp-1 md:line-clamp-none">
+
+              <h3 className="font-inter text-base md:text-lg font-bold text-[var(--black)] mb-2">
+                {r.title}
+              </h3>
+
+              <div className="font-inter text-[11px] font-semibold text-[var(--primary-dark)] bg-[var(--gray-bg)] p-2 rounded-md mb-3 border border-[var(--border)]">
+                {r.pipeline}
+              </div>
+
+              <p className="font-inter text-xs md:text-sm text-[var(--gray)] leading-relaxed mt-auto">
                 {r.desc}
               </p>
             </motion.div>
           ))}
         </ScrollReveal>
 
+        <div className="mt-10 md:mt-12 text-center">
+          <Link href="/about">
+            <motion.button 
+              whileHover={{ y: -2 }}
+              className="px-7 py-3 bg-[var(--primary)] text-white font-inter font-bold text-sm rounded-lg shadow-md hover:bg-[var(--primary-dark)] transition-all"
+            >
+              Learn More About Our Company →
+            </motion.button>
+          </Link>
+        </div>
+
       </div>
-    </motion.section>
+    </section>
   )
 }

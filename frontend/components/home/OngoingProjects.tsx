@@ -4,148 +4,147 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import SectionLabel from '../shared/SectionLabel'
+import { projects as staticProjects } from '@/data/projects'
 
 export default function OngoingProjects() {
-  const [activeProjects, setActiveProjects] = useState<any[]>([])
-  const [completedProjects, setCompletedProjects] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>(() => {
+    // Default fallback to static dataset so customers NEVER see a loading indicator
+    return staticProjects.slice(0, 6).map(p => ({
+      client: p.client || 'Industrial Client',
+      location: p.location || 'India',
+      industry: p.type || 'Industrial Manufacturing',
+      scopeOfWork: p.description || 'Turnkey Electrical Infrastructure & Power Distribution',
+      status: p.status || 'Completed',
+      name: p.name,
+      image: p.image || '/images/hero/panel-1.jpg'
+    }))
+  })
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        if (!process.env.NEXT_PUBLIC_API_URL) return;
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`)
+        if (!res.ok) return;
         const data = await res.json()
-        setActiveProjects(data.filter((p: any) => p.status === 'In Progress').slice(0, 3))
-        setCompletedProjects(data.filter((p: any) => p.status === 'Completed').slice(0, 3))
+        if (Array.isArray(data) && data.length > 0) {
+          setFeaturedProjects(data.slice(0, 6).map((p: any) => ({
+            client: p.client || p.name,
+            location: p.location || 'Karnataka, India',
+            industry: p.type || 'Industrial Infrastructure',
+            scopeOfWork: p.description || 'Electrical Infrastructure & Distribution',
+            status: p.status || 'Completed',
+            name: p.name,
+            image: p.image || '/images/hero/panel-1.jpg'
+          })))
+        }
       } catch (error) {
         console.error('Error fetching projects:', error)
-      } finally {
-        setLoading(false)
       }
     }
     fetchProjects()
   }, [])
 
-  if (loading) {
-    return <div className="py-24 text-center font-inter text-[var(--gray)]">Loading projects...</div>
-  }
-
   return (
-    <section className="bg-white py-14 md:py-24">
+    <section className="bg-white py-12 md:py-24 border-b border-[var(--border)]">
       <div className="site-container">
+        
+        {/* Section Header */}
         <div className="mb-8 md:mb-14 flex flex-col items-start text-left">
-          <SectionLabel text="What We Are Building" color="accent" />
-          <h2 className="font-cormorant text-4xl md:text-6xl text-[var(--accent)] tracking-wider">
-            Ongoing <span className="text-[var(--primary)]">Projects</span>
+          <SectionLabel text="Track Record of Excellence" color="accent" />
+          <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[40px] leading-tight text-[var(--black)] mt-2">
+            Featured <span className="text-[var(--primary)]">Industrial Projects</span>
           </h2>
-          <p className="mt-4 max-w-2xl font-inter text-sm md:text-base text-[var(--gray)]">
-            A snapshot of current work across industrial, institutional, and commercial environments, with transparent progress and execution context.
+          <p className="mt-3 max-w-2xl font-inter text-sm md:text-base text-[var(--gray)] leading-relaxed">
+            High-reliability power distribution and turnkey electrical engineering across aerospace, automotive, manufacturing, and commercial infrastructure.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
-          {/* --- FIRST ROW: ONGOING PROJECTS --- */}
-          {activeProjects.map((project, index) => (
+        {/* 6 Featured Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          {featuredProjects.map((project, index) => (
             <motion.div
               key={`${project.name}-${index}`}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ delay: index * 0.06 }}
-              whileHover={{ y: -6, boxShadow: '0 28px 50px rgba(15,23,42,0.08)' }}
-              className={`section-shell overflow-hidden rounded-[1.5rem] border border-[var(--border)] block bg-white`}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+              className="bg-white rounded-xl border border-[var(--border)] overflow-hidden flex flex-col h-full shadow-sm hover:border-[var(--primary)] transition-all duration-300"
             >
-              <div className="relative h-28 md:h-52 overflow-hidden bg-gray-100">
-                <img src={project.image} alt={project.name} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent" />
-                {/* Active Badge */}
-                <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-3 py-1 font-poppins text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-md">
-                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                  In Progress
-                </div>
-              </div>
-
-              <div className="p-3 md:p-7 flex flex-col h-full">
-                <div className="flex items-center justify-between mb-2 md:mb-4">
-                  <div className="font-poppins text-[8px] md:text-[11px] uppercase tracking-[0.1em] md:tracking-[0.2em] text-[var(--primary)]">
-                    {project.client} • {project.location}
-                  </div>
-                </div>
-                <h3 className="mt-1 font-cormorant text-xl md:text-3xl text-[var(--black)] leading-tight">{project.name}</h3>
-                <p className="mt-2 md:mt-3 font-inter text-[10px] md:text-sm leading-relaxed text-[var(--gray)] line-clamp-2 md:line-clamp-3">
-                  {project.description}
-                </p>
-
-                <div className="mt-auto pt-4 md:pt-6 space-y-2">
-                  <div className="flex justify-between font-poppins text-[8px] md:text-[11px] font-semibold uppercase tracking-[0.1em] md:tracking-[0.18em] text-[var(--black-soft)]">
-                    <span>Execution Progress</span>
-                    <span>{project.progress}%</span>
-                  </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-[var(--gray-bg)]">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${project.progress}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.1, delay: 0.15 }}
-                      className="h-full rounded-full bg-[linear-gradient(90deg,var(--primary),var(--accent))]"
-                    />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-
-          {/* --- SECOND ROW: COMPLETED PROJECTS --- */}
-          {completedProjects.map((project, index) => (
-            <motion.div
-              key={`completed-${project.name}-${index}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ delay: (index + 3) * 0.06 }}
-              whileHover={{ y: -6, boxShadow: '0 28px 50px rgba(15,23,42,0.08)' }}
-              className="section-shell overflow-hidden rounded-[1.5rem] border border-[var(--border)] block"
-            >
-              <div className="relative h-28 md:h-52 overflow-hidden bg-[var(--black)]">
-                <img src={project.image} alt={project.name} className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/65 to-transparent" />
-                {/* Completed Badge */}
-                <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-3 py-1 font-poppins text-[11px] font-semibold uppercase tracking-[0.16em] text-white shadow-md">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  Completed
-                </div>
-              </div>
-
-              <div className="p-3 md:p-7 flex flex-col h-full">
-                <div className="font-poppins text-[8px] md:text-[11px] uppercase tracking-[0.1em] md:tracking-[0.2em] text-[var(--gray-dark)] mb-1 md:mb-0">
-                  {project.client} • {project.location}
-                </div>
-                <h3 className="mt-1 md:mt-3 font-cormorant text-xl md:text-3xl text-[var(--black)]">{project.name}</h3>
-                <p className="mt-2 md:mt-3 font-inter text-[10px] md:text-sm leading-relaxed text-[var(--gray)] line-clamp-2 md:line-clamp-3">
-                  {project.description}
-                </p>
+              <div className="relative h-44 sm:h-48 overflow-hidden bg-[var(--black)]">
+                <img 
+                  src={project.image} 
+                  alt={project.client} 
+                  loading="lazy"
+                  fetchPriority="low"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                 
-                <div className="mt-auto pt-3 md:pt-6 flex justify-between items-center border-t border-[var(--border)]">
-                    <span className="font-inter text-[9px] md:text-xs text-[var(--gray)]">{project.type}</span>
-                    <span className="font-poppins text-[8px] md:text-[10px] font-bold text-[var(--accent)] uppercase tracking-wider">100% Delivered</span>
+                {/* Status Badge */}
+                <div className={`absolute left-3.5 top-3.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-inter text-[11px] font-bold text-white shadow-md ${
+                  project.status === 'In Progress' ? 'bg-[var(--primary)]' : 'bg-[var(--primary-dark)]'
+                }`}>
+                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                  {project.status}
+                </div>
+
+                <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
+                  <span className="font-inter text-xs font-bold text-[var(--primary-light)] uppercase tracking-wider block">
+                    {project.industry}
+                  </span>
+                  <h3 className="font-inter text-lg font-bold leading-tight mt-0.5 text-white">
+                    {project.client}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="p-4 md:p-5 flex flex-col flex-grow bg-white">
+                <div className="space-y-2 mb-4 font-inter text-xs text-[var(--black-soft)]">
+                  <div className="flex justify-between border-b border-[var(--border)] pb-2">
+                    <span className="text-[var(--gray)] font-medium">Project Location:</span>
+                    <span className="font-semibold text-[var(--black)]">{project.location}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-[var(--border)] pb-2">
+                    <span className="text-[var(--gray)] font-medium">Industry:</span>
+                    <span className="font-semibold text-[var(--black)]">{project.industry}</span>
+                  </div>
+                  <div className="pt-1">
+                    <span className="text-[var(--gray)] font-medium block mb-1">Scope of Work:</span>
+                    <p className="font-medium text-[var(--black)] leading-relaxed line-clamp-2">
+                      {project.scopeOfWork}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-auto pt-3 border-t border-[var(--border)] flex justify-between items-center">
+                  <span className="font-inter text-[11px] font-semibold text-[var(--primary-dark)] uppercase">
+                    Class I Execution
+                  </span>
+                  <Link 
+                    href="/projects" 
+                    className="inline-flex items-center gap-1 font-inter text-xs font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors"
+                  >
+                    Learn more →
+                  </Link>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-8 md:mt-12 text-center">
+        <div className="mt-10 md:mt-14 text-center">
           <Link href="/projects">
             <motion.button
               whileHover={{ y: -2 }}
-              className="w-full sm:w-auto px-8 md:px-10 py-4 bg-[var(--primary)] text-white font-poppins font-semibold tracking-[0.18em] uppercase rounded-full shadow-xl hover:shadow-2xl transition-all"
+              className="px-8 py-3.5 bg-[var(--primary)] text-white font-inter font-bold text-sm rounded-lg shadow-md hover:bg-[var(--primary-dark)] transition-all"
             >
               Explore All Projects →
             </motion.button>
           </Link>
         </div>
+
       </div>
     </section>
   )

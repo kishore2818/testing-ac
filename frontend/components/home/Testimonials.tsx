@@ -4,21 +4,52 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionLabel from '../shared/SectionLabel'
 
+const staticTestimonials = [
+  {
+    quote: "Adler delivered the electrical infrastructure within the required project schedule and maintained excellent coordination throughout execution.",
+    name: "Rajesh Kulkarni",
+    role: "Vice President — Infrastructure",
+    company: "Aequs SEZ / Aerospace Division",
+    image: "/images/hero/panel-1.jpg"
+  },
+  {
+    quote: "Their technical design and panel manufacturing precision ensured smooth commissioning for our high-capacity processing facility with zero downtime.",
+    name: "Vikram Sharma",
+    role: "Chief General Manager",
+    company: "SATS Food Solutions",
+    image: "/images/projects/comp-1.png"
+  },
+  {
+    quote: "Adler's engineering team handled our HT/LT power distribution with outstanding safety adherence, structured quality checks, and disciplined project management.",
+    name: "Ananth Ramaswamy",
+    role: "Head of Electrical Projects",
+    company: "SFS Industrial Manufacturing",
+    image: "/images/projects/comp-5.png"
+  }
+]
+
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState<any[]>([])
+  const [testimonials, setTestimonials] = useState<any[]>(staticTestimonials)
   const [current, setCurrent] = useState(0)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
+        if (!process.env.NEXT_PUBLIC_API_URL) return;
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews`)
+        if (!res.ok) return;
         const data = await res.json()
-        setTestimonials(data)
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(data.map((r: any) => ({
+            quote: r.quote || r.comment,
+            name: r.name,
+            role: r.role || r.designation || 'Project Director',
+            company: r.company,
+            image: r.image || '/images/hero/panel-1.jpg'
+          })))
+        }
       } catch (error) {
         console.error('Error fetching reviews:', error)
-      } finally {
-        setLoading(false)
       }
     }
     fetchReviews()
@@ -28,125 +59,116 @@ export default function Testimonials() {
   const handlePrev = () => setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   useEffect(() => {
-    if (testimonials.length === 0) return;
+    if (testimonials.length <= 1) return;
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % testimonials.length)
-    }, 3000)
+    }, 6000)
     return () => clearInterval(timer)
   }, [testimonials.length])
 
-  if (loading) {
-    return <div className="py-24 text-center font-inter text-[var(--gray)]">Loading client feedback...</div>
-  }
-
-  if (!testimonials || testimonials.length === 0) {
-    return null;
-  }
-
   return (
-    <section className="bg-[var(--gray-bg)] py-14 md:py-24 border-y border-[var(--border)]">
+    <section className="bg-[var(--gray-bg)] py-12 md:py-24 border-y border-[var(--border)]">
       <div className="site-container">
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16"
-        >
-          <SectionLabel text="Client Feedback" color="accent" />
-          <h2 className="font-cormorant md:font-bebas text-4xl md:text-6xl text-[var(--accent)] tracking-wider">
-            WHAT THEY <span className="text-[var(--primary)]">SAY</span>
-          </h2>
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-8 md:mb-12 gap-4">
+          <div>
+            <SectionLabel text="Client Feedback" color="accent" />
+            <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[38px] leading-tight text-[var(--black)] mt-2">
+              What Industrial Clients <span className="text-[var(--primary)]">Say</span>
+            </h2>
+          </div>
           
-          <div className="flex gap-3 md:gap-4 mt-5 md:mt-8">
+          <div className="flex gap-3">
             <button 
               onClick={handlePrev}
               aria-label="Previous Testimonial"
-              className="w-10 h-10 md:w-12 md:h-12 border border-[var(--primary)] bg-white rounded-full flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all shadow-sm"
+              className="w-10 h-10 border border-[var(--border)] bg-white rounded-lg flex items-center justify-center text-[var(--black)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all shadow-sm font-bold"
             >
               ←
             </button>
             <button 
               onClick={handleNext}
               aria-label="Next Testimonial"
-              className="w-12 h-12 border border-[var(--primary)] bg-white rounded-full flex items-center justify-center text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all shadow-sm"
+              className="w-10 h-10 border border-[var(--border)] bg-white rounded-lg flex items-center justify-center text-[var(--black)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all shadow-sm font-bold"
             >
               →
             </button>
           </div>
-        </motion.div>
+        </div>
 
-        <div className="relative min-h-[320px]">
+        <div className="relative min-h-[280px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="bg-white border text-[var(--black)] border-[var(--border)] shadow-md rounded-[1.5rem] md:rounded-sm overflow-hidden flex flex-col md:flex-row"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-[var(--border)] shadow-md rounded-2xl overflow-hidden flex flex-col lg:flex-row"
             >
               {/* Image Panel */}
-              <div className="relative md:w-72 h-32 md:h-auto shrink-0 overflow-hidden">
+              <div className="relative lg:w-80 h-40 lg:h-auto shrink-0 overflow-hidden bg-[var(--black)]">
                 <img
                   src={testimonials[current].image}
                   alt={testimonials[current].company}
-                  className="w-full h-full object-cover brightness-100 contrast-105"
+                  loading="lazy"
+                  className="w-full h-full object-cover opacity-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex items-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-5">
                   <div>
-                    <p className="font-rajdhani text-white text-xs font-bold uppercase tracking-widest opacity-90">
+                    <span className="font-inter text-xs font-bold text-[var(--primary)] uppercase tracking-wider block">
+                      Verified Client
+                    </span>
+                    <p className="font-inter text-sm font-semibold text-white mt-0.5">
                       {testimonials[current].company}
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-4 md:p-14 relative flex-1">
-                {/* Huge quote mark background */}
-                <div className="absolute -top-2 left-4 md:left-10 font-bebas text-[110px] md:text-[180px] text-[var(--gray-bg)] leading-none pointer-events-none select-none">
-                  &ldquo;
-                </div>
-
-                {/* Stars */}
-                <div className="flex gap-1 mb-4 md:mb-6 relative z-10">
+              {/* Content Panel */}
+              <div className="p-6 md:p-10 relative flex-1 flex flex-col justify-between">
+                
+                {/* 5 Stars */}
+                <div className="flex gap-1 mb-4">
                   {[1,2,3,4,5].map(s => (
-                    <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="var(--primary)" className="shrink-0">
+                    <svg key={s} width="16" height="16" viewBox="0 0 24 24" fill="#8DC43E" className="shrink-0">
                       <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
                     </svg>
                   ))}
                 </div>
                 
-                <p className="font-inter text-[13px] md:text-2xl text-[var(--gray-dark)] leading-relaxed mb-4 md:mb-8 relative z-10 font-medium line-clamp-4 md:line-clamp-none">
-                  {testimonials[current].quote}
+                {/* Quote */}
+                <p className="font-inter text-base sm:text-lg lg:text-xl text-[var(--black)] leading-relaxed font-normal mb-6 italic">
+                  &ldquo;{testimonials[current].quote}&rdquo;
                 </p>
                 
-                <div className="flex items-center gap-4 relative z-10">
-                  <div className="w-10 h-10 md:w-14 md:h-14 bg-[var(--primary-soft)] border border-[var(--primary)]/20 rounded-full flex justify-center items-center font-bebas text-lg md:text-2xl text-[var(--primary)] shrink-0">
+                {/* Name & Role */}
+                <div className="flex items-center gap-3.5 pt-4 border-t border-[var(--border)]">
+                  <div className="w-11 h-11 bg-[var(--primary-soft)] border border-[var(--primary)]/30 rounded-full flex justify-center items-center font-inter font-bold text-base text-[var(--primary-dark)] shrink-0">
                     {testimonials[current].name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-poppins md:font-rajdhani text-[14px] md:text-xl font-semibold md:font-bold text-[var(--black)] uppercase tracking-wider">
+                    <h4 className="font-inter text-sm md:text-base font-bold text-[var(--black)]">
                       {testimonials[current].name}
                     </h4>
-                    <p className="font-inter text-[10px] md:text-sm text-[var(--gray)]">
-                      {testimonials[current].role} · {testimonials[current].company}
+                    <p className="font-inter text-xs text-[var(--gray)]">
+                      {testimonials[current].role} · <span className="font-semibold text-[var(--black-soft)]">{testimonials[current].company}</span>
                     </p>
                   </div>
                 </div>
 
-                {/* Dot indicators */}
-                <div className="flex gap-2 mt-4 md:mt-8">
+                {/* Dots indicator */}
+                <div className="flex gap-1.5 mt-6">
                   {testimonials.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setCurrent(i)}
-                      className={`h-1.5 rounded-full transition-all ${i === current ? 'w-8 bg-[var(--primary)]' : 'w-3 bg-[var(--border)]'}`}
+                      className={`h-1.5 rounded-full transition-all ${i === current ? 'w-6 bg-[var(--primary)]' : 'w-2 bg-[var(--border)]'}`}
                     />
                   ))}
                 </div>
+
               </div>
             </motion.div>
           </AnimatePresence>

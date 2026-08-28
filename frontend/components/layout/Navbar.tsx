@@ -54,10 +54,10 @@ export default function Navbar() {
                 className="relative group flex flex-col items-center gap-0.5"
               >
                 <span
-                  className={`font-poppins text-[13px] tracking-[0.15em] uppercase transition-colors duration-200 ${
+                  className={`font-inter text-[15px] leading-[20px] tracking-normal transition-colors duration-200 ${
                     isActive
-                      ? 'text-[var(--black)] font-extrabold'
-                      : 'text-[var(--black-soft)] group-hover:text-[var(--primary)] font-bold'
+                      ? 'text-[var(--primary)] font-semibold'
+                      : 'text-[var(--black-soft)] group-hover:text-[var(--primary)] font-semibold'
                   }`}
                 >
                   {link.label}

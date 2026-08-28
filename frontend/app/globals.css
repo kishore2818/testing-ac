@@ -2,32 +2,33 @@
 @source "../components/**/*.{ts,tsx}";
 
 :root {
-  --primary:       #7CB342;
-  --primary-dark:  #558B2F;
-  --primary-light: #9CCC65;
-  --primary-glow:  rgba(124,179,66,0.12);
-  --primary-soft:  #F1F8E9;
+  --primary:       #8DC43E;
+  --primary-dark:  #5B8825;
+  --primary-light: #A3D856;
+  --primary-glow:  rgba(141,196,62,0.15);
+  --primary-soft:  #F7FAF3;
 
-  --accent:        #1E88E5;
-  --accent-dark:   #1565C0;
-  --accent-light:  #42A5F5;
-  --accent-glow:   rgba(30,136,229,0.12);
-  --accent-soft:   #E3F2FD;
+  --accent:        #5B8825;
+  --accent-dark:   #3D5C18;
+  --accent-light:  #8DC43E;
+  --accent-glow:   rgba(91,136,37,0.12);
+  --accent-soft:   #F7FAF3;
 
-  --black:         #222222;
-  --black-soft:    #333333;
+  --black:         #202020;
+  --black-soft:    #424242;
   --black-card:    #FFFFFF;
-  --black-muted:   #666666;
+  --black-muted:   #6B7280;
 
   --white:         #FFFFFF;
-  --white-soft:    #F5F5F5;
-  --white-muted:   #E0E0E0;
+  --white-soft:    #F7FAF3;
+  --white-muted:   #E5E7EB;
 
-  --gray:          #757575;
+  --gray:          #6B7280;
   --gray-dark:     #424242;
-  --gray-light:    #BDBDBD;
-  --gray-bg:       #F5F5F5;
-  --border:        #EEEEEE;
+  --gray-light:    #E5E7EB;
+  --gray-bg:       #F7FAF3;
+  --border:        #E5E7EB;
+  --success:       #2E7D32;
 }
 
 @theme inline {
@@ -57,11 +58,11 @@
   --color-gray-bg: var(--gray-bg);
   --color-border: var(--border);
 
-  --font-bebas: var(--font-montserrat), "Bebas Neue", "Arial Narrow", "Impact", sans-serif;
-  --font-rajdhani: var(--font-montserrat), "Rajdhani", "Arial Narrow", "Segoe UI", sans-serif;
-  --font-inter: var(--font-outfit), "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-poppins: var(--font-outfit), "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-cormorant: var(--font-montserrat), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-bebas: var(--font-inter), "Inter", sans-serif;
+  --font-rajdhani: var(--font-inter), "Inter", sans-serif;
+  --font-inter: var(--font-inter), "Inter", sans-serif;
+  --font-poppins: var(--font-inter), "Inter", sans-serif;
+  --font-cormorant: var(--font-inter), "Inter", sans-serif;
 }
 
 /* Global Container Utility */
@@ -76,15 +77,30 @@
 
 @media (min-width: 768px) {
   .site-container {
-    padding-left: 1.5rem; /* 24px */
-    padding-right: 1.5rem;
+    padding-left: 2rem; /* 32px */
+    padding-right: 2rem;
   }
 }
 
 @media (min-width: 1024px) {
   .site-container {
-    padding-left: 2rem;   /* 32px */
-    padding-right: 2rem;
+    padding-left: 2.5rem;   /* 40px */
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-container {
+    padding-left: 3rem;   /* 48px — symmetric on laptop */
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .site-container {
+    /* max-width keeps content centered; auto margins = equal side space */
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 

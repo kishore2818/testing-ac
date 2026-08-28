@@ -1,3 +1,12 @@
+// Real image mapping — ongoing projects use comp images to avoid missing file preloads
+const COMP_IMAGES = [
+  '/images/projects/comp-2.png',
+  '/images/projects/comp-3.png',
+  '/images/projects/comp-4.png',
+  '/images/projects/comp-5.png',
+  '/images/projects/comp-6.png',
+]
+
 export const projects = [
   // --- ONGOING PROJECTS ---
   {
@@ -8,7 +17,7 @@ export const projects = [
     status: 'In Progress',
     description: 'Industrial Manufacturing Facility. Contractor: Scon Projects. Consultant: United Architects.',
     progress: 75,
-    image: '/images/projects/ongoing-placeholder.jpg',
+    image: COMP_IMAGES[0],
   },
   {
     name: 'International Residential School',
@@ -18,7 +27,7 @@ export const projects = [
     status: 'In Progress',
     description: 'International Residential School. Contractor: CCPL. Consultant: Ace Architects / Maple.',
     progress: 60,
-    image: '/images/projects/ongoing-placeholder.jpg',
+    image: COMP_IMAGES[1],
   },
   {
     name: 'Luxurious Villa Project',
@@ -28,7 +37,7 @@ export const projects = [
     status: 'In Progress',
     description: 'Luxurious Villa Project. Contractor: CCPL.',
     progress: 45,
-    image: '/images/projects/ongoing-placeholder.jpg',
+    image: COMP_IMAGES[2],
   },
   {
     name: 'Industrial Manufacturing Facility',
@@ -38,7 +47,7 @@ export const projects = [
     status: 'In Progress',
     description: 'Industrial Manufacturing Facility. Contractor: CCPL. Consultant: CRN.',
     progress: 70,
-    image: '/images/projects/ongoing-placeholder.jpg',
+    image: COMP_IMAGES[3],
   },
   {
     name: 'Industrial Manufacturing Facility',
@@ -48,7 +57,7 @@ export const projects = [
     status: 'In Progress',
     description: 'Industrial Manufacturing Facility. Contractor: CCPL.',
     progress: 85,
-    image: '/images/projects/ongoing-placeholder.jpg',
+    image: COMP_IMAGES[4],
   },
 
   // --- COMPLETED PROJECTS ---

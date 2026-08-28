@@ -6,59 +6,84 @@ import { ChevronDown } from 'lucide-react'
 import SectionLabel from '../shared/SectionLabel'
 import Link from 'next/link'
 
-const faqs = [
-  { q: "What types of electrical panels do you design?", a: "We design and manufacture LT Distribution Panels, HT Panels up to 33kV, Motor Control Centers (MCC), Power Control Centers (PCC), APFC, VCB Panels, and custom PLC automation desks." },
-  { q: "How do you ensure panel quality?", a: "All our panels are designed and tested according to rigorous industrial standards. We operate under strict quality guidelines to ensure every unit is built for reliability, safety, and long-term performance." },
-  { q: "Do you offer Annual Maintenance Contracts (AMCs)?", a: "Absolutely. We provide comprehensive preventive and corrective AMCs, which include thermographic scanning, arc flash studies, and 24/7 emergency dispatch." },
-  { q: "Which industries do you primarily serve?", a: "We serve heavy manufacturing, pharmaceuticals, commercial real estate, data centers, hospitals, and critical infrastructure projects (like metros and airports)." },
-  { q: "How quickly can you deliver a custom panel?", a: "Depending on scale and complexity, standard distribution boards take 2-4 weeks, while complex MCC/PCC or VCB panels take 6-10 weeks from drawing approval to dispatch." },
-  { q: "What brands of components do you use?", a: "We strictly use premium components from trusted global brands like Siemens, Schneider Electric, ABB, L&T, and C&S Electric based on client specifications." }
+const industrialFaqs = [
+  { 
+    q: "What industries do you specialize in?", 
+    a: "We specialize in heavy industrial manufacturing, aerospace facilities, automotive & mobility assembly, food processing & cold storage, logistics warehousing, data centers, and major commercial infrastructure developments." 
+  },
+  { 
+    q: "What voltage levels do you support?", 
+    a: "We handle both High Voltage (HT) systems up to 33kV and Low Voltage (LT) power distribution networks, switchgears, sub-stations, transformers, and plant automation desks." 
+  },
+  { 
+    q: "Do you handle complete turnkey electrical projects?", 
+    a: "Yes. As a Class I Electrical Contractor, Adler delivers complete turnkey projects from initial site survey and engineering design to BOQ procurement, panel manufacturing, cabling, installation, testing, and commissioning." 
+  },
+  { 
+    q: "Do you provide testing and commissioning?", 
+    a: "Absoltely. We perform comprehensive factory acceptance testing (FAT), site acceptance testing (SAT), insulation hi-pot testing, relay calibration, earth resistance audits, and formal joint commissioning." 
+  },
+  { 
+    q: "Do you provide AMC for industrial facilities?", 
+    a: "Yes, we offer structured Annual Maintenance Contracts (AMC) including preventive maintenance schedules, infrared thermography, arc flash hazard audits, transformer oil testing, and rapid emergency response." 
+  },
+  { 
+    q: "Can you work from BOQ/drawings provided by consultants?", 
+    a: "Yes. Our engineering team routinely works with BOQ specifications and single line diagrams (SLD) issued by MEP consultants, offering value engineering and precise execution." 
+  },
+  { 
+    q: "Do you provide emergency electrical support?", 
+    a: "We offer dedicated emergency breakdown support for facility AMC clients to diagnose power faults, replace damaged switchgear components, and restore uptime swiftly." 
+  },
+  { 
+    q: "What types of electrical panels do you design?", 
+    a: "Adler designs and manufactures LT Distribution Panels, HT Panels up to 33kV, Motor Control Centers (MCC), Power Control Centers (PCC), APFC Panels, VCB Panels, and PLC automation desks." 
+  }
 ]
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
-  const displayedFaqs = faqs.slice(0, 4)
 
   return (
-    <motion.section 
-      initial={{ x: -150, opacity: 0 }}
-      whileInView={{ x: 0, opacity: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ 
-        boxShadow: "inset 0 0 40px rgba(124, 179, 66, 0.08)",
-        backgroundColor: "#fcfdfe" 
-      }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-[var(--gray-bg)] py-12 md:py-16 h-full flex flex-col justify-center relative overflow-hidden group transition-colors"
-    >
-      <div className="site-container max-w-2xl md:max-w-xl lg:max-w-lg mx-auto relative z-10 transition-transform duration-500 group-hover:scale-[1.01]">
+    <section className="bg-[var(--gray-bg)] py-12 md:py-20 border-b border-[var(--border)]">
+      <div className="site-container max-w-4xl mx-auto">
         
-        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-16">
-          <SectionLabel text="Got Questions?" color="accent" />
-          <h2 className="font-cormorant md:font-bebas text-4xl md:text-4xl text-[var(--accent)] tracking-wider">
-            FREQUENTLY ASKED <span className="text-[var(--primary)]">QUESTIONS</span>
+        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-12">
+          <SectionLabel text="Technical FAQs" color="accent" />
+          <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[38px] leading-tight text-[var(--black)] mt-2">
+            Frequently Asked <span className="text-[var(--primary)]">Questions</span>
           </h2>
+          <p className="font-inter text-[var(--gray)] max-w-xl mt-2 text-sm leading-relaxed">
+            Essential information for project engineers, procurement leaders, and plant managers.
+          </p>
         </div>
 
-        <div className="space-y-3 md:space-y-4">
-          {displayedFaqs.map((faq, i) => {
+        <div className="space-y-3">
+          {industrialFaqs.map((faq, i) => {
             const isOpen = openIndex === i
             return (
-              <div key={i} className={`bg-white border border-[var(--border)] rounded-[1.25rem] md:rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow ${i >= 2 ? 'hidden md:block' : 'block'}`}>
+              <div 
+                key={i} 
+                className={`bg-white border rounded-xl overflow-hidden shadow-sm transition-all ${
+                  isOpen ? 'border-[var(--primary)] shadow-md' : 'border-[var(--border)] hover:border-[var(--primary)]/50'
+                }`}
+              >
                 <button 
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="w-full px-4 md:px-6 py-4 md:py-5 flex justify-between items-center text-left hover:bg-gray-50 transition-colors gap-3"
+                  className="w-full px-5 md:px-6 py-4 flex justify-between items-center text-left gap-4"
                 >
-                  <span className={`font-poppins md:font-rajdhani text-sm md:text-base font-semibold md:font-bold tracking-[0.08em] md:tracking-widest uppercase transition-colors ${isOpen ? 'text-[var(--primary)]' : 'text-[var(--black)]'}`}>
+                  <span className={`font-inter text-sm md:text-base font-bold transition-colors ${
+                    isOpen ? 'text-[var(--primary-dark)]' : 'text-[var(--black)]'
+                  }`}>
                     {faq.q}
                   </span>
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="text-[var(--primary)]"
+                    transition={{ duration: 0.2 }}
+                    className="text-[var(--primary)] shrink-0"
                   >
-                    <ChevronDown size={24} />
+                    <ChevronDown size={20} />
                   </motion.div>
                 </button>
                 <AnimatePresence initial={false}>
@@ -67,9 +92,9 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.25 }}
                     >
-                      <div className="px-4 md:px-6 pb-5 md:pb-6 pt-1 md:pt-2 font-inter text-sm md:text-base text-[var(--gray)] leading-relaxed">
+                      <div className="px-5 md:px-6 pb-5 pt-1 font-inter text-xs md:text-sm text-[var(--black-soft)] leading-relaxed border-t border-[var(--border)] bg-[var(--primary-soft)]/40">
                         {faq.a}
                       </div>
                     </motion.div>
@@ -80,18 +105,18 @@ export default function FAQ() {
           })}
         </div>
 
-        <div className="mt-8 md:mt-12 text-left md:text-center block md:hidden">
+        <div className="mt-8 text-center">
           <Link href="/contact">
             <motion.button
               whileHover={{ y: -2 }}
-              className="w-full sm:w-auto px-8 md:px-10 py-4 bg-[var(--primary)] text-white font-poppins font-semibold tracking-[0.18em] uppercase rounded-full shadow-xl hover:shadow-2xl transition-all text-xs"
+              className="px-6 py-3 bg-[var(--primary)] text-white font-inter font-bold text-xs sm:text-sm rounded-lg shadow-sm hover:bg-[var(--primary-dark)] transition-all"
             >
-              Have More Questions? →
+              Have Specific Engineering Requirements? Contact Us →
             </motion.button>
           </Link>
         </div>
 
       </div>
-    </motion.section>
+    </section>
   )
 }
