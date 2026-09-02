@@ -105,8 +105,7 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    // Add your Google Search Console verification token here once you verify
-    // google: 'YOUR_GOOGLE_VERIFICATION_TOKEN',
+    google: 'UlZpIxpvEmXTU-ieYqeyg6hICwcgRgh6Usrp_Yt5aUU',
   },
 }
 
