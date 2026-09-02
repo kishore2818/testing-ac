@@ -1,8 +1,23 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import PageHero from '@/components/shared/PageHero'
 import Enquiry from '@/components/home/Enquiry'
+
+export const metadata: Metadata = {
+  title: 'Contact Us | Adler Contracts – Get a Free Quote',
+  description:
+    'Contact Adler Contracts in Bengaluru for electrical panel manufacturing, MCC panels, PCC panels, APFC panels and bus ducts. Get a free project quote today.',
+  alternates: { canonical: 'https://adlercontracts.in/contact' },
+  openGraph: {
+    title: 'Contact Adler Contracts | Get a Free Quote',
+    description: 'Get in touch with Bengaluru\'s leading electrical panel manufacturer. Free project consultation.',
+    url: 'https://adlercontracts.in/contact',
+  },
+}
+
+
 import MapContainer from '@/components/contact/MapContainer'
 
 export default function ContactPage() {

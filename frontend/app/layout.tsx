@@ -22,52 +22,76 @@ const montserrat = Montserrat({
   display: 'swap',
 })
 
+const SITE_URL = 'https://adlercontracts.in'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://adlercontracts.com'),
+  metadataBase: new URL(SITE_URL),
+
   title: {
-    default: 'Adler Contracts | Power Built With Precision',
+    default: 'Adler Contracts | Electrical Panel Specialists in Bengaluru',
     template: '%s | Adler Contracts',
   },
   description:
-    "Adler Contracts — India's premier electrical panel specialists. Expert design, installation, and maintenance of MCC, PCC, and control panels.",
+    'Adler Contracts – India\'s trusted electrical panel manufacturer in Bengaluru. Expert design, manufacturing & installation of MCC panels, PCC panels, APFC panels, control desks & bus ducts. Call now!',
+
   keywords: [
-    'electrical panel design',
-    'MCC panel',
-    'PCC panel',
-    'APFC panel',
-    'industrial electrical',
-    'panel installation',
     'Adler Contracts',
+    'adler contracts',
+    'adlercontracts.in',
+    'electrical panel manufacturer Bengaluru',
+    'MCC panel manufacturer India',
+    'PCC panel manufacturer',
+    'APFC panel',
+    'control panel manufacturer Bangalore',
+    'industrial electrical panels',
+    'bus duct manufacturer',
+    'switchgear manufacturer Bangalore',
+    'electrical contractor Bengaluru',
+    'panel board manufacturer India',
+    'motor control centre',
+    'power control centre',
   ],
+
+  authors: [{ name: 'Adler Contracts', url: SITE_URL }],
+  creator: 'Adler Contracts',
+  publisher: 'Adler Contracts',
+
+  alternates: {
+    canonical: SITE_URL,
+  },
+
   icons: {
     icon: '/favicon.ico',
     shortcut: '/icon.png',
     apple: '/apple-icon.png',
   },
+
   openGraph: {
-    title: 'Adler Contracts | Power Built With Precision',
+    title: 'Adler Contracts | Electrical Panel Specialists in Bengaluru',
     description:
-      "India's premier electrical panel specialists. Turnkey design, manufacturing, and installation of MCC, PCC, and control panels.",
-    url: 'https://adlercontracts.com',
+      'India\'s trusted electrical panel manufacturer. Turnkey design, manufacturing & installation of MCC, PCC, APFC panels & bus ducts. Based in Bengaluru.',
+    url: SITE_URL,
     siteName: 'Adler Contracts',
     images: [
       {
-        url: '/logo.png',
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Adler Contracts',
+        alt: 'Adler Contracts – Electrical Panel Specialists',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
+
   twitter: {
     card: 'summary_large_image',
-    title: 'Adler Contracts | Power Built With Precision',
+    title: 'Adler Contracts | Electrical Panel Specialists in Bengaluru',
     description:
-      "India's premier electrical panel specialists. Expert design and installation.",
-    images: ['/logo.png'],
+      'India\'s trusted electrical panel manufacturer. MCC, PCC, APFC panels & bus ducts. Bengaluru.',
+    images: [`${SITE_URL}/og-image.png`],
   },
+
   robots: {
     index: true,
     follow: true,
@@ -79,6 +103,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+
+  verification: {
+    // Add your Google Search Console verification token here once you verify
+    // google: 'YOUR_GOOGLE_VERIFICATION_TOKEN',
+  },
 }
 
 export default function RootLayout({
@@ -86,6 +115,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        {/* Canonical domain reinforcement */}
+        <link rel="canonical" href={SITE_URL} />
+        {/* Geo tags for local SEO (Bengaluru, India) */}
+        <meta name="geo.region" content="IN-KA" />
+        <meta name="geo.placename" content="Bengaluru" />
+        <meta name="geo.position" content="12.9716;77.5946" />
+        <meta name="ICBM" content="12.9716, 77.5946" />
+      </head>
       <body className={`min-h-full bg-white text-black antialiased overflow-x-hidden ${inter.variable} ${outfit.variable} ${montserrat.variable}`}>
         <JsonLd />
         {children}

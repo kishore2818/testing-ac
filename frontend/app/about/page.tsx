@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
@@ -7,6 +8,19 @@ import CoreValues from '@/components/about/CoreValues'
 import Framework from '@/components/about/Framework'
 import Partners from '@/components/about/Partners'
 import StatsCounter from '@/components/home/StatsCounter'
+
+export const metadata: Metadata = {
+  title: 'About Us | Adler Contracts – Electrical Panel Manufacturer Bengaluru',
+  description:
+    'Learn about Adler Contracts – Bengaluru\'s leading electrical panel manufacturer. Our mission, values, and expertise in MCC, PCC, APFC panels and bus ducts since 2010.',
+  alternates: { canonical: 'https://adlercontracts.in/about' },
+  openGraph: {
+    title: 'About Adler Contracts | Electrical Panel Manufacturer Bengaluru',
+    description: 'Bengaluru\'s trusted electrical panel manufacturer since 2010. MCC, PCC, APFC panels & bus ducts.',
+    url: 'https://adlercontracts.in/about',
+  },
+}
+
 
 export default function AboutPage() {
   return (
