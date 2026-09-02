@@ -204,7 +204,7 @@ export default function LoginPage() {
         </div>
       </motion.div>
 
-      <style jsx global>{`
+      <style>{`
         @keyframes shake {
           0%, 100% { transform: translateX(0); }
           15% { transform: translateX(-8px); }
