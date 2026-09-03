@@ -147,9 +147,9 @@ export default function ReviewsManagement() {
           
           <button 
             onClick={() => handleOpenModal()}
-            className="flex items-center gap-2 bg-[var(--black)] text-white px-6 py-2.5 rounded-full font-poppins font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md hover:shadow-primary/20 active:scale-95 group"
+            className="w-full md:w-auto flex items-center justify-center gap-2 bg-[var(--black)] text-white px-6 py-3 rounded-full font-poppins font-bold text-xs uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md hover:shadow-primary/20 active:scale-95 group"
           >
-            <Plus size={14} className="group-hover:rotate-90 transition-transform" />
+            <Plus size={16} className="group-hover:rotate-90 transition-transform" />
             Add New Review
           </button>
         </motion.div>
@@ -160,7 +160,7 @@ export default function ReviewsManagement() {
             <p className="font-rajdhani text-[11px] font-bold text-[var(--gray)] uppercase tracking-widest">Retrieving Feedback...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AnimatePresence mode="popLayout">
               {reviews.map((review, idx) => (
                 <motion.div
@@ -170,7 +170,7 @@ export default function ReviewsManagement() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="bg-white border border-[var(--border)] rounded-xl p-3 sm:p-6 hover:shadow-md hover:shadow-black/5 transition-all duration-300 group relative flex flex-col sm:flex-row gap-3 sm:gap-6 overflow-hidden"
+                  className="bg-white border border-[var(--border)] rounded-2xl p-5 sm:p-6 hover:shadow-lg hover:shadow-black/5 transition-all duration-300 group relative flex flex-col sm:flex-row gap-4 sm:gap-6 overflow-hidden"
                 >
                   {/* Quote mark background */}
                   <div className="absolute -top-2 -left-2 font-bebas text-[80px] text-gray-50 leading-none pointer-events-none select-none group-hover:text-primary/5 transition-colors duration-300">
@@ -178,18 +178,18 @@ export default function ReviewsManagement() {
                   </div>
 
                   {/* Admin Controls */}
-                  <div className="absolute top-4 right-4 flex gap-1 z-20 opacity-0 group-hover:opacity-100 transition-all transform translate-x-4 group-hover:translate-x-0">
+                  <div className="absolute top-4 right-4 flex gap-1.5 z-20 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all">
                     <button 
                       onClick={() => handleOpenModal(review)}
-                      className="p-2 bg-white shadow-sm border border-gray-100 rounded-lg text-[var(--black)] hover:bg-[var(--primary)] hover:text-white transition-colors"
+                      className="p-2 bg-white shadow-sm border border-gray-200 rounded-lg text-[var(--black)] hover:bg-[var(--primary)] hover:text-white transition-colors"
                     >
-                      <Edit2 size={12} />
+                      <Edit2 size={13} />
                     </button>
                     <button 
                       onClick={() => handleDelete(review._id)}
-                      className="p-2 bg-white shadow-sm border border-gray-100 rounded-lg text-red-500 hover:bg-red-500 hover:text-white transition-colors"
+                      className="p-2 bg-white shadow-sm border border-gray-200 rounded-lg text-red-500 hover:bg-red-500 hover:text-white transition-colors"
                     >
-                      <Trash2 size={12} />
+                      <Trash2 size={13} />
                     </button>
                   </div>
 
@@ -220,13 +220,15 @@ export default function ReviewsManagement() {
                       {review.quote}
                     </p>
                     
-                    <div className="mt-auto pt-3 border-t border-gray-50">
-                      <h4 className="font-bebas text-lg text-[var(--black)] tracking-wide mb-0.5">
+                    <div className="mt-auto pt-3 border-t border-gray-100">
+                      <h4 className="font-bebas text-xl text-[var(--black)] tracking-wide mb-1">
                         {review.name}
                       </h4>
-                      <p className="font-rajdhani text-[10px] font-bold text-[var(--primary)] uppercase tracking-wider flex items-center gap-1.5">
-                        <Briefcase size={8} />
-                        {review.role} <span className="text-gray-300">•</span> {review.company}
+                      <p className="font-rajdhani text-[11px] font-bold text-[var(--primary)] uppercase tracking-wider flex items-center gap-1.5 flex-wrap">
+                        <Briefcase size={10} className="shrink-0" />
+                        <span>{review.role}</span>
+                        <span className="text-gray-300">•</span>
+                        <span>{review.company}</span>
                       </p>
                     </div>
                   </div>

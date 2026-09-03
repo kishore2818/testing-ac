@@ -70,26 +70,26 @@ export default function Testimonials() {
     <section className="bg-[var(--gray-bg)] py-12 md:py-24 border-y border-[var(--border)]">
       <div className="site-container">
         
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-8 md:mb-12 gap-4">
+        <div className="flex items-end justify-between mb-8 md:mb-12 gap-4">
           <div>
             <SectionLabel text="Client Feedback" color="accent" />
-            <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[38px] leading-tight text-[var(--black)] mt-2">
+            <h2 className="font-inter font-semibold text-[22px] sm:text-[34px] lg:text-[38px] leading-tight text-[var(--black)] mt-1.5 sm:mt-2">
               What Industrial Clients <span className="text-[var(--primary)]">Say</span>
             </h2>
           </div>
           
-          <div className="flex gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button 
               onClick={handlePrev}
               aria-label="Previous Testimonial"
-              className="w-10 h-10 border border-[var(--border)] bg-white rounded-lg flex items-center justify-center text-[var(--black)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all shadow-sm font-bold"
+              className="w-9 h-9 sm:w-10 sm:h-10 border border-[var(--border)] bg-white rounded-xl flex items-center justify-center text-[var(--black)] hover:border-[var(--primary)] hover:text-[var(--primary)] hover:scale-105 active:scale-95 transition-all shadow-sm font-bold"
             >
               ←
             </button>
             <button 
               onClick={handleNext}
               aria-label="Next Testimonial"
-              className="w-10 h-10 border border-[var(--border)] bg-white rounded-lg flex items-center justify-center text-[var(--black)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all shadow-sm font-bold"
+              className="w-9 h-9 sm:w-10 sm:h-10 border border-[var(--border)] bg-white rounded-xl flex items-center justify-center text-[var(--black)] hover:border-[var(--primary)] hover:text-[var(--primary)] hover:scale-105 active:scale-95 transition-all shadow-sm font-bold"
             >
               →
             </button>

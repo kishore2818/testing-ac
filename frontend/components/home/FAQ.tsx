@@ -45,15 +45,14 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="bg-[var(--gray-bg)] py-12 md:py-20 border-b border-[var(--border)]">
-      <div className="site-container max-w-4xl mx-auto">
-        
-        <div className="text-left md:text-center flex flex-col items-start md:items-center mb-8 md:mb-12">
+    <div className="bg-white border border-[var(--border)] rounded-2xl md:rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm h-full flex flex-col justify-between">
+      <div>
+        <div className="text-left mb-6 sm:mb-8">
           <SectionLabel text="Technical FAQs" color="accent" />
-          <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[38px] leading-tight text-[var(--black)] mt-2">
+          <h2 className="font-inter font-semibold text-[22px] sm:text-[30px] lg:text-[34px] leading-tight text-[var(--black)] mt-2">
             Frequently Asked <span className="text-[var(--primary)]">Questions</span>
           </h2>
-          <p className="font-inter text-[var(--gray)] max-w-xl mt-2 text-sm leading-relaxed">
+          <p className="font-inter text-[var(--gray)] max-w-xl mt-2 text-xs sm:text-sm leading-relaxed">
             Essential information for project engineers, procurement leaders, and plant managers.
           </p>
         </div>
@@ -109,14 +108,13 @@ export default function FAQ() {
           <Link href="/contact">
             <motion.button
               whileHover={{ y: -2 }}
-              className="px-6 py-3 bg-[var(--primary)] text-white font-inter font-bold text-xs sm:text-sm rounded-lg shadow-sm hover:bg-[var(--primary-dark)] transition-all"
+              className="w-full sm:w-auto px-6 py-3 bg-[var(--primary)] text-white font-inter font-bold text-xs sm:text-sm rounded-lg shadow-sm hover:bg-[var(--primary-dark)] transition-all"
             >
-              Have Specific Engineering Requirements? Contact Us →
+              Have Specific Requirements? Contact Us →
             </motion.button>
           </Link>
         </div>
-
       </div>
-    </section>
+    </div>
   )
 }

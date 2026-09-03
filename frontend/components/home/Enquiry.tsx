@@ -70,20 +70,20 @@ export default function Enquiry() {
   }
 
   return (
-    <section className="bg-white py-12 md:py-24 relative overflow-hidden border-t border-[var(--border)]">
+    <div className="bg-white border border-[var(--border)] border-t-[4px] border-t-[var(--primary)] rounded-2xl md:rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm h-full flex flex-col justify-between relative overflow-hidden">
       
       {/* Subtle Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,var(--primary-soft)_0%,transparent_65%)] pointer-events-none" />
 
-      <div className="site-container max-w-4xl mx-auto relative z-10">
+      <div className="relative z-10">
         
         {/* Section Header */}
-        <div className="text-left md:text-center mb-8 md:mb-12">
+        <div className="text-left mb-6 sm:mb-8">
           <SectionLabel text="B2B Technical Proposal Request" color="accent" />
-          <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[40px] leading-tight text-[var(--black)] mt-2">
+          <h2 className="font-inter font-semibold text-[22px] sm:text-[30px] lg:text-[34px] leading-tight text-[var(--black)] mt-2">
             Have an Electrical Project <span className="text-[var(--primary)]">in the Pipeline?</span>
           </h2>
-          <p className="font-inter text-[var(--gray)] mt-3 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+          <p className="font-inter text-[var(--gray)] mt-2 text-xs sm:text-sm leading-relaxed">
             Share your BOQ, drawings or project requirements. Our engineering team will review your requirements and get back to you within 24 hours.
           </p>
         </div>
@@ -92,7 +92,6 @@ export default function Enquiry() {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white border border-[var(--border)] border-t-[4px] border-t-[var(--primary)] rounded-2xl p-6 md:p-10 shadow-xl relative"
         >
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-5">
             
@@ -244,6 +243,6 @@ export default function Enquiry() {
 
         </motion.div>
       </div>
-    </section>
+    </div>
   )
 }

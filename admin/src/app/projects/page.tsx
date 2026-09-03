@@ -182,10 +182,10 @@ function ProjectsContent() {
             </h1>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             {/* Search Bar */}
-            <div className="relative group flex-1 min-w-[240px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--gray)] group-focus-within:text-[var(--primary)] transition-colors" size={14} />
+            <div className="relative group flex-1 min-w-[200px]">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--gray)] group-focus-within:text-[var(--primary)] transition-colors" size={14} />
               <input 
                 type="text"
                 placeholder="Search projects or clients..."
@@ -197,10 +197,10 @@ function ProjectsContent() {
             
             <button 
               onClick={() => handleOpenModal()}
-              className="flex items-center gap-2 bg-[var(--black)] text-white px-4 md:px-6 py-2.5 rounded-full font-poppins font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md hover:shadow-primary/20 active:scale-95 group"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[var(--black)] text-white px-5 py-2.5 rounded-full font-poppins font-bold text-xs uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md hover:shadow-primary/20 active:scale-95 group shrink-0"
             >
-              <Plus size={14} className="group-hover:rotate-90 transition-transform" />
-              <span className="hidden sm:inline">Add Project</span>
+              <Plus size={15} className="group-hover:rotate-90 transition-transform" />
+              <span>Add Project</span>
             </button>
           </div>
         </motion.div>

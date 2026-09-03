@@ -26,10 +26,14 @@ export default function Home() {
         <OngoingProjects />
         <WhyUs />
         <Testimonials />
-        <div className="grid grid-cols-1 lg:grid-cols-2 w-full">
-          <FAQ />
-          <Enquiry />
-        </div>
+        <section className="bg-[var(--gray-bg)] py-12 md:py-24 border-b border-[var(--border)]">
+          <div className="site-container max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+              <FAQ />
+              <Enquiry />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
       <WhatsAppButton />
