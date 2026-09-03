@@ -87,31 +87,31 @@ export default function Dashboard() {
         </header>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-8 sm:mb-12">
           {statCards.map((stat, idx) => (
             <motion.div
               key={stat.label}
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white p-5 rounded-2xl border border-[var(--border)] shadow-sm hover:shadow-lg hover:shadow-black/5 transition-all duration-300 group relative overflow-hidden"
+              className="bg-white p-3 sm:p-5 rounded-2xl border border-[var(--border)] shadow-sm hover:shadow-lg hover:shadow-black/5 transition-all duration-300 group relative overflow-hidden"
             >
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-2 sm:mb-4">
                   <div 
-                    className="p-2.5 rounded-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm"
+                    className="p-1.5 sm:p-2.5 rounded-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm"
                     style={{ backgroundColor: `${stat.color}08`, border: `1px solid ${stat.color}20` }}
                   >
-                    <stat.icon size={20} style={{ color: stat.color }} />
+                    <stat.icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: stat.color }} />
                   </div>
-                  <span className="text-[9px] font-black px-2.5 py-1 rounded-full bg-gray-50 text-gray-400 uppercase tracking-widest border border-gray-100">
+                  <span className="text-[8px] sm:text-[9px] font-black px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-gray-50 text-gray-400 uppercase tracking-widest border border-gray-100">
                     {stat.trend}
                   </span>
                 </div>
-                <p className="text-[10px] font-bold text-[var(--gray)] tracking-[0.15em] uppercase font-rajdhani mb-1">
+                <p className="text-[9px] sm:text-[10px] font-bold text-[var(--gray)] tracking-[0.15em] uppercase font-rajdhani mb-0.5 sm:mb-1 truncate">
                   {stat.label}
                 </p>
-                <h3 className="text-3xl font-bebas text-[var(--black)] group-hover:text-[var(--primary)] transition-colors">
+                <h3 className="text-2xl sm:text-3xl font-bebas text-[var(--black)] group-hover:text-[var(--primary)] transition-colors">
                   {loading ? '...' : stat.value}
                 </h3>
               </div>
@@ -128,12 +128,12 @@ export default function Dashboard() {
         </div>
 
         {/* Primary Management Hub */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="group relative bg-white p-8 rounded-[2rem] border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
+            className="group relative bg-white p-4 sm:p-8 rounded-[1.25rem] sm:rounded-[2rem] border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between"
           >
             <div className="relative z-10">
               <div className="w-12 h-12 bg-[var(--primary-soft)] rounded-xl flex items-center justify-center mb-6 text-[var(--primary)] group-hover:rotate-12 transition-transform duration-500">

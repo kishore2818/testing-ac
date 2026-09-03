@@ -160,7 +160,7 @@ export default function ReviewsManagement() {
             <p className="font-rajdhani text-[11px] font-bold text-[var(--gray)] uppercase tracking-widest">Retrieving Feedback...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-6">
             <AnimatePresence mode="popLayout">
               {reviews.map((review, idx) => (
                 <motion.div
@@ -170,7 +170,7 @@ export default function ReviewsManagement() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="bg-white border border-[var(--border)] rounded-xl p-6 hover:shadow-md hover:shadow-black/5 transition-all duration-300 group relative flex flex-col sm:flex-row gap-6 overflow-hidden"
+                  className="bg-white border border-[var(--border)] rounded-xl p-3 sm:p-6 hover:shadow-md hover:shadow-black/5 transition-all duration-300 group relative flex flex-col sm:flex-row gap-3 sm:gap-6 overflow-hidden"
                 >
                   {/* Quote mark background */}
                   <div className="absolute -top-2 -left-2 font-bebas text-[80px] text-gray-50 leading-none pointer-events-none select-none group-hover:text-primary/5 transition-colors duration-300">

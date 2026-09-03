@@ -261,7 +261,7 @@ function ProjectsContent() {
         ) : (
           <motion.div 
             layout 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, idx) => (
@@ -275,7 +275,7 @@ function ProjectsContent() {
                   className="bg-white border border-[var(--border)] rounded-xl overflow-hidden hover:shadow-lg hover:shadow-black/5 transition-all duration-300 group flex flex-col h-full"
                 >
                   {/* Image Container */}
-                  <div className="relative h-48 overflow-hidden bg-gray-100">
+                  <div className="relative h-28 sm:h-48 overflow-hidden bg-gray-100">
                     <img 
                       src={project.image} 
                       alt={project.name} 
@@ -284,18 +284,18 @@ function ProjectsContent() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     
                     {/* Floating Controls */}
-                    <div className="absolute top-3 right-3 flex flex-col gap-1.5 lg:translate-x-10 lg:opacity-0 lg:group-hover:translate-x-0 lg:group-hover:opacity-100 transition-all duration-300">
+                    <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex flex-col gap-1 sm:gap-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 z-10">
                       <button 
                         onClick={() => handleOpenModal(project)}
-                        className="p-2 bg-white text-[var(--black)] rounded-lg shadow-md hover:bg-[var(--primary)] hover:text-white transition-colors"
+                        className="p-1.5 sm:p-2 bg-white text-[var(--black)] rounded-lg shadow-md hover:bg-[var(--primary)] hover:text-white transition-colors"
                       >
-                        <Edit2 size={14} />
+                        <Edit2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </button>
                       <button 
                         onClick={() => handleDelete(project._id)}
-                        className="p-2 bg-white text-red-500 rounded-lg shadow-md hover:bg-red-500 hover:text-white transition-colors"
+                        className="p-1.5 sm:p-2 bg-white text-red-500 rounded-lg shadow-md hover:bg-red-500 hover:text-white transition-colors"
                       >
-                        <Trash2 size={14} />
+                        <Trash2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </button>
                     </div>
 
@@ -309,17 +309,17 @@ function ProjectsContent() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-4 flex flex-col flex-grow">
-                    <div className="flex items-center gap-1.5 mb-2">
+                  <div className="p-2.5 sm:p-4 flex flex-col flex-grow">
+                    <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-2">
                       <Tag size={10} className="text-[var(--primary)]" />
-                      <span className="font-rajdhani text-[10px] font-bold text-[var(--gray)] uppercase tracking-widest">{project.type}</span>
+                      <span className="font-rajdhani text-[9px] sm:text-[10px] font-bold text-[var(--gray)] uppercase tracking-widest truncate">{project.type}</span>
                     </div>
 
-                    <h4 className="font-bebas text-xl mb-2 text-[var(--black)] leading-tight group-hover:text-[var(--primary)] transition-colors">
+                    <h4 className="font-bebas text-sm sm:text-xl mb-1 sm:mb-2 text-[var(--black)] leading-tight group-hover:text-[var(--primary)] transition-colors truncate">
                       {project.name}
                     </h4>
                     
-                    <p className="font-montserrat text-xs text-[var(--black-muted)] mb-4 flex-grow leading-relaxed line-clamp-2">
+                    <p className="font-montserrat text-[10px] sm:text-xs text-[var(--black-muted)] mb-2 sm:mb-4 flex-grow leading-tight sm:leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
                     
