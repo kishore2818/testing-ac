@@ -69,7 +69,7 @@ export default function EngineeringCore() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
           {steps.map((step, i) => (
             <motion.div 
               key={step.num}
@@ -77,22 +77,22 @@ export default function EngineeringCore() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="relative p-5 md:p-6 border border-white/15 bg-white/5 rounded-xl overflow-hidden group flex flex-col h-full hover:border-[var(--primary)] transition-all duration-300"
+              className="relative p-3.5 sm:p-6 border border-white/15 bg-white/5 rounded-xl overflow-hidden group flex flex-col h-full hover:border-[var(--primary)] transition-all duration-300"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-2.5 bg-[var(--primary)]/20 border border-[var(--primary)]/30 rounded-lg text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
-                  <step.icon className="w-6 h-6" strokeWidth={1.75} />
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <div className="p-2 sm:p-2.5 bg-[var(--primary)]/20 border border-[var(--primary)]/30 rounded-lg text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                  <step.icon className="w-4 h-4 sm:w-6 sm:h-6" strokeWidth={1.75} />
                 </div>
-                <span className="font-inter font-bold text-xs text-[var(--primary)] bg-white/10 px-2.5 py-1 rounded-md">
+                <span className="font-inter font-bold text-[10px] sm:text-xs text-[var(--primary)] bg-white/10 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md">
                   {step.num}
                 </span>
               </div>
 
-              <h3 className="font-inter font-bold text-base md:text-lg mb-2 text-white group-hover:text-[var(--primary)] transition-colors leading-snug">
+              <h3 className="font-inter font-bold text-xs sm:text-base md:text-lg mb-1 sm:mb-2 text-white group-hover:text-[var(--primary)] transition-colors leading-snug">
                 {step.title}
               </h3>
 
-              <p className="font-inter text-xs text-gray-300 leading-relaxed flex-grow">
+              <p className="font-inter text-[10px] sm:text-xs text-gray-300 leading-tight sm:leading-relaxed flex-grow line-clamp-3 sm:line-clamp-none">
                 {step.desc}
               </p>
 

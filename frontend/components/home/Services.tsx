@@ -26,7 +26,7 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
         </div>
 
         <ScrollReveal animation={staggerContainer}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
             {displayedServices.map((service, idx) => {
               const IconComponent = (LucideIcons[service.icon as keyof typeof LucideIcons] as LucideIcon) || LucideIcons.Zap
 
@@ -35,30 +35,30 @@ export default function Services({ showAll = false }: { showAll?: boolean }) {
                   key={service.slug}
                   variants={fadeUp}
                   whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}
-                  className="group bg-white p-5 md:p-6 relative rounded-xl shadow-sm border border-[var(--border)] overflow-hidden flex flex-col h-full transition-all duration-300"
+                  className="group bg-white p-3 sm:p-5 md:p-6 relative rounded-xl shadow-sm border border-[var(--border)] overflow-hidden flex flex-col h-full transition-all duration-300"
                 >
                   {/* Primary green top border accent */}
                   <div className="absolute top-0 left-0 h-1 bg-[var(--primary)] w-0 group-hover:w-full transition-all duration-500" />
                   
-                  <div className="mb-4 p-3 bg-[var(--primary-soft)] w-12 h-12 flex items-center justify-center rounded-lg text-[var(--primary)] border border-[var(--primary)]/20">
-                    <IconComponent className="w-6 h-6" strokeWidth={1.75} />
+                  <div className="mb-2 sm:mb-4 p-2 sm:p-3 bg-[var(--primary-soft)] w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg text-[var(--primary)] border border-[var(--primary)]/20">
+                    <IconComponent className="w-4 h-4 sm:w-6 sm:h-6" strokeWidth={1.75} />
                   </div>
 
-                  <div className="font-inter text-[11px] font-bold uppercase tracking-wider text-[var(--primary)] mb-1">
+                  <div className="font-inter text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[var(--primary)] mb-0.5 sm:mb-1">
                     0{idx + 1}
                   </div>
                   
-                  <h3 className="font-inter text-lg font-semibold text-[var(--black)] leading-snug mb-2 group-hover:text-[var(--primary)] transition-colors">
+                  <h3 className="font-inter text-xs sm:text-base md:text-lg font-semibold text-[var(--black)] leading-snug mb-1 sm:mb-2 group-hover:text-[var(--primary)] transition-colors">
                     {service.title}
                   </h3>
                   
-                  <p className="font-inter text-[var(--gray)] text-xs md:text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
+                  <p className="font-inter text-[var(--gray)] text-[10px] sm:text-xs md:text-sm leading-relaxed mb-3 flex-grow line-clamp-2 sm:line-clamp-3">
                     {service.description}
                   </p>
                   
                   <Link 
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1.5 font-inter text-xs font-bold text-[var(--black-soft)] group-hover:text-[var(--primary)] transition-colors mt-auto pt-2 border-t border-[var(--border)]"
+                    className="inline-flex items-center gap-1 font-inter text-[10px] sm:text-xs font-bold text-[var(--black-soft)] group-hover:text-[var(--primary)] transition-colors mt-auto pt-1.5 border-t border-[var(--border)]"
                   >
                     Learn Details 
                     <span className="group-hover:translate-x-1 transition-transform">→</span>

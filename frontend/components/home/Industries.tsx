@@ -69,13 +69,13 @@ export default function Industries() {
         </div>
 
         {/* 6 Primary Large Cards */}
-        <ScrollReveal animation={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <ScrollReveal animation={staggerContainer} className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5 md:gap-6">
           {primaryIndustries.map((ind) => (
             <motion.div
               key={ind.num}
               variants={fadeUp}
               whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(0,0,0,0.12)' }}
-              className="group relative bg-[var(--black)] border border-[var(--border)] overflow-hidden rounded-xl h-64 sm:h-72 lg:h-80 flex flex-col justify-end shadow-md transition-all duration-300"
+              className="group relative bg-[var(--black)] border border-[var(--border)] overflow-hidden rounded-xl h-52 sm:h-72 lg:h-80 flex flex-col justify-end shadow-md transition-all duration-300"
             >
               {/* Background Image */}
               <div 
@@ -87,16 +87,16 @@ export default function Industries() {
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/95 via-black/55 to-black/20 group-hover:from-black/90 transition-colors duration-500" />
 
               {/* Number Tag */}
-              <div className="absolute top-4 left-4 z-20 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md border border-white/20 font-inter text-xs font-bold text-[var(--primary)]">
+              <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-20 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-black/60 backdrop-blur-md border border-white/20 font-inter text-[10px] sm:text-xs font-bold text-[var(--primary)]">
                 {ind.num}
               </div>
 
               {/* Card Content */}
-              <div className="relative z-20 p-5 md:p-6 mt-auto">
-                <h3 className="font-inter text-lg md:text-xl font-bold text-white group-hover:text-[var(--primary)] transition-colors duration-300">
+              <div className="relative z-20 p-3 sm:p-5 md:p-6 mt-auto">
+                <h3 className="font-inter text-xs sm:text-lg md:text-xl font-bold text-white group-hover:text-[var(--primary)] transition-colors duration-300 leading-tight">
                   {ind.name}
                 </h3>
-                <p className="font-inter text-xs md:text-sm text-white/85 mt-2 leading-relaxed">
+                <p className="font-inter text-[10px] sm:text-xs md:text-sm text-white/85 mt-1 sm:mt-2 leading-tight sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
                   {ind.desc}
                 </p>
               </div>

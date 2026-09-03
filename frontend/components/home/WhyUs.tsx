@@ -54,32 +54,32 @@ export default function WhyUs() {
         </div>
 
         {/* 4 Feature Grid */}
-        <ScrollReveal animation={staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <ScrollReveal animation={staggerContainer} className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
           {reasons.map((r) => (
             <motion.div
               key={r.num}
               variants={fadeUp}
               whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}
-              className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-[var(--border)] transition-all hover:border-[var(--primary)] flex flex-col h-full"
+              className="bg-white p-3 sm:p-5 md:p-6 rounded-xl shadow-sm border border-[var(--border)] transition-all hover:border-[var(--primary)] flex flex-col h-full"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 rounded-lg bg-[var(--primary-soft)] flex items-center justify-center text-[var(--primary)] border border-[var(--primary)]/20">
-                  <r.icon className="w-5 h-5" strokeWidth={1.75} />
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg bg-[var(--primary-soft)] flex items-center justify-center text-[var(--primary)] border border-[var(--primary)]/20">
+                  <r.icon className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.75} />
                 </div>
-                <span className="font-inter font-bold text-xs text-[var(--primary-dark)] bg-[var(--primary-soft)] px-2.5 py-1 rounded-md">
+                <span className="font-inter font-bold text-[10px] sm:text-xs text-[var(--primary-dark)] bg-[var(--primary-soft)] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md">
                   {r.num}
                 </span>
               </div>
 
-              <h3 className="font-inter text-base md:text-lg font-bold text-[var(--black)] mb-2">
+              <h3 className="font-inter text-xs sm:text-base md:text-lg font-bold text-[var(--black)] mb-1 sm:mb-2 leading-tight">
                 {r.title}
               </h3>
 
-              <div className="font-inter text-[11px] font-semibold text-[var(--primary-dark)] bg-[var(--gray-bg)] p-2 rounded-md mb-3 border border-[var(--border)]">
+              <div className="font-inter text-[9px] sm:text-[11px] font-semibold text-[var(--primary-dark)] bg-[var(--gray-bg)] p-1.5 sm:p-2 rounded-md mb-2 sm:mb-3 border border-[var(--border)] line-clamp-2">
                 {r.pipeline}
               </div>
 
-              <p className="font-inter text-xs md:text-sm text-[var(--gray)] leading-relaxed mt-auto">
+              <p className="font-inter text-[10px] sm:text-xs md:text-sm text-[var(--gray)] leading-tight sm:leading-relaxed mt-auto line-clamp-3">
                 {r.desc}
               </p>
             </motion.div>

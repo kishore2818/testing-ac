@@ -49,7 +49,7 @@ export default function CoreValues() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6 mb-12 md:mb-20">
           {values.map((v, i) => (
             <motion.div 
               key={v.title}
@@ -57,21 +57,21 @@ export default function CoreValues() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group flex flex-col p-6 bg-[var(--gray-bg)] border border-[var(--border)] rounded-xl hover:border-[var(--primary)] transition-all bg-white shadow-sm hover:shadow-xl relative overflow-hidden"
+              className="group flex flex-col p-3.5 sm:p-6 bg-[var(--gray-bg)] border border-[var(--border)] rounded-xl hover:border-[var(--primary)] transition-all bg-white shadow-sm hover:shadow-xl relative overflow-hidden"
             >
-              <div className="w-14 h-14 bg-[var(--primary-soft)] border border-[var(--primary)]/20 text-[var(--primary)] rounded-xl flex items-center justify-center mb-5 shrink-0 group-hover:scale-105 transition-transform duration-300">
-                <v.icon className="w-7 h-7" strokeWidth={1.75} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 bg-[var(--primary-soft)] border border-[var(--primary)]/20 text-[var(--primary)] rounded-xl flex items-center justify-center mb-3 sm:mb-5 shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <v.icon className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={1.75} />
               </div>
 
-              <div className="font-inter text-[var(--primary-dark)] font-bold uppercase text-xs mb-1">
+              <div className="font-inter text-[var(--primary-dark)] font-bold uppercase text-[10px] sm:text-xs mb-0.5 sm:mb-1">
                 0{i + 1}
               </div>
 
-              <h4 className="font-inter font-bold text-xl text-[var(--black)] mb-2">
+              <h4 className="font-inter font-bold text-sm sm:text-xl text-[var(--black)] mb-1 sm:mb-2">
                 {v.title}
               </h4>
 
-              <p className="font-inter text-xs sm:text-sm text-[var(--gray)] leading-relaxed flex-grow">
+              <p className="font-inter text-[10px] sm:text-xs md:text-sm text-[var(--gray)] leading-tight sm:leading-relaxed flex-grow line-clamp-3 sm:line-clamp-none">
                 {v.description}
               </p>
             </motion.div>

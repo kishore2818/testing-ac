@@ -61,7 +61,7 @@ export default function OngoingProjects() {
         </div>
 
         {/* 6 Featured Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5 md:gap-6">
           {featuredProjects.map((project, index) => (
             <motion.div
               key={`${project.name}-${index}`}
@@ -72,7 +72,7 @@ export default function OngoingProjects() {
               whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
               className="bg-white rounded-xl border border-[var(--border)] overflow-hidden flex flex-col h-full shadow-sm hover:border-[var(--primary)] transition-all duration-300"
             >
-              <div className="relative h-44 sm:h-48 overflow-hidden bg-[var(--black)]">
+              <div className="relative h-28 sm:h-48 overflow-hidden bg-[var(--black)]">
                 <img 
                   src={project.image} 
                   alt={project.client} 
@@ -83,50 +83,50 @@ export default function OngoingProjects() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                 
                 {/* Status Badge */}
-                <div className={`absolute left-3.5 top-3.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-inter text-[11px] font-bold text-white shadow-md ${
+                <div className={`absolute left-2 top-2 sm:left-3.5 sm:top-3.5 inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2 py-0.5 sm:px-3 sm:py-1 font-inter text-[9px] sm:text-[11px] font-bold text-white shadow-md ${
                   project.status === 'In Progress' ? 'bg-[var(--primary)]' : 'bg-[var(--primary-dark)]'
                 }`}>
-                  <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                  <span className="h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-white animate-pulse" />
                   {project.status}
                 </div>
 
-                <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
-                  <span className="font-inter text-xs font-bold text-[var(--primary-light)] uppercase tracking-wider block">
+                <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3.5 sm:right-3.5 text-white">
+                  <span className="font-inter text-[9px] sm:text-xs font-bold text-[var(--primary-light)] uppercase tracking-wider block truncate">
                     {project.industry}
                   </span>
-                  <h3 className="font-inter text-lg font-bold leading-tight mt-0.5 text-white">
+                  <h3 className="font-inter text-xs sm:text-lg font-bold leading-tight mt-0.5 text-white truncate">
                     {project.client}
                   </h3>
                 </div>
               </div>
 
-              <div className="p-4 md:p-5 flex flex-col flex-grow bg-white">
-                <div className="space-y-2 mb-4 font-inter text-xs text-[var(--black-soft)]">
-                  <div className="flex justify-between border-b border-[var(--border)] pb-2">
-                    <span className="text-[var(--gray)] font-medium">Project Location:</span>
-                    <span className="font-semibold text-[var(--black)]">{project.location}</span>
+              <div className="p-2.5 sm:p-5 flex flex-col flex-grow bg-white">
+                <div className="space-y-1 sm:space-y-2 mb-2 sm:mb-4 font-inter text-[10px] sm:text-xs text-[var(--black-soft)]">
+                  <div className="flex justify-between border-b border-[var(--border)] pb-1 sm:pb-2">
+                    <span className="text-[var(--gray)] font-medium">Location:</span>
+                    <span className="font-semibold text-[var(--black)] truncate max-w-[55%]">{project.location}</span>
                   </div>
-                  <div className="flex justify-between border-b border-[var(--border)] pb-2">
+                  <div className="hidden sm:flex justify-between border-b border-[var(--border)] pb-2">
                     <span className="text-[var(--gray)] font-medium">Industry:</span>
-                    <span className="font-semibold text-[var(--black)]">{project.industry}</span>
+                    <span className="font-semibold text-[var(--black)] truncate max-w-[55%]">{project.industry}</span>
                   </div>
-                  <div className="pt-1">
-                    <span className="text-[var(--gray)] font-medium block mb-1">Scope of Work:</span>
-                    <p className="font-medium text-[var(--black)] leading-relaxed line-clamp-2">
+                  <div className="pt-0.5 sm:pt-1">
+                    <span className="text-[var(--gray)] font-medium block mb-0.5 sm:mb-1 text-[9px] sm:text-xs">Scope:</span>
+                    <p className="font-medium text-[var(--black)] leading-snug sm:leading-relaxed line-clamp-2 text-[10px] sm:text-xs">
                       {project.scopeOfWork}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-auto pt-3 border-t border-[var(--border)] flex justify-between items-center">
-                  <span className="font-inter text-[11px] font-semibold text-[var(--primary-dark)] uppercase">
-                    Class I Execution
+                <div className="mt-auto pt-2 sm:pt-3 border-t border-[var(--border)] flex justify-between items-center">
+                  <span className="font-inter text-[9px] sm:text-[11px] font-semibold text-[var(--primary-dark)] uppercase truncate max-w-[50%]">
+                    Class I
                   </span>
                   <Link 
                     href="/projects" 
-                    className="inline-flex items-center gap-1 font-inter text-xs font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors"
+                    className="inline-flex items-center gap-0.5 font-inter text-[10px] sm:text-xs font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors shrink-0"
                   >
-                    Learn more →
+                    Details →
                   </Link>
                 </div>
               </div>
