@@ -210,9 +210,9 @@ function ProjectsContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-white p-2 rounded-2xl border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-x-auto hide-scrollbar"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-white p-1.5 sm:p-2 rounded-2xl border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] w-full"
         >
-          <div className="bg-[#f3f4f6] p-1.5 rounded-xl flex items-center gap-1.5 whitespace-nowrap min-w-max">
+          <div className="bg-[#f3f4f6] p-1 sm:p-1.5 rounded-xl grid grid-cols-3 gap-1 w-full sm:w-auto">
             {filters.map(f => {
               const count = f === 'All' ? projects.length : projects.filter(p => p.status === f).length
               const isActive = filter === f
@@ -221,14 +221,14 @@ function ProjectsContent() {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`relative px-5 sm:px-8 py-2 sm:py-2.5 rounded-lg font-poppins text-xs font-bold tracking-widest transition-all flex items-center justify-center gap-2 shrink-0 ${
+                  className={`relative w-full px-1 sm:px-6 py-1.5 sm:py-2.5 rounded-lg font-poppins text-[10px] sm:text-xs font-bold tracking-wider sm:tracking-widest transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
                     isActive 
                       ? 'bg-white text-[var(--primary)] shadow-[0_2px_10px_rgba(0,0,0,0.06)] border border-gray-200/60' 
                       : 'text-gray-500 hover:text-gray-800'
                   }`}
                 >
-                  <span>{label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-inter font-bold ${
+                  <span className="truncate">{label}</span>
+                  <span className={`text-[8px] sm:text-[10px] px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded-full font-inter font-bold shrink-0 ${
                     isActive ? 'bg-[var(--primary-soft)] text-[var(--primary-dark)]' : 'bg-gray-200/80 text-gray-600'
                   }`}>
                     {count}
@@ -238,7 +238,7 @@ function ProjectsContent() {
                   {isActive && (
                     <motion.span
                       layoutId="activeTabDotAdmin"
-                      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[var(--primary)]"
+                      className="absolute -bottom-1 sm:-bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[var(--primary)]"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
