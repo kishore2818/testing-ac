@@ -128,22 +128,22 @@ export default function Dashboard() {
         </div>
 
         {/* Primary Management Hub */}
-        <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="group relative bg-white p-4 sm:p-8 rounded-[1.25rem] sm:rounded-[2rem] border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between"
+            className="group relative bg-white p-6 sm:p-8 rounded-[2rem] border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between"
           >
             <div className="relative z-10">
               <div className="w-12 h-12 bg-[var(--primary-soft)] rounded-xl flex items-center justify-center mb-6 text-[var(--primary)] group-hover:rotate-12 transition-transform duration-500">
                 <LayoutGrid size={24} />
               </div>
-              <h2 className="text-2xl font-bebas text-[var(--black)] mb-3 tracking-wide uppercase">Portfolio Repository</h2>
-              <p className="font-montserrat text-xs text-[var(--black-muted)] mb-8 leading-relaxed max-w-md">
+              <h2 className="text-2xl sm:text-3xl font-bebas text-[var(--black)] mb-3 tracking-wide uppercase">Portfolio Repository</h2>
+              <p className="font-montserrat text-xs sm:text-sm text-[var(--black-muted)] mb-8 leading-relaxed max-w-md">
                 Centralized project management. Update progress metrics, upload new visual assets, and manage the technical details of your entire construction history.
               </p>
-              <Link href="/projects" className="inline-flex items-center gap-2 bg-[var(--black)] text-white px-6 py-3 rounded-full font-poppins font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md active:scale-95">
+              <Link href="/projects" className="inline-flex items-center gap-2 bg-[var(--black)] text-white px-6 py-3 rounded-full font-poppins font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md active:scale-95">
                 Manage Repository
                 <ArrowUpRight size={14} />
               </Link>
@@ -158,17 +158,17 @@ export default function Dashboard() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="group relative bg-white p-8 rounded-[2rem] border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
+            className="group relative bg-white p-6 sm:p-8 rounded-[2rem] border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between"
           >
             <div className="relative z-10">
               <div className="w-12 h-12 bg-[var(--accent-soft)] rounded-xl flex items-center justify-center mb-6 text-[var(--accent)] group-hover:-rotate-12 transition-transform duration-500">
                 <Users size={24} />
               </div>
-              <h2 className="text-2xl font-bebas text-[var(--black)] mb-3 tracking-wide uppercase">Testimonial Ledger</h2>
-              <p className="font-montserrat text-xs text-[var(--black-muted)] mb-8 leading-relaxed max-w-md">
+              <h2 className="text-2xl sm:text-3xl font-bebas text-[var(--black)] mb-3 tracking-wide uppercase">Testimonial Ledger</h2>
+              <p className="font-montserrat text-xs sm:text-sm text-[var(--black-muted)] mb-8 leading-relaxed max-w-md">
                 Maintain client relationships by curating high-impact feedback. Showcase your professional reputation through verified testimonials and corporate feedback.
               </p>
-              <Link href="/reviews" className="inline-flex items-center gap-2 bg-[var(--black)] text-white px-6 py-3 rounded-full font-poppins font-bold text-[10px] uppercase tracking-widest hover:bg-[var(--accent)] transition-all shadow-md active:scale-95">
+              <Link href="/reviews" className="inline-flex items-center gap-2 bg-[var(--black)] text-white px-6 py-3 rounded-full font-poppins font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-[var(--accent)] transition-all shadow-md active:scale-95">
                 Curate Feedback
                 <ArrowUpRight size={14} />
               </Link>
