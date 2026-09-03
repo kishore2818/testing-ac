@@ -117,6 +117,10 @@ export default function RootLayout({
       <head>
         {/* Canonical domain reinforcement */}
         <link rel="canonical" href={SITE_URL} />
+        {/* Favicon & Logo icons for Google Search & browsers */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         {/* Geo tags for local SEO (Bengaluru, India) */}
         <meta name="geo.region" content="IN-KA" />
         <meta name="geo.placename" content="Bengaluru" />
