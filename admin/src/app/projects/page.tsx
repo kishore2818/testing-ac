@@ -31,8 +31,8 @@ function ProjectsContent() {
     image: ''
   })
 
-  const [filter, setFilter] = useState('In Progress')
-  const filters = ['In Progress', 'Completed']
+  const [filter, setFilter] = useState('All')
+  const filters = ['All', 'In Progress', 'Completed']
 
   useEffect(() => {
     loadProjects()
@@ -155,7 +155,7 @@ function ProjectsContent() {
   }
 
   const filteredProjects = projects
-    .filter(p => p.status === filter)
+    .filter(p => filter === 'All' ? true : p.status === filter)
     .filter(p => 
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.client.toLowerCase().includes(searchQuery.toLowerCase())
@@ -210,31 +210,46 @@ function ProjectsContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 bg-white p-1.5 rounded-xl border border-[var(--border)] shadow-sm"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-white p-2 rounded-2xl border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-x-auto hide-scrollbar"
         >
-          <div className="flex p-1 bg-gray-50 rounded-lg w-full md:w-auto">
-            {filters.map(f => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`relative px-6 py-2 rounded-md text-[10px] font-bold uppercase tracking-widest font-rajdhani transition-all flex-1 md:flex-none ${
-                  filter === f 
-                    ? 'bg-white text-[var(--primary)] shadow-sm' 
-                    : 'text-[var(--gray)] hover:text-[var(--black)]'
-                }`}
-              >
-                {f === 'In Progress' ? 'Ongoing' : f}
-                {filter === f && (
-                  <motion.div layoutId="tab-indicator" className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--primary)] rounded-full" />
-                )}
-              </button>
-            ))}
+          <div className="bg-[#f3f4f6] p-1.5 rounded-xl flex items-center gap-1.5 whitespace-nowrap min-w-max">
+            {filters.map(f => {
+              const count = f === 'All' ? projects.length : projects.filter(p => p.status === f).length
+              const isActive = filter === f
+              const label = f === 'In Progress' ? 'ONGOING' : f.toUpperCase()
+              return (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`relative px-5 sm:px-8 py-2 sm:py-2.5 rounded-lg font-poppins text-xs font-bold tracking-widest transition-all flex items-center justify-center gap-2 shrink-0 ${
+                    isActive 
+                      ? 'bg-white text-[var(--primary)] shadow-[0_2px_10px_rgba(0,0,0,0.06)] border border-gray-200/60' 
+                      : 'text-gray-500 hover:text-gray-800'
+                  }`}
+                >
+                  <span>{label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-inter font-bold ${
+                    isActive ? 'bg-[var(--primary-soft)] text-[var(--primary-dark)]' : 'bg-gray-200/80 text-gray-600'
+                  }`}>
+                    {count}
+                  </span>
+
+                  {/* Green bottom dot indicator matching screenshot */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeTabDotAdmin"
+                      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[var(--primary)]"
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </button>
+              )
+            })}
           </div>
 
-          <div className="flex items-center gap-4 px-4 py-1.5 border-l border-[var(--border)] hidden md:flex">
-            <span className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-widest">
-              Showing {filteredProjects.length} {filter === 'In Progress' ? 'Ongoing' : 'Completed'} Projects
-            </span>
+          <div className="flex items-center gap-2 px-3 py-1.5 text-[11px] font-semibold text-[var(--black-muted)] font-poppins shrink-0">
+            <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse" />
+            <span>Showing {filteredProjects.length} {filter === 'All' ? 'Total' : filter === 'In Progress' ? 'Ongoing' : 'Completed'} Projects</span>
           </div>
         </motion.div>
 

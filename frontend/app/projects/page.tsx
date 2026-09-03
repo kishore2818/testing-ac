@@ -53,34 +53,44 @@ export default function ProjectsPage() {
                 <div className="h-[2px] w-24 bg-[var(--accent)]" />
               </div>
               
-              <div className="flex flex-wrap justify-start md:justify-center gap-2 p-1.5 bg-[var(--gray-bg)] rounded-full border border-[var(--border)]">
-                {filters.map(f => {
-                  const isActive = filter === f
-                  const count = f === 'All' ? projects.length : projects.filter(p => p.status === f).length
-                  return (
-                    <button
-                      key={f}
-                      onClick={() => setFilter(f)}
-                      className={`relative font-poppins md:font-rajdhani uppercase tracking-[0.16em] md:tracking-widest font-semibold md:font-bold px-4 md:px-6 py-2 text-[11px] md:text-xs rounded-full transition-colors flex items-center gap-2 ${
-                        isActive ? 'text-white' : 'text-[var(--gray)] hover:text-[var(--black)]'
-                      }`}
-                    >
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeFilterPill"
-                          className="absolute inset-0 bg-[var(--accent)] rounded-full z-0"
-                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                      <span className="relative z-10">{f}</span>
-                      <span className={`relative z-10 text-[9px] px-1.5 py-0.2 rounded-full font-inter ${
-                        isActive ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-700'
-                      }`}>
-                        {count}
-                      </span>
-                    </button>
-                  )
-                })}
+              <div className="w-full flex justify-center px-2 py-1">
+                <div className="bg-white p-1.5 rounded-2xl border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] max-w-full overflow-x-auto hide-scrollbar">
+                  <div className="bg-[#f3f4f6] p-1.5 rounded-xl flex items-center gap-1.5 whitespace-nowrap min-w-max">
+                    {filters.map(f => {
+                      const isActive = filter === f
+                      const label = f === 'In Progress' ? 'ONGOING' : f.toUpperCase()
+                      const count = f === 'All' ? projects.length : projects.filter(p => p.status === f).length
+
+                      return (
+                        <button
+                          key={f}
+                          onClick={() => setFilter(f)}
+                          className={`relative px-5 sm:px-8 py-2 sm:py-2.5 rounded-lg font-poppins text-xs font-bold tracking-widest transition-all flex items-center justify-center gap-2 shrink-0 ${
+                            isActive
+                              ? 'bg-white text-[var(--primary)] shadow-[0_2px_10px_rgba(0,0,0,0.06)] border border-gray-200/60'
+                              : 'text-gray-500 hover:text-gray-800'
+                          }`}
+                        >
+                          <span>{label}</span>
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-inter font-bold ${
+                            isActive ? 'bg-[var(--primary-soft)] text-[var(--primary-dark)]' : 'bg-gray-200/80 text-gray-600'
+                          }`}>
+                            {count}
+                          </span>
+
+                          {/* Green bottom dot indicator matching screenshot */}
+                          {isActive && (
+                            <motion.span
+                              layoutId="activeTabDotFrontend"
+                              className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[var(--primary)]"
+                              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                            />
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
 
