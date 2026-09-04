@@ -70,7 +70,7 @@ export default function Enquiry() {
   }
 
   return (
-    <div className="bg-white border border-[var(--border)] border-t-[4px] border-t-[var(--primary)] rounded-2xl md:rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm h-full flex flex-col justify-between relative overflow-hidden">
+    <div className="bg-white border border-[var(--border)] border-t-[4px] border-t-[var(--primary)] rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-md hover:shadow-lg transition-shadow h-full flex flex-col justify-between relative overflow-hidden">
       
       {/* Subtle Background Radial Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,var(--primary-soft)_0%,transparent_65%)] pointer-events-none" />
