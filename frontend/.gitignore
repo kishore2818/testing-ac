@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw PDF extraction dumps
+/public/images/company/
+/public/images/company_extracted/
