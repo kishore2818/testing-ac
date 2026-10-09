@@ -16,7 +16,7 @@ const IMAGES = [
 const statsData = [
   { end: 17, label: "Projects Delivered", suffix: "+" },
   { end: 10, label: "Years Team Experience", suffix: "+" },
-  { end: 5, label: "Clients Served", suffix: "+" },
+  { end: 12, label: "Major Corporate Clients", suffix: "+" },
   { end: 1, label: "Class I Contractor", suffix: "" }
 ];
 

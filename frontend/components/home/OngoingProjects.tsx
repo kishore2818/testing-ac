@@ -4,42 +4,58 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import SectionLabel from '../shared/SectionLabel'
-import { projects as staticProjects } from '@/data/projects'
+import ProjectCard from '../projects/ProjectCard'
+import ProjectGalleryModal, { ProjectModalData } from '../projects/ProjectGalleryModal'
+import { projects as staticProjects, ProjectItem } from '@/data/projects'
 
 export default function OngoingProjects() {
-  const [featuredProjects, setFeaturedProjects] = useState<any[]>(() => {
-    // Default fallback to static dataset so customers NEVER see a loading indicator
-    return staticProjects.slice(0, 6).map(p => ({
-      client: p.client || 'Industrial Client',
-      location: p.location || 'India',
-      industry: p.type || 'Industrial Manufacturing',
-      scopeOfWork: p.description || 'Turnkey Electrical Infrastructure & Power Distribution',
-      status: p.status || 'Completed',
-      name: p.name,
-      image: p.image || '/images/hero/panel-1.jpg'
-    }))
-  })
+  const [projectsList, setProjectsList] = useState<ProjectItem[]>(staticProjects.slice(0, 6))
+  const [selectedProject, setSelectedProject] = useState<ProjectModalData | null>(null)
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        if (!process.env.NEXT_PUBLIC_API_URL) return;
+        if (!process.env.NEXT_PUBLIC_API_URL) return
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`)
-        if (!res.ok) return;
-        const data = await res.json()
-        if (Array.isArray(data) && data.length > 0) {
-          setFeaturedProjects(data.slice(0, 6).map((p: any) => ({
-            client: p.client || p.name,
-            location: p.location || 'Karnataka, India',
-            industry: p.type || 'Industrial Infrastructure',
-            scopeOfWork: p.description || 'Electrical Infrastructure & Distribution',
-            status: p.status || 'Completed',
-            name: p.name,
-            image: p.image || '/images/hero/panel-1.jpg'
-          })))
+        if (!res.ok) return
+        const apiData = await res.json()
+        if (Array.isArray(apiData) && apiData.length > 0) {
+          const merged: ProjectItem[] = staticProjects.map((s) => {
+            const apiP = apiData.find((a: any) => {
+              const aName = a.name?.toLowerCase() || ''
+              const sName = s.name.toLowerCase()
+              return aName === sName || 
+                (sName.includes('foxconn') && aName.includes('foxconn')) ||
+                (sName.includes('unit-4') && aName.includes('unit-4')) ||
+                (sName.includes('sterling') && aName.includes('sterling')) ||
+                (sName.includes('sfs') && aName.includes('sfs')) ||
+                (sName.includes('thyssenkrupp') && aName.includes('thyssenkrupp'))
+            })
+            if (!apiP) return s
+            const img = s.image || apiP.image || '/images/projects/ongoing-placeholder.jpg'
+            return {
+              ...s,
+              id: apiP._id,
+              name: s.name,
+              client: s.client,
+              location: s.location,
+              type: s.type,
+              status: s.status,
+              progress: apiP.progress ?? s.progress,
+              value: s.value || apiP.value,
+              capacity: s.capacity || apiP.capacity,
+              powerCapacity: s.powerCapacity || apiP.powerCapacity,
+              workAwarded: s.workAwarded || apiP.workAwarded,
+              duration: s.duration || apiP.duration,
+              description: s.description,
+              image: img,
+              gallery: s.gallery && s.gallery.length > 0 ? s.gallery : [img]
+            }
+          })
+          setProjectsList(merged.slice(0, 6))
         }
       } catch (error) {
-        console.error('Error fetching projects:', error)
+        console.error('Error fetching projects for homepage:', error)
       }
     }
     fetchProjects()
@@ -51,86 +67,24 @@ export default function OngoingProjects() {
         
         {/* Section Header */}
         <div className="mb-8 md:mb-14 flex flex-col items-start text-left">
-          <SectionLabel text="Track Record of Excellence" color="accent" />
+          <SectionLabel text="Active Infrastructure Sites" color="accent" />
           <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[40px] leading-tight text-[var(--black)] mt-2">
-            Featured <span className="text-[var(--primary)]">Industrial Projects</span>
+            Ongoing <span className="text-[var(--primary)]">Projects</span>
           </h2>
           <p className="mt-3 max-w-2xl font-inter text-sm md:text-base text-[var(--gray)] leading-relaxed">
-            High-reliability power distribution and turnkey electrical engineering across aerospace, automotive, manufacturing, and commercial infrastructure.
+            Major turnkey industrial electrical execution, HT/LT substation installations, and high-capacity power distribution currently under progress across India.
           </p>
         </div>
 
-        {/* 6 Featured Cards Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5 md:gap-6">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={`${project.name}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
-              className="bg-white rounded-xl border border-[var(--border)] overflow-hidden flex flex-col h-full shadow-sm hover:border-[var(--primary)] transition-all duration-300"
-            >
-              <div className="relative h-28 sm:h-48 overflow-hidden bg-[var(--black)]">
-                <img 
-                  src={project.image} 
-                  alt={project.client} 
-                  loading="lazy"
-                  fetchPriority="low"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                
-                {/* Status Badge */}
-                <div className={`absolute left-2 top-2 sm:left-3.5 sm:top-3.5 inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2 py-0.5 sm:px-3 sm:py-1 font-inter text-[9px] sm:text-[11px] font-bold text-white shadow-md ${
-                  project.status === 'In Progress' ? 'bg-[var(--primary)]' : 'bg-[var(--primary-dark)]'
-                }`}>
-                  <span className="h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-white animate-pulse" />
-                  {project.status}
-                </div>
-
-                <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3.5 sm:right-3.5 text-white">
-                  <span className="font-inter text-[9px] sm:text-xs font-bold text-[var(--primary-light)] uppercase tracking-wider block truncate">
-                    {project.industry}
-                  </span>
-                  <h3 className="font-inter text-xs sm:text-lg font-bold leading-tight mt-0.5 text-white truncate">
-                    {project.client}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="p-2.5 sm:p-5 flex flex-col flex-grow bg-white">
-                <div className="space-y-1 sm:space-y-2 mb-2 sm:mb-4 font-inter text-[10px] sm:text-xs text-[var(--black-soft)]">
-                  <div className="flex justify-between border-b border-[var(--border)] pb-1 sm:pb-2">
-                    <span className="text-[var(--gray)] font-medium">Location:</span>
-                    <span className="font-semibold text-[var(--black)] truncate max-w-[55%]">{project.location}</span>
-                  </div>
-                  <div className="hidden sm:flex justify-between border-b border-[var(--border)] pb-2">
-                    <span className="text-[var(--gray)] font-medium">Industry:</span>
-                    <span className="font-semibold text-[var(--black)] truncate max-w-[55%]">{project.industry}</span>
-                  </div>
-                  <div className="pt-0.5 sm:pt-1">
-                    <span className="text-[var(--gray)] font-medium block mb-0.5 sm:mb-1 text-[9px] sm:text-xs">Scope:</span>
-                    <p className="font-medium text-[var(--black)] leading-snug sm:leading-relaxed line-clamp-2 text-[10px] sm:text-xs">
-                      {project.scopeOfWork}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-auto pt-2 sm:pt-3 border-t border-[var(--border)] flex justify-between items-center">
-                  <span className="font-inter text-[9px] sm:text-[11px] font-semibold text-[var(--primary-dark)] uppercase truncate max-w-[50%]">
-                    Class I
-                  </span>
-                  <Link 
-                    href="/projects" 
-                    className="inline-flex items-center gap-0.5 font-inter text-[10px] sm:text-xs font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors shrink-0"
-                  >
-                    Details →
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+        {/* 6 Featured Cards Grid with Interactive Swap Arrows */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {projectsList.map((project, index) => (
+            <ProjectCard
+              key={(project.id || project.name) + index}
+              project={project}
+              onOpenModal={(p) => setSelectedProject(p)}
+              priority={index < 3}
+            />
           ))}
         </div>
 
@@ -140,12 +94,18 @@ export default function OngoingProjects() {
               whileHover={{ y: -2 }}
               className="px-8 py-3.5 bg-[var(--primary)] text-white font-inter font-bold text-sm rounded-lg shadow-md hover:bg-[var(--primary-dark)] transition-all"
             >
-              Explore All Projects →
+              Explore Complete Portfolio ({staticProjects.length}+ Projects) →
             </motion.button>
           </Link>
         </div>
 
       </div>
+
+      {/* Interactive Lightbox / Modal */}
+      <ProjectGalleryModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   )
 }

@@ -113,7 +113,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" data-scroll-behavior="smooth">
       <head>
         {/* Canonical domain reinforcement */}
         <link rel="canonical" href={SITE_URL} />

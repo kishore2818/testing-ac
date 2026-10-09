@@ -6,4 +6,7 @@ dist/
 build/
 .env
 .DS_Store
-*.loghttps://github.com/kishore2818/admin-ac.git*.tsbuildinfo
+*.log
+*.tsbuildinfo
+*.pdf
+Company porfile (1).pdf

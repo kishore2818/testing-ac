@@ -2,15 +2,18 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import PageHero from '@/components/shared/PageHero'
+import ProjectCard from '@/components/projects/ProjectCard'
+import ProjectGalleryModal, { ProjectModalData } from '@/components/projects/ProjectGalleryModal'
+import { projects as staticProjects, ProjectItem } from '@/data/projects'
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState('All')
-  const [projects, setProjects] = useState<any[]>([])
+  const [projectsList, setProjectsList] = useState<ProjectItem[]>(staticProjects)
+  const [selectedProject, setSelectedProject] = useState<ProjectModalData | null>(null)
   const [loading, setLoading] = useState(true)
   
   const filters = ['All', 'In Progress', 'Completed']
@@ -18,11 +21,84 @@ export default function ProjectsPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        if (!process.env.NEXT_PUBLIC_API_URL) {
+          setLoading(false)
+          return
+        }
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`)
-        const data = await res.json()
-        setProjects(data)
+        if (!res.ok) throw new Error('Failed to fetch from API')
+        const apiData = await res.json()
+        
+        if (Array.isArray(apiData) && apiData.length > 0) {
+          // Merge API data with static gallery mappings preserving verified PDF details
+          const merged: ProjectItem[] = staticProjects.map((s) => {
+            const apiP = apiData.find((a: any) => {
+              const aName = a.name?.toLowerCase() || ''
+              const sName = s.name.toLowerCase()
+              return aName === sName || 
+                (sName.includes('foxconn') && aName.includes('foxconn')) ||
+                (sName.includes('unit-4') && aName.includes('unit-4')) ||
+                (sName.includes('sterling') && aName.includes('sterling')) ||
+                (sName.includes('sfs') && aName.includes('sfs')) ||
+                (sName.includes('thyssenkrupp') && aName.includes('thyssenkrupp'))
+            })
+            if (!apiP) return s
+            const img = s.image || apiP.image || '/images/projects/ongoing-placeholder.jpg'
+            return {
+              ...s,
+              id: apiP._id,
+              name: s.name,
+              client: s.client,
+              location: s.location,
+              type: s.type,
+              status: s.status,
+              progress: apiP.progress ?? s.progress,
+              value: s.value || apiP.value,
+              capacity: s.capacity || apiP.capacity,
+              powerCapacity: s.powerCapacity || apiP.powerCapacity,
+              workAwarded: s.workAwarded || apiP.workAwarded,
+              duration: s.duration || apiP.duration,
+              description: s.description,
+              image: img,
+              gallery: s.gallery && s.gallery.length > 0 ? s.gallery : [img]
+            }
+          })
+
+          const extraApiProjects = apiData
+            .filter((apiP: any) => !staticProjects.some((s) => {
+              const aName = apiP.name?.toLowerCase() || ''
+              const sName = s.name.toLowerCase()
+              return aName === sName || 
+                (sName.includes('foxconn') && aName.includes('foxconn')) ||
+                (sName.includes('unit-4') && aName.includes('unit-4')) ||
+                (sName.includes('sterling') && aName.includes('sterling')) ||
+                (sName.includes('sfs') && aName.includes('sfs')) ||
+                (sName.includes('thyssenkrupp') && aName.includes('thyssenkrupp'))
+            }))
+            .map((apiP: any) => ({
+              id: apiP._id,
+              name: apiP.name,
+              client: apiP.client,
+              location: apiP.location,
+              type: apiP.type || 'Electrical Project',
+              status: apiP.status || 'In Progress',
+              progress: apiP.progress ?? 100,
+              value: apiP.value || 'Class I Verified',
+              capacity: apiP.capacity || 'Class I Verified',
+              powerCapacity: apiP.powerCapacity || 'Class I',
+              workAwarded: apiP.workAwarded || 'HT/LT Supply & Installation',
+              duration: apiP.duration || '6 months',
+              description: apiP.description || '',
+              scope: apiP.scope || ['Turnkey Electrical Execution'],
+              image: apiP.image || '/images/hero/hero-real-1.jpg',
+              gallery: [apiP.image || '/images/hero/hero-real-1.jpg']
+            }))
+
+          setProjectsList([...merged, ...extraApiProjects])
+        }
       } catch (error) {
-        console.error('Error fetching projects:', error)
+        console.error('Error fetching projects from API, fallback to verified static data:', error)
+        setProjectsList(staticProjects)
       } finally {
         setLoading(false)
       }
@@ -31,26 +107,34 @@ export default function ProjectsPage() {
   }, [])
   
   const filteredProjects = filter === 'All' 
-    ? projects 
-    : projects.filter(p => p.status === filter)
+    ? projectsList 
+    : projectsList.filter(p => p.status === filter)
 
   return (
     <>
       <Navbar />
       <main>
-        <PageHero image="/images/page-headers/projects.png" 
+        <PageHero 
+          image="/images/page-headers/projects.png" 
           title="OUR PROJECT PORTFOLIO" 
-          subtitle="A demonstration of our capability across Industrial, Commercial, and Institutional sectors." 
+          subtitle="A comprehensive track record of turnkey electrical engineering across Industrial, Commercial, Aerospace and Institutional sectors." 
         />
         
         <section className="py-12 md:py-24 bg-white min-h-[800px]">
           <div className="site-container">
             
             {/* Filterable Project History */}
-            <div className="flex flex-col items-start md:items-center justify-center mb-8 md:mb-12 flex-wrap gap-4 md:gap-6 text-left md:text-center">
-              <div className="flex flex-col items-start md:items-center justify-center gap-3 md:gap-4">
-                <h2 className="font-cormorant md:font-bebas text-4xl text-[var(--black)] tracking-wider">Project <span className="text-[var(--accent)]">History</span></h2>
-                <div className="h-[2px] w-24 bg-[var(--accent)]" />
+            <div className="flex flex-col items-start md:items-center justify-center mb-8 md:mb-14 flex-wrap gap-4 md:gap-6 text-left md:text-center">
+              <div className="flex flex-col items-start md:items-center justify-center gap-2 md:gap-3">
+                <span className="font-inter text-xs font-bold uppercase tracking-widest text-[var(--primary-dark)]">
+                  Turnkey Execution Portfolio
+                </span>
+                <h2 className="font-inter font-bold text-3xl sm:text-4xl text-[var(--black)]">
+                  Project <span className="text-[var(--primary)]">Showcase & History</span>
+                </h2>
+                <p className="font-inter text-xs sm:text-sm text-[var(--gray)] max-w-xl">
+                  Click any project to view technical specifications, capacity metrics, and animatic photo galleries. Use card arrows to cycle through on-site photos.
+                </p>
               </div>
               
               <div className="w-full max-w-lg mx-auto px-2 py-1">
@@ -59,26 +143,26 @@ export default function ProjectsPage() {
                     {filters.map(f => {
                       const isActive = filter === f
                       const label = f === 'In Progress' ? 'ONGOING' : f.toUpperCase()
-                      const count = f === 'All' ? projects.length : projects.filter(p => p.status === f).length
+                      const count = f === 'All' ? projectsList.length : projectsList.filter(p => p.status === f).length
 
                       return (
                         <button
                           key={f}
                           onClick={() => setFilter(f)}
-                          className={`relative w-full px-1 sm:px-4 py-1.5 sm:py-2.5 rounded-lg font-poppins text-[10px] sm:text-xs font-bold tracking-wider sm:tracking-widest transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                          className={`relative w-full px-1 sm:px-4 py-2 sm:py-2.5 rounded-lg font-inter text-[11px] sm:text-xs font-bold tracking-wider transition-all flex items-center justify-center gap-1.5 sm:gap-2 text-center ${
                             isActive
                               ? 'bg-white text-[var(--primary)] shadow-[0_2px_10px_rgba(0,0,0,0.06)] border border-gray-200/60'
                               : 'text-gray-500 hover:text-gray-800'
                           }`}
                         >
                           <span className="truncate">{label}</span>
-                          <span className={`text-[8px] sm:text-[10px] px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded-full font-inter font-bold shrink-0 ${
+                          <span className={`text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full font-inter font-bold shrink-0 ${
                             isActive ? 'bg-[var(--primary-soft)] text-[var(--primary-dark)]' : 'bg-gray-200/80 text-gray-600'
                           }`}>
                             {count}
                           </span>
 
-                          {/* Green bottom dot indicator matching screenshot */}
+                          {/* Green bottom dot indicator */}
                           {isActive && (
                             <motion.span
                               layoutId="activeTabDotFrontend"
@@ -100,40 +184,15 @@ export default function ProjectsPage() {
                 <span>Loading project portfolio...</span>
               </div>
             ) : (
-              <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+              <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                 <AnimatePresence mode="popLayout">
                   {filteredProjects.map((project, i) => (
-                    <motion.div
-                      key={project.name + i}
-                      layout
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3 }}
-                      className="bg-white border border-[var(--border)] rounded-[1rem] md:rounded-sm p-3 md:p-5 hover:shadow-xl transition-all duration-300 group flex flex-col h-full hover:-translate-y-1"
-                    >
-                      <div className="relative mb-3 md:mb-4 overflow-hidden h-28 md:h-44 bg-[var(--gray-bg)] rounded-md">
-                        <Image
-                          src={project.image || '/images/projects/comp-1.png'}
-                          alt={project.name}
-                          fill
-                          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="flex justify-between items-start mb-1 md:mb-2 flex-col md:flex-row gap-1">
-                        <span className="font-rajdhani text-[8px] md:text-[10px] font-bold text-[var(--primary)] uppercase tracking-wider">{project.type}</span>
-                        <span className={`text-[7px] md:text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
-                          {project.status}
-                        </span>
-                      </div>
-                      <h4 className="font-cormorant md:font-bebas text-[16px] md:text-xl mb-1 text-[var(--black)] leading-tight group-hover:text-[var(--primary)] transition-colors">{project.name}</h4>
-                      <p className="font-inter text-[9px] md:text-[11px] text-[var(--gray)] mb-3 md:mb-4 flex-grow line-clamp-3 leading-relaxed">{project.description}</p>
-                      <div className="pt-2 md:pt-4 border-t border-[var(--border)] mt-auto flex flex-col md:flex-row md:justify-between items-start md:items-center gap-1">
-                        <span className="font-rajdhani text-[8px] md:text-[9px] font-bold text-[var(--black)] uppercase tracking-widest">{project.client}</span>
-                        <span className="font-rajdhani text-[7px] md:text-[9px] font-bold text-[var(--gray)] uppercase tracking-widest">{project.location}</span>
-                      </div>
-                    </motion.div>
+                    <ProjectCard
+                      key={(project.id || project.name) + i}
+                      project={project}
+                      onOpenModal={(p) => setSelectedProject(p)}
+                      priority={i < 4}
+                    />
                   ))}
                 </AnimatePresence>
               </motion.div>
@@ -141,9 +200,16 @@ export default function ProjectsPage() {
 
           </div>
         </section>
+
+        {/* Interactive Animatic Lightbox / Details Modal */}
+        <ProjectGalleryModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
       </main>
       <Footer />
       <WhatsAppButton />
     </>
   )
 }
+

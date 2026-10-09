@@ -9,46 +9,49 @@ export default function WhatsAppButton() {
   return (
     <div className="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-[2000] flex items-center justify-end pointer-events-auto">
       
-      {/* Tooltip (Desktop Hover & Mobile friendly) */}
+      {/* Tooltip */}
       <motion.div
-        initial={{ opacity: 0, x: 15, scale: 0.95 }}
+        initial={{ opacity: 0, x: 10, scale: 0.95 }}
         animate={{ 
           opacity: hovered ? 1 : 0, 
-          x: hovered ? 0 : 15,
+          x: hovered ? 0 : 10,
           scale: hovered ? 1 : 0.95 
         }}
         transition={{ duration: 0.2 }}
-        className="hidden sm:block bg-[#1f2937] text-white font-poppins text-xs font-medium py-2 px-4 rounded-xl mr-3 shadow-xl border border-white/10 whitespace-nowrap pointer-events-none"
+        className="hidden sm:block bg-[#111827] text-white font-inter text-xs font-semibold py-2 px-3.5 rounded-xl mr-3 shadow-xl border border-white/10 whitespace-nowrap pointer-events-none"
       >
-        Chat with us on WhatsApp
+        Chat on WhatsApp
       </motion.div>
 
-      <div 
-        className="relative flex items-center justify-center"
+      {/* Floating Animated WhatsApp Button */}
+      <motion.a
+        href="https://wa.me/919035027395"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Adler Contracts on WhatsApp"
         onMouseEnter={() => setHovered(true)} 
         onMouseLeave={() => setHovered(false)}
+        animate={{
+          y: [0, -6, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.94 }}
+        className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#25D366] text-white shadow-[0_8px_25px_rgba(37,211,102,0.4)] hover:shadow-[0_12px_35px_rgba(37,211,102,0.6)] cursor-pointer transition-shadow"
       >
-        {/* Pulse Ripple Effect */}
-        <span className="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-40 animate-ping" />
-
-        {/* Floating Button */}
-        <a
-          href="https://wa.me/919035027395"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
-          className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#25D366] text-white shadow-[0_8px_30px_rgba(37,211,102,0.45)] hover:shadow-[0_12px_40px_rgba(37,211,102,0.6)] cursor-pointer transform hover:scale-110 active:scale-95 transition-all duration-300 group"
+        {/* Crisp Official WhatsApp Vector */}
+        <svg
+          viewBox="0 0 32 32"
+          className="w-7 h-7 md:w-8 md:h-8 fill-current"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Official HD WhatsApp Icon */}
-          <svg
-            viewBox="0 0 24 24"
-            className="w-7 h-7 md:w-8 md:h-8 fill-current transition-transform duration-300 group-hover:rotate-6"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-        </a>
-      </div>
+          <path d="M16 2C8.268 2 2 8.268 2 16c0 2.72.775 5.257 2.115 7.412L2.5 30l6.786-1.58C11.353 29.472 13.613 30 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm8.28 19.86c-.347.973-1.737 1.787-2.827 2.023-.746.16-1.72.288-5.006-1.073-4.2-1.74-6.907-6.02-7.116-6.297-.202-.277-1.706-2.27-1.706-4.327 0-2.057 1.077-3.07 1.46-3.487.383-.417.834-.52 1.112-.52.278 0 .556.003.8.014.26.012.607-.098.95.727.347.834 1.18 2.88 1.285 3.09.104.208.174.452.035.73-.14.278-.208.452-.417.695-.208.243-.438.542-.625.728-.208.208-.426.435-.183.852.243.417 1.08 1.782 2.318 2.884 1.593 1.417 2.936 1.858 3.353 2.066.417.208.66.174.903-.104.243-.278 1.04-1.216 1.318-1.633.278-.417.556-.347.938-.208.382.139 2.428 1.146 2.845 1.354.417.208.695.312.798.486.104.174.104 1.007-.243 1.98z"/>
+        </svg>
+      </motion.a>
     </div>
   )
 }
