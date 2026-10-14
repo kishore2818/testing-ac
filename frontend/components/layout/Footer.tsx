@@ -88,7 +88,7 @@ export default function Footer() {
           <div className="mt-5 rounded-2xl bg-white px-4 py-4 text-[var(--black)]">
             <p className="font-poppins text-xs uppercase tracking-[0.22em] text-[var(--primary)]">Contact</p>
             <p className="mt-3 font-inter text-sm">+91 90350 27395</p>
-            <p className="mt-1 font-inter text-sm">Priya@adlercontracts.com</p>
+            <p className="mt-1 font-inter text-sm"><a href="mailto:adlercontracts@gmail.com" className="hover:text-[var(--primary)] transition-colors">adlercontracts@gmail.com</a></p>
             <p className="mt-3 font-inter text-sm leading-relaxed">Plot No 1/A RS No. 43/2A, Saraf Enclave, Azam Nagar Circle, Belagavi – 590 010</p>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function Footer() {
            <h4 className="font-rajdhani font-bold text-xs tracking-[0.2em] uppercase text-[var(--primary)] mb-4">Contact</h4>
            <div className="flex flex-col gap-3 font-inter text-sm text-[var(--gray-light)]">
              <p><strong className="text-white">Phone:</strong> <br/>+91 90350 27395</p>
-             <p><strong className="text-white">Email:</strong> <br/>Priya@adlercontracts.com</p>
+             <p><strong className="text-white">Email:</strong> <br/><a href="mailto:adlercontracts@gmail.com" className="hover:text-[var(--primary)] transition-colors">adlercontracts@gmail.com</a></p>
              <p><strong className="text-white">Address:</strong> <br/>Plot No 1/A RS No. 43/2A, Saraf Enclave, Azam Nagar Circle, Belagavi – 590 010</p>
            </div>
         </div>
