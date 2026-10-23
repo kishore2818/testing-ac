@@ -9,8 +9,13 @@ export async function proxy(request: NextRequest) {
     pathname.startsWith('/login') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
+    pathname.startsWith('/images') ||
     pathname.includes('favicon') ||
     pathname.includes('.png') ||
+    pathname.includes('.jpg') ||
+    pathname.includes('.jpeg') ||
+    pathname.includes('.webp') ||
+    pathname.includes('.svg') ||
     pathname.includes('.ico')
   ) {
     return NextResponse.next()

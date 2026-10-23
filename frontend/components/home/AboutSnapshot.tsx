@@ -10,18 +10,18 @@ export default function AboutSnapshot() {
   const cards = [
     {
       num: '01',
-      title: 'Engineering Excellence',
-      desc: 'Precision design, load calculations, and meticulous engineering planning for zero-defect execution.'
+      title: 'Quality',
+      desc: 'Every installation tested and checked before handover.'
     },
     {
       num: '02',
-      title: 'Safety & Quality',
-      desc: 'Structured quality procedures, stringent safety protocols, and certified testing standards.'
+      title: 'Safety',
+      desc: 'Safe work methods and full PPE on every site, every day.'
     },
     {
       num: '03',
-      title: 'On-Time Execution',
-      desc: 'Disciplined project management focused on meeting strict timelines without cost overruns.'
+      title: 'Trust',
+      desc: 'Honest dealings and commitments delivered on time.'
     }
   ]
 
@@ -39,7 +39,7 @@ export default function AboutSnapshot() {
         >
           <SectionLabel text="Who We Are" color="accent" centered={true} />
           <h2 className="font-inter font-semibold text-[26px] sm:text-[34px] lg:text-[40px] leading-tight text-[var(--black)] mt-3">
-            Engineering Electrical Infrastructure <span className="text-[var(--primary)]">That Performs</span>
+            Class I Electrical Contractor · <span className="text-[var(--primary)]">Headquartered in Belagavi</span>
           </h2>
         </motion.div>
 
@@ -47,15 +47,20 @@ export default function AboutSnapshot() {
           
           {/* Left Column (Text & 3 Cards) */}
           <ScrollReveal animation={fadeLeft} className="flex flex-col items-start text-left order-2 lg:order-1">
-            <motion.p 
+            <motion.div 
               initial={{ x: -20, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="font-inter text-[var(--black-soft)] font-normal text-sm sm:text-base leading-relaxed mb-6 md:mb-8 border-l-4 border-[var(--primary)] pl-4 md:pl-5 py-3 bg-[var(--primary-soft)] rounded-r-xl shadow-sm"
+              className="space-y-4 mb-6 md:mb-8 border-l-4 border-[var(--primary)] pl-4 md:pl-5 py-3 bg-[var(--primary-soft)] rounded-r-xl shadow-sm text-left"
             >
-              Adler Contracts is a Class I Electrical Contractor delivering end-to-end electrical infrastructure for industrial and commercial projects. From engineering and panel manufacturing to installation, testing and commissioning, we combine technical expertise, disciplined execution and safety-focused project management.
-            </motion.p>
+              <p className="font-inter text-[var(--black-soft)] font-normal text-sm sm:text-base leading-relaxed">
+                Adler Contracts is a Class I electrical contractor headquartered in Belagavi, Karnataka, founded in 2024. We deliver turnkey, end-to-end electrical solutions, from design and planning to installation, testing and commissioning. Since 2024 we have completed and taken on 14 projects across Karnataka and Tamil Nadu for aerospace, EV, SEZ and institutional clients, together worth over ₹10.7 Cr and more than 27 MVA of capacity.
+              </p>
+              <div className="pt-2 border-t border-[var(--primary)]/20 text-xs sm:text-sm font-semibold text-[var(--primary-dark)]">
+                ✦ Led by Mrs. Priyadarshini B.P., Proprietor, with a Grade I licensed electrical supervisor on every project.
+              </div>
+            </motion.div>
 
             <div className="space-y-4 mb-8 w-full">
               {cards.map((feat) => (

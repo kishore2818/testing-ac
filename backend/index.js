@@ -61,6 +61,48 @@ function verifyToken(req, res, next) {
   }
 }
 
+// Helper to parse project form data (handles scope JSON + gallery URLs)
+function parseProjectData(body, files) {
+  const data = { ...body };
+
+  // Parse scope from JSON string or comma-separated
+  if (data.scope) {
+    try {
+      data.scope = JSON.parse(data.scope);
+    } catch {
+      // If not valid JSON, try comma-separated
+      data.scope = data.scope.split(',').map(s => s.trim()).filter(Boolean);
+    }
+  }
+
+  // Parse existing gallery URLs from JSON string
+  if (data.existingGallery) {
+    try {
+      data.gallery = JSON.parse(data.existingGallery);
+    } catch {
+      data.gallery = [];
+    }
+    delete data.existingGallery;
+  }
+
+  // Append newly uploaded gallery files
+  if (files && files.galleryFiles) {
+    const newUrls = files.galleryFiles.map(f => f.path);
+    data.gallery = [...(data.gallery || []), ...newUrls];
+  }
+
+  // Handle main image from uploaded file
+  if (files && files.imageFile && files.imageFile[0]) {
+    data.image = files.imageFile[0].path;
+  }
+
+  // Clean up fields not in schema
+  delete data.imageFile;
+  delete data.galleryFiles;
+
+  return data;
+}
+
 // ── Connect to MongoDB & Seed Admin ──────────────────────────────────────────
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -155,6 +197,12 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 
 // ── Project Routes ────────────────────────────────────────────────────────────
 
+// Multi-field upload: imageFile (single main image) + galleryFiles (up to 10 gallery images)
+const projectUpload = upload.fields([
+  { name: 'imageFile', maxCount: 1 },
+  { name: 'galleryFiles', maxCount: 10 },
+]);
+
 app.get('/api/projects', async (req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 });
@@ -164,25 +212,25 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-app.post('/api/projects', upload.single('imageFile'), async (req, res) => {
+app.post('/api/projects', projectUpload, async (req, res) => {
   try {
-    const projectData = { ...req.body };
-    if (req.file) projectData.image = req.file.path;
+    const projectData = parseProjectData(req.body, req.files);
     const project = new Project(projectData);
     await project.save();
     res.status(201).json(project);
   } catch (error) {
+    console.error('Create project error:', error);
     res.status(400).json({ error: 'Failed to create project' });
   }
 });
 
-app.put('/api/projects/:id', upload.single('imageFile'), async (req, res) => {
+app.put('/api/projects/:id', projectUpload, async (req, res) => {
   try {
-    const projectData = { ...req.body };
-    if (req.file) projectData.image = req.file.path;
+    const projectData = parseProjectData(req.body, req.files);
     const project = await Project.findByIdAndUpdate(req.params.id, projectData, { new: true });
     res.json(project);
   } catch (error) {
+    console.error('Update project error:', error);
     res.status(400).json({ error: 'Failed to update project' });
   }
 });

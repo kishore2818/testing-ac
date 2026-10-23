@@ -6,13 +6,13 @@ import PageHero from '@/components/shared/PageHero'
 import Enquiry from '@/components/home/Enquiry'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Adler Contracts – Get a Free Quote',
+  title: 'Contact Us | Adler Contracts – Class I Electrical Contractor',
   description:
-    'Contact Adler Contracts in Bengaluru for electrical panel manufacturing, MCC panels, PCC panels, APFC panels and bus ducts. Get a free project quote today.',
+    'Contact Adler Contracts in Belagavi, Karnataka for Class I turnkey electrical contracting, HT/LT installations, substations up to 33 kV, and CEIG approvals. Get a project consultation today.',
   alternates: { canonical: 'https://adlercontracts.in/contact' },
   openGraph: {
-    title: 'Contact Adler Contracts | Get a Free Quote',
-    description: 'Get in touch with Bengaluru\'s leading electrical panel manufacturer. Free project consultation.',
+    title: 'Contact Adler Contracts | Class I Electrical Contractor',
+    description: 'Get in touch with Karnataka\'s trusted Class I electrical contractor for HT/LT electrical engineering.',
     url: 'https://adlercontracts.in/contact',
   },
 }
@@ -53,7 +53,7 @@ export default function ContactPage() {
                <div className="bg-[var(--gray-bg)] p-5 md:p-8 border-l-4 border-[var(--primary)] rounded-2xl shadow-sm border border-[var(--border)] border-l-[var(--primary)]">
                  <h3 className="font-rajdhani text-lg md:text-xl font-bold uppercase mb-1 md:mb-2">Business Hours</h3>
                  <p className="font-inter text-sm md:text-base text-[var(--gray)]">Monday - Saturday: 9:00 AM - 6:30 PM (IST)</p>
-                 <p className="font-inter text-sm md:text-base text-[var(--gray)]">Contact: Mrs. Priya Acharya</p>
+                 <p className="font-inter text-sm md:text-base text-[var(--gray)]">Proprietor: Mrs. Priyadarshini B.P.</p>
                </div>
             </div>
 

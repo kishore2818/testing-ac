@@ -84,7 +84,7 @@ export default function Enquiry() {
             Have an Electrical Project <span className="text-[var(--primary)]">in the Pipeline?</span>
           </h2>
           <p className="font-inter text-[var(--gray)] mt-2 text-xs sm:text-sm leading-relaxed">
-            Share your BOQ, drawings or project requirements. Our engineering team will review your requirements and get back to you within 24 hours.
+            Share your BOQ, drawings or project requirements. Our engineering team will review your requirements and get back to you within 1–2 working days.
           </p>
         </div>
 
@@ -136,14 +136,14 @@ export default function Enquiry() {
             <div className="space-y-1.5">
               <label className="font-inter text-xs font-bold text-[var(--black-soft)] uppercase tracking-wider">Electrical Requirement *</label>
               <select required name="elecReq" className="w-full bg-[var(--gray-bg)] border border-[var(--border)] rounded-lg px-3.5 py-2.5 text-[var(--black)] font-inter text-sm input-glow transition-all appearance-none cursor-pointer">
-                <option value="HT">HT (High Tension)</option>
-                <option value="LT">LT (Low Tension)</option>
-                <option value="Panel">Panel Manufacturing</option>
-                <option value="Transformer">Transformer Setup</option>
-                <option value="Cable">Cabling & Busduct</option>
-                <option value="Automation">PLC Automation</option>
-                <option value="Testing">Testing & Diagnostics</option>
-                <option value="Other">Other Requirement</option>
+                <option value="HT">HT (High Tension) Installation</option>
+                <option value="LT">LT (Low Tension) Distribution</option>
+                <option value="Substation">Substation / Transformer Setup</option>
+                <option value="CEIG">CEIG Approval & Liasoning</option>
+                <option value="Cable">Cabling, Trays & Busduct</option>
+                <option value="Automation">Industrial Automation & Protection</option>
+                <option value="Testing">Testing, Commissioning & Audits</option>
+                <option value="Other">Other Turnkey Requirement</option>
               </select>
             </div>
 
@@ -226,7 +226,7 @@ export default function Enquiry() {
                 exit={{ opacity: 0 }}
                 className="mt-4 bg-[var(--success)] text-white font-inter text-sm font-semibold p-3.5 rounded-lg shadow-lg flex items-center gap-2 justify-center"
               >
-                <CheckCircle className="w-5 h-5" /> Our engineering team will review your BOQ/drawings and contact you within 24 hours!
+                <CheckCircle className="w-5 h-5" /> Our engineering team will review your BOQ/drawings and contact you within 1–2 working days!
               </motion.div>
             )}
             {status === 'error' && (

@@ -24,8 +24,8 @@ const steps = [
   },
   {
     num: '04',
-    title: 'Panel Manufacturing',
-    desc: 'In-house assembly, busbar fabrication, wiring, and factory acceptance testing (FAT).',
+    title: 'Panel Sourcing & Integration',
+    desc: 'Tier-1 component selection, vendor FAT coordination, wiring verification, and rigorous testing.',
     icon: Cpu
   },
   {

@@ -42,11 +42,11 @@ export default function ClientsCarousel() {
           transition={{ duration: 0.8 }}
           className="mb-8 md:mb-14 text-left"
         >
-          <h2 className="font-cormorant text-4xl text-[var(--accent)] tracking-wider">
-            Trusted By <span className="text-[var(--primary)]">Leading Companies</span>
+          <h2 className="font-inter font-semibold text-2xl sm:text-3xl lg:text-4xl text-[var(--black)]">
+            Trusted By <span className="text-[var(--primary)]">Aerospace, EV & Industrial Leaders</span>
           </h2>
-          <p className="mt-4 max-w-2xl font-inter text-sm md:text-base text-[var(--gray)]">
-            Our client relationships span aerospace, manufacturing, logistics, hospitality, and institutional infrastructure across India.
+          <p className="mt-3 max-w-2xl font-inter text-sm md:text-base text-[var(--gray)]">
+            Proven client relationships and repeat execution across aerospace, EV mobility, industrial manufacturing, and SEZ infrastructure.
           </p>
         </motion.div>
 
@@ -64,8 +64,9 @@ export default function ClientsCarousel() {
           ))}
         </div>
 
-        <div className="mt-8 md:mt-12 font-poppins text-[var(--primary)] tracking-[0.18em] uppercase font-semibold text-xs md:text-sm text-left">
-          200+ Companies across India trust Adler Contracts
+        <div className="mt-8 md:mt-12 font-inter text-[var(--primary-dark)] tracking-wider uppercase font-bold text-xs md:text-sm text-left flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse" />
+          <span>Delivering Turnkey HT/LT Solutions across Karnataka & Tamil Nadu</span>
         </div>
       </div>
     </section>

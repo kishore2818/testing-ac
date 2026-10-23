@@ -47,7 +47,7 @@ export default function ProjectCard({ project, onOpenModal, priority = false }: 
       className="bg-white border border-[var(--border)] rounded-2xl overflow-hidden hover:border-[var(--primary)] transition-all duration-300 group flex flex-col h-full cursor-pointer shadow-sm relative"
     >
       {/* Card Image Area with Arrows & Indicators */}
-      <div className="relative h-44 sm:h-52 md:h-56 bg-[var(--black)] overflow-hidden">
+      <div className="relative h-32 sm:h-52 md:h-56 bg-[var(--black)] overflow-hidden">
         
         {/* Animated Photo Transition */}
         <AnimatePresence mode="wait">
@@ -67,18 +67,18 @@ export default function ProjectCard({ project, onOpenModal, priority = false }: 
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
         {/* Top Badges */}
-        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none">
+        <div className="absolute top-1.5 left-1.5 right-1.5 sm:top-2.5 sm:left-2.5 sm:right-2.5 flex items-center justify-between z-10 pointer-events-none gap-1">
           {/* Status Badge */}
-          <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-md ${
+          <span className={`inline-flex items-center gap-1 px-1.5 sm:px-2.5 py-0.5 rounded-full text-[8px] sm:text-[10px] font-bold text-white shadow-md shrink-0 ${
             project.status === 'Completed' ? 'bg-[var(--primary-dark)]' : 'bg-amber-600'
           }`}>
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            {project.status === 'Completed' ? 'Completed' : 'Ongoing'}
+            <span className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-white animate-pulse" />
+            <span className="truncate">{project.status === 'Completed' ? 'Completed' : 'Ongoing'}</span>
           </span>
 
           {/* Project Value / Capacity Badge */}
           {displayValue && (
-            <span className="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white font-inter text-[10px] font-bold border border-white/20">
+            <span className="px-1.5 sm:px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white font-inter text-[8px] sm:text-[10px] font-bold border border-white/20 truncate">
               {displayValue}
             </span>
           )}
@@ -89,26 +89,26 @@ export default function ProjectCard({ project, onOpenModal, priority = false }: 
           <>
             <button
               onClick={handlePrev}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/55 hover:bg-[var(--primary)] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all opacity-80 sm:opacity-0 group-hover:opacity-100 z-20 shadow-md hover:scale-110 active:scale-95 cursor-pointer"
+              className="absolute left-1.5 sm:left-2 top-1/2 -translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-black/55 hover:bg-[var(--primary)] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all opacity-80 sm:opacity-0 group-hover:opacity-100 z-20 shadow-md hover:scale-110 active:scale-95 cursor-pointer"
               aria-label="Previous photo"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
 
             <button
               onClick={handleNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/55 hover:bg-[var(--primary)] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all opacity-80 sm:opacity-0 group-hover:opacity-100 z-20 shadow-md hover:scale-110 active:scale-95 cursor-pointer"
+              className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-black/55 hover:bg-[var(--primary)] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all opacity-80 sm:opacity-0 group-hover:opacity-100 z-20 shadow-md hover:scale-110 active:scale-95 cursor-pointer"
               aria-label="Next photo"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </>
         )}
 
         {/* Photo Counter & Dot Indicators at Bottom of Image */}
-        <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
+        <div className="absolute bottom-1.5 sm:bottom-2.5 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between z-10 pointer-events-none">
           {hasMultiplePhotos && (
-            <div className="flex items-center gap-1">
+            <div className="hidden sm:flex items-center gap-1">
               {photos.map((_, i) => (
                 <span
                   key={i}
@@ -121,7 +121,7 @@ export default function ProjectCard({ project, onOpenModal, priority = false }: 
           )}
 
           {hasMultiplePhotos && (
-            <span className="text-[10px] font-semibold text-white/90 bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/10 ml-auto">
+            <span className="text-[8px] sm:text-[10px] font-semibold text-white/90 bg-black/50 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 rounded-md border border-white/10 ml-auto">
               {currentIdx + 1}/{photos.length} Photos
             </span>
           )}
@@ -129,58 +129,55 @@ export default function ProjectCard({ project, onOpenModal, priority = false }: 
       </div>
 
       {/* Card Content Area */}
-      <div className="p-4 sm:p-5 flex flex-col flex-grow bg-white">
+      <div className="p-2.5 sm:p-5 flex flex-col flex-grow bg-white">
         
         {/* Industry Type Tag */}
-        <div className="flex items-center justify-between gap-2 mb-1.5">
-          <span className="font-inter text-[10px] sm:text-[11px] font-bold text-[var(--primary-dark)] uppercase tracking-wider truncate">
+        <div className="flex items-center justify-between gap-1 mb-1 sm:mb-1.5">
+          <span className="font-inter text-[9px] sm:text-[11px] font-bold text-[var(--primary-dark)] uppercase tracking-wider truncate">
             {project.type}
-          </span>
-          <span className="font-inter text-[10px] text-[var(--gray)] shrink-0">
-            {project.progress}% Done
           </span>
         </div>
 
         {/* Project Name */}
-        <h3 className="font-inter font-bold text-sm sm:text-base text-[var(--black)] leading-snug group-hover:text-[var(--primary)] transition-colors mb-2 line-clamp-1">
+        <h3 className="font-inter font-bold text-xs sm:text-base text-[var(--black)] leading-snug group-hover:text-[var(--primary)] transition-colors mb-1 sm:mb-2 line-clamp-1">
           {project.name}
         </h3>
 
-        {/* Description */}
-        <p className="font-inter text-xs text-[var(--gray)] leading-relaxed mb-4 line-clamp-2">
+        {/* Description - Compact on mobile, 2 lines on larger */}
+        <p className="font-inter text-[10px] sm:text-xs text-[var(--gray)] leading-tight sm:leading-relaxed mb-2 sm:mb-4 line-clamp-1 sm:line-clamp-2">
           {project.description}
         </p>
 
         {/* Metadata Specs */}
-        <div className="mt-auto pt-3 border-t border-[var(--border)] space-y-2 text-xs font-inter">
-          <div className="flex items-center justify-between text-[11px]">
+        <div className="mt-auto pt-2 sm:pt-3 border-t border-[var(--border)] space-y-1 sm:space-y-2 text-[10px] sm:text-xs font-inter">
+          <div className="flex items-center justify-between gap-1 text-[9px] sm:text-[11px]">
             <span className="text-[var(--gray)] flex items-center gap-1 truncate">
-              <Building2 className="w-3 h-3 text-[var(--primary)] shrink-0" />
-              {project.client}
+              <Building2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--primary)] shrink-0" />
+              <span className="truncate">{project.client}</span>
             </span>
-            <span className="text-[var(--black)] font-medium flex items-center gap-1 shrink-0">
-              <MapPin className="w-3 h-3 text-[var(--primary)] shrink-0" />
-              {project.location?.split(',')[0]}
+            <span className="text-[var(--black)] font-medium flex items-center gap-0.5 shrink-0">
+              <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--primary)] shrink-0" />
+              <span>{project.location?.split(',')[0]}</span>
             </span>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] pt-1.5 border-t border-dashed border-gray-100">
-            <span className="text-[var(--primary-dark)] font-bold flex items-center gap-1">
-              <IndianRupee className="w-3 h-3 text-[var(--primary)]" />
+          <div className="flex items-center justify-between text-[9px] sm:text-[11px] pt-1 sm:pt-1.5 border-t border-dashed border-gray-100">
+            <span className="text-[var(--primary-dark)] font-bold flex items-center gap-0.5">
+              <IndianRupee className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--primary)]" />
               {displayValue}
             </span>
             {project.powerCapacity && (
-              <span className="text-[var(--gray)] font-medium flex items-center gap-1">
-                <Zap className="w-3 h-3 text-amber-500" />
+              <span className="text-[var(--gray)] font-medium flex items-center gap-0.5">
+                <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-500" />
                 {project.powerCapacity}
               </span>
             )}
           </div>
 
-          <div className="pt-2 flex items-center justify-between text-[11px] font-semibold border-t border-[var(--border)]">
+          <div className="pt-1.5 sm:pt-2 flex items-center justify-between text-[9px] sm:text-[11px] font-semibold border-t border-[var(--border)]">
             <span className="text-[var(--primary-dark)] inline-flex items-center gap-1 group-hover:underline">
-              <Eye className="w-3.5 h-3.5" />
-              View Full Details
+              <Eye className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
+              View Details
             </span>
             <span className="text-[var(--gray)] group-hover:text-[var(--primary)] transition-colors">
               →

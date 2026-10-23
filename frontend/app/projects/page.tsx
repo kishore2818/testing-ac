@@ -4,100 +4,66 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import PageHero from '@/components/shared/PageHero'
+import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectGalleryModal, { ProjectModalData } from '@/components/projects/ProjectGalleryModal'
 import { projects as staticProjects, ProjectItem } from '@/data/projects'
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState('All')
-  const [projectsList, setProjectsList] = useState<ProjectItem[]>(staticProjects)
+  const [projectsList, setProjectsList] = useState<ProjectItem[]>([])
   const [selectedProject, setSelectedProject] = useState<ProjectModalData | null>(null)
   const [loading, setLoading] = useState(true)
   
-  const filters = ['All', 'In Progress', 'Completed']
+  const filters = ['All', 'Completed', 'In Progress']
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        if (!process.env.NEXT_PUBLIC_API_URL) {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL
+        if (!apiUrl) {
+          // No API URL configured — use static data
+          setProjectsList(staticProjects)
           setLoading(false)
           return
         }
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`)
+
+        const res = await fetch(`${apiUrl}/api/projects`, { cache: 'no-store' })
         if (!res.ok) throw new Error('Failed to fetch from API')
         const apiData = await res.json()
         
         if (Array.isArray(apiData) && apiData.length > 0) {
-          // Merge API data with static gallery mappings preserving verified PDF details
-          const merged: ProjectItem[] = staticProjects.map((s) => {
-            const apiP = apiData.find((a: any) => {
-              const aName = a.name?.toLowerCase() || ''
-              const sName = s.name.toLowerCase()
-              return aName === sName || 
-                (sName.includes('foxconn') && aName.includes('foxconn')) ||
-                (sName.includes('unit-4') && aName.includes('unit-4')) ||
-                (sName.includes('sterling') && aName.includes('sterling')) ||
-                (sName.includes('sfs') && aName.includes('sfs')) ||
-                (sName.includes('thyssenkrupp') && aName.includes('thyssenkrupp'))
-            })
-            if (!apiP) return s
-            const img = s.image || apiP.image || '/images/projects/ongoing-placeholder.jpg'
-            return {
-              ...s,
-              id: apiP._id,
-              name: s.name,
-              client: s.client,
-              location: s.location,
-              type: s.type,
-              status: s.status,
-              progress: apiP.progress ?? s.progress,
-              value: s.value || apiP.value,
-              capacity: s.capacity || apiP.capacity,
-              powerCapacity: s.powerCapacity || apiP.powerCapacity,
-              workAwarded: s.workAwarded || apiP.workAwarded,
-              duration: s.duration || apiP.duration,
-              description: s.description,
-              image: img,
-              gallery: s.gallery && s.gallery.length > 0 ? s.gallery : [img]
-            }
-          })
+          // API returned data — use it directly (DB is the source of truth)
+          const mapped: ProjectItem[] = apiData.map((p: any) => ({
+            id: p._id,
+            name: p.name,
+            client: p.client,
+            location: p.location,
+            type: p.type || 'Electrical Project',
+            status: p.status || 'Completed',
+            progress: p.progress ?? 100,
+            value: p.value || '',
+            capacity: p.capacity || '',
+            powerCapacity: p.powerCapacity || '',
+            workAwarded: p.workAwarded || '',
+            duration: p.duration || '',
+            description: p.description || '',
+            scope: p.scope || [],
+            image: p.image || '/images/hero/hero-real-1.jpg',
+            gallery: p.gallery && p.gallery.length > 0 ? p.gallery : [p.image || '/images/hero/hero-real-1.jpg'],
+          }))
 
-          const extraApiProjects = apiData
-            .filter((apiP: any) => !staticProjects.some((s) => {
-              const aName = apiP.name?.toLowerCase() || ''
-              const sName = s.name.toLowerCase()
-              return aName === sName || 
-                (sName.includes('foxconn') && aName.includes('foxconn')) ||
-                (sName.includes('unit-4') && aName.includes('unit-4')) ||
-                (sName.includes('sterling') && aName.includes('sterling')) ||
-                (sName.includes('sfs') && aName.includes('sfs')) ||
-                (sName.includes('thyssenkrupp') && aName.includes('thyssenkrupp'))
-            }))
-            .map((apiP: any) => ({
-              id: apiP._id,
-              name: apiP.name,
-              client: apiP.client,
-              location: apiP.location,
-              type: apiP.type || 'Electrical Project',
-              status: apiP.status || 'In Progress',
-              progress: apiP.progress ?? 100,
-              value: apiP.value || 'Class I Verified',
-              capacity: apiP.capacity || 'Class I Verified',
-              powerCapacity: apiP.powerCapacity || 'Class I',
-              workAwarded: apiP.workAwarded || 'HT/LT Supply & Installation',
-              duration: apiP.duration || '6 months',
-              description: apiP.description || '',
-              scope: apiP.scope || ['Turnkey Electrical Execution'],
-              image: apiP.image || '/images/hero/hero-real-1.jpg',
-              gallery: [apiP.image || '/images/hero/hero-real-1.jpg']
-            }))
+          // Sort completed first
+          mapped.sort((a, b) => (a.status === 'Completed' ? -1 : 1))
 
-          setProjectsList([...merged, ...extraApiProjects])
+          setProjectsList(mapped)
+        } else {
+          // API returned empty — fall back to static data
+          setProjectsList(staticProjects)
         }
       } catch (error) {
-        console.error('Error fetching projects from API, fallback to verified static data:', error)
+        console.error('Error fetching projects, falling back to static data:', error)
         setProjectsList(staticProjects)
       } finally {
         setLoading(false)
@@ -184,7 +150,7 @@ export default function ProjectsPage() {
                 <span>Loading project portfolio...</span>
               </div>
             ) : (
-              <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              <motion.div layout className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
                 <AnimatePresence mode="popLayout">
                   {filteredProjects.map((project, i) => (
                     <ProjectCard
@@ -212,4 +178,3 @@ export default function ProjectsPage() {
     </>
   )
 }
-

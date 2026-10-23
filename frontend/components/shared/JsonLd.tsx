@@ -16,8 +16,8 @@ export default function JsonLd() {
       height: 100,
     },
     description:
-      "India's trusted electrical panel manufacturer. Expert design, manufacturing & installation of MCC panels, PCC panels, APFC panels, control desks and bus ducts.",
-    foundingDate: '2010',
+      "Karnataka Class I Licensed Electrical Contractor up to 33 kV. Turnkey HT/LT power distribution, substations, transformer setups, and CEIG approvals.",
+    foundingDate: '2024',
     areaServed: {
       '@type': 'Country',
       name: 'India',
@@ -25,7 +25,7 @@ export default function JsonLd() {
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        telephone: '+91-80-41105000',
+        telephone: '+91-90350-27395',
         contactType: 'customer service',
         areaServed: 'IN',
         availableLanguage: ['English', 'Hindi', 'Kannada'],
@@ -33,44 +33,43 @@ export default function JsonLd() {
     ],
     sameAs: [
       SITE_URL,
-      // Add your LinkedIn / Facebook / Twitter URLs here once you have them
     ],
   }
 
   // 2. LocalBusiness schema — critical for "near me" & city searches
   const localBusinessSchema = {
     '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'ElectronicsStore'],
+    '@type': ['LocalBusiness', 'ProfessionalService'],
     '@id': `${SITE_URL}/#localbusiness`,
     name: 'Adler Contracts',
     image: [`${SITE_URL}/logo.png`, `${SITE_URL}/og-image.png`],
     url: SITE_URL,
-    telephone: '+91-80-41105000',
+    telephone: '+91-90350-27395',
     priceRange: '₹₹₹',
     currenciesAccepted: 'INR',
     paymentAccepted: 'Bank Transfer, Cheque',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Bengaluru',
-      addressLocality: 'Bengaluru',
+      streetAddress: 'Plot No 1/A RS No. 43/2A, Saraf Enclave, Azam Nagar Circle',
+      addressLocality: 'Belagavi',
       addressRegion: 'Karnataka',
-      postalCode: '560001',
+      postalCode: '590010',
       addressCountry: 'IN',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 12.9716,
-      longitude: 77.5946,
+      latitude: 15.8497,
+      longitude: 74.4977,
     },
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         opens: '09:00',
-        closes: '18:00',
+        closes: '18:30',
       },
     ],
-    hasMap: 'https://maps.google.com/?q=Bengaluru+Karnataka+India',
+    hasMap: 'https://maps.google.com/?q=Belagavi+Karnataka+India',
   }
 
   // 3. WebSite schema — enables Google Sitelinks search box
@@ -81,7 +80,7 @@ export default function JsonLd() {
     name: 'Adler Contracts',
     url: SITE_URL,
     description:
-      "India's trusted electrical panel manufacturer in Bengaluru. MCC, PCC, APFC panels & bus ducts.",
+      "Karnataka Class I Licensed Electrical Contractor up to 33 kV in Belagavi. Turnkey HT/LT electrical engineering.",
     publisher: {
       '@id': `${SITE_URL}/#organization`,
     },

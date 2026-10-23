@@ -2,7 +2,7 @@
 
 import AdminNavbar from '@/components/AdminNavbar'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Edit2, Trash2, X, Upload, Check, Loader2, MapPin, User, Tag, Search, Filter, SlidersHorizontal, Clock, MessageSquare, Briefcase } from 'lucide-react'
+import { Plus, Edit2, Trash2, X, Upload, Loader2, MapPin, User, Tag, Search, SlidersHorizontal, Clock, MessageSquare, Briefcase, Zap, IndianRupee, Wrench, Images } from 'lucide-react'
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { fetchProjects, createProject, updateProject, deleteProject } from '@/lib/api'
@@ -19,6 +19,9 @@ function ProjectsContent() {
   
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [galleryFiles, setGalleryFiles] = useState<File[]>([])
+  const [galleryPreviews, setGalleryPreviews] = useState<string[]>([])
+  const [existingGallery, setExistingGallery] = useState<string[]>([])
   
   const [formData, setFormData] = useState({
     name: '',
@@ -28,7 +31,13 @@ function ProjectsContent() {
     status: 'In Progress',
     description: '',
     progress: 0,
-    image: ''
+    image: '',
+    value: '',
+    capacity: '',
+    powerCapacity: '',
+    workAwarded: '',
+    duration: '',
+    scopeText: '',
   })
 
   const [filter, setFilter] = useState('All')
@@ -41,8 +50,6 @@ function ProjectsContent() {
   useEffect(() => {
     if (searchParams.get('action') === 'new' && !loading) {
       handleOpenModal()
-      // Remove param after opening to prevent re-opening on refresh if needed
-      // router.replace('/projects', { scroll: false })
     }
   }, [searchParams, loading])
 
@@ -59,19 +66,28 @@ function ProjectsContent() {
 
   const handleOpenModal = (project: any = null) => {
     setImageFile(null)
+    setGalleryFiles([])
+    setGalleryPreviews([])
     if (project) {
       setEditingId(project._id)
       setFormData({
-        name: project.name,
-        client: project.client,
-        location: project.location,
-        type: project.type,
-        status: project.status,
-        description: project.description,
-        progress: project.progress,
-        image: project.image
+        name: project.name || '',
+        client: project.client || '',
+        location: project.location || '',
+        type: project.type || '',
+        status: project.status || 'In Progress',
+        description: project.description || '',
+        progress: project.progress || 0,
+        image: project.image || '',
+        value: project.value || '',
+        capacity: project.capacity || '',
+        powerCapacity: project.powerCapacity || '',
+        workAwarded: project.workAwarded || '',
+        duration: project.duration || '',
+        scopeText: (project.scope || []).join('\n'),
       })
-      setImagePreview(project.image)
+      setImagePreview(project.image || null)
+      setExistingGallery(project.gallery || [])
     } else {
       setEditingId(null)
       setFormData({
@@ -79,12 +95,19 @@ function ProjectsContent() {
         client: '',
         location: '',
         type: '',
-        status: filter,
+        status: filter === 'All' ? 'In Progress' : filter,
         progress: filter === 'Completed' ? 100 : 0,
         description: '',
-        image: ''
+        image: '',
+        value: '',
+        capacity: '',
+        powerCapacity: '',
+        workAwarded: '',
+        duration: '',
+        scopeText: '',
       })
       setImagePreview(null)
+      setExistingGallery([])
     }
     setIsModalOpen(true)
   }
@@ -106,6 +129,29 @@ function ProjectsContent() {
       }
       reader.readAsDataURL(file)
     }
+  }
+
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    if (files.length > 0) {
+      setGalleryFiles(prev => [...prev, ...files])
+      files.forEach(file => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setGalleryPreviews(prev => [...prev, reader.result as string])
+        }
+        reader.readAsDataURL(file)
+      })
+    }
+  }
+
+  const removeGalleryPreview = (index: number) => {
+    setGalleryFiles(prev => prev.filter((_, i) => i !== index))
+    setGalleryPreviews(prev => prev.filter((_, i) => i !== index))
+  }
+
+  const removeExistingGallery = (index: number) => {
+    setExistingGallery(prev => prev.filter((_, i) => i !== index))
   }
 
   const handleDelete = async (id: string) => {
@@ -131,12 +177,29 @@ function ProjectsContent() {
     data.append('status', formData.status)
     data.append('description', formData.description)
     data.append('progress', formData.progress.toString())
+    data.append('value', formData.value)
+    data.append('capacity', formData.capacity)
+    data.append('powerCapacity', formData.powerCapacity)
+    data.append('workAwarded', formData.workAwarded)
+    data.append('duration', formData.duration)
+    
+    // Parse scope from newline-separated text
+    const scopeArr = formData.scopeText.split('\n').map(s => s.trim()).filter(Boolean)
+    data.append('scope', JSON.stringify(scopeArr))
+
+    // Send existing gallery URLs
+    data.append('existingGallery', JSON.stringify(existingGallery))
     
     if (imageFile) {
       data.append('imageFile', imageFile)
     } else {
       data.append('image', formData.image)
     }
+
+    // Append new gallery files
+    galleryFiles.forEach(file => {
+      data.append('galleryFiles', file)
+    })
 
     try {
       if (editingId) {
@@ -157,8 +220,8 @@ function ProjectsContent() {
   const filteredProjects = projects
     .filter(p => filter === 'All' ? true : p.status === filter)
     .filter(p => 
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.client.toLowerCase().includes(searchQuery.toLowerCase())
+      p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.client?.toLowerCase().includes(searchQuery.toLowerCase())
     )
 
   return (
@@ -197,7 +260,7 @@ function ProjectsContent() {
             
             <button 
               onClick={() => handleOpenModal()}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[var(--black)] text-white px-5 py-2.5 rounded-full font-poppins font-bold text-xs uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md hover:shadow-primary/20 active:scale-95 group shrink-0"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[var(--black)] text-white px-5 py-2.5 rounded-full font-poppins font-bold text-xs uppercase tracking-widest hover:bg-[var(--primary)] transition-all shadow-md hover:shadow-primary/20 active:scale-95 group"
             >
               <Plus size={15} className="group-hover:rotate-90 transition-transform" />
               <span>Add Project</span>
@@ -322,6 +385,22 @@ function ProjectsContent() {
                     <p className="font-montserrat text-[10px] sm:text-xs text-[var(--black-muted)] mb-2 sm:mb-4 flex-grow leading-tight sm:leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
+
+                    {/* Extra Info */}
+                    {(project.value || project.powerCapacity) && (
+                      <div className="flex items-center gap-2 mb-2 text-[9px] sm:text-[10px]">
+                        {project.value && (
+                          <span className="flex items-center gap-0.5 text-[var(--primary-dark)] font-bold">
+                            <IndianRupee size={9} /> {project.value}
+                          </span>
+                        )}
+                        {project.powerCapacity && (
+                          <span className="flex items-center gap-0.5 text-amber-600 font-bold">
+                            <Zap size={9} /> {project.powerCapacity}
+                          </span>
+                        )}
+                      </div>
+                    )}
                     
                     {project.status !== 'Completed' && (
                       <div className="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
@@ -390,7 +469,7 @@ function ProjectsContent() {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col border border-white/20"
+              className="relative bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col border border-white/20"
             >
               <div className="p-8 border-b border-[var(--border)] flex items-center justify-between bg-[#fcfcfc]">
                 <div>
@@ -472,6 +551,72 @@ function ProjectsContent() {
 
                     <section>
                       <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--black)] mb-6">
+                        <IndianRupee size={14} className="text-[var(--primary)]" />
+                        Project Specifications
+                      </h3>
+                      
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Project Value</label>
+                            <input 
+                              type="text"
+                              value={formData.value}
+                              onChange={e => setFormData({...formData, value: e.target.value})}
+                              className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
+                              placeholder="e.g. 2.2 Cr"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Capacity</label>
+                            <input 
+                              type="text"
+                              value={formData.capacity}
+                              onChange={e => setFormData({...formData, capacity: e.target.value})}
+                              className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
+                              placeholder="e.g. ₹2.20 Crore"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Power Capacity</label>
+                            <input 
+                              type="text"
+                              value={formData.powerCapacity}
+                              onChange={e => setFormData({...formData, powerCapacity: e.target.value})}
+                              className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
+                              placeholder="e.g. 10 MVA"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Duration</label>
+                            <input 
+                              type="text"
+                              value={formData.duration}
+                              onChange={e => setFormData({...formData, duration: e.target.value})}
+                              className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
+                              placeholder="e.g. 6 months"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Work Awarded</label>
+                          <input 
+                            type="text"
+                            value={formData.workAwarded}
+                            onChange={e => setFormData({...formData, workAwarded: e.target.value})}
+                            className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
+                            placeholder="e.g. HT/LT Supply & Installation"
+                          />
+                        </div>
+                      </div>
+                    </section>
+
+                    <section>
+                      <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--black)] mb-6">
                         <Clock size={14} className="text-[var(--primary)]" />
                         Status & Milestones
                       </h3>
@@ -510,7 +655,7 @@ function ProjectsContent() {
                     <section>
                       <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--black)] mb-6">
                         <Upload size={14} className="text-[var(--primary)]" />
-                        Visual Assets
+                        Main Project Image
                       </h3>
                       
                       <div className="relative group aspect-video bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl overflow-hidden hover:border-[var(--primary)] transition-colors">
@@ -542,6 +687,61 @@ function ProjectsContent() {
                       </div>
                     </section>
 
+                    {/* Gallery Upload Section */}
+                    <section>
+                      <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--black)] mb-6">
+                        <Images size={14} className="text-[var(--primary)]" />
+                        Gallery Images
+                      </h3>
+                      
+                      <div className="space-y-4">
+                        {/* Existing Gallery */}
+                        {existingGallery.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {existingGallery.map((url, i) => (
+                              <div key={`existing-${i}`} className="relative group/gal aspect-video rounded-lg overflow-hidden border border-gray-200">
+                                <img src={url} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover" />
+                                <button
+                                  type="button"
+                                  onClick={() => removeExistingGallery(i)}
+                                  className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover/gal:opacity-100 transition-opacity"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* New Gallery Previews */}
+                        {galleryPreviews.length > 0 && (
+                          <div className="grid grid-cols-3 gap-2">
+                            {galleryPreviews.map((preview, i) => (
+                              <div key={`new-${i}`} className="relative group/gal aspect-video rounded-lg overflow-hidden border-2 border-[var(--primary)] border-dashed">
+                                <img src={preview} alt={`New ${i + 1}`} className="w-full h-full object-cover" />
+                                <span className="absolute top-1 left-1 text-[8px] bg-[var(--primary)] text-white px-1.5 py-0.5 rounded-full font-bold">NEW</span>
+                                <button
+                                  type="button"
+                                  onClick={() => removeGalleryPreview(i)}
+                                  className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover/gal:opacity-100 transition-opacity"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Add More Gallery */}
+                        <div className="relative border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-[var(--primary)] transition-colors cursor-pointer">
+                          <p className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-widest">
+                            + Add gallery images (up to 10)
+                          </p>
+                          <input type="file" multiple className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" onChange={handleGalleryChange} />
+                        </div>
+                      </div>
+                    </section>
+
                     <section>
                       <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--black)] mb-6">
                         <MessageSquare size={14} className="text-[var(--primary)]" />
@@ -549,11 +749,25 @@ function ProjectsContent() {
                       </h3>
                       <textarea 
                         required
-                        rows={6}
+                        rows={4}
                         value={formData.description}
                         onChange={e => setFormData({...formData, description: e.target.value})}
                         className="w-full bg-white border border-[var(--border)] rounded-2xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none resize-none font-montserrat leading-relaxed"
                         placeholder="Comprehensive project scope and key highlights..."
+                      />
+                    </section>
+
+                    <section>
+                      <h3 className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[var(--black)] mb-6">
+                        <Wrench size={14} className="text-[var(--primary)]" />
+                        Scope of Work (one item per line)
+                      </h3>
+                      <textarea 
+                        rows={5}
+                        value={formData.scopeText}
+                        onChange={e => setFormData({...formData, scopeText: e.target.value})}
+                        className="w-full bg-white border border-[var(--border)] rounded-2xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none resize-none font-montserrat leading-relaxed"
+                        placeholder={"Heavy Industrial HT/LT Power Distribution\nOverhead Crane Power Rails & Busbar System\nFactory Bay High-Lumen LED System"}
                       />
                     </section>
                   </div>

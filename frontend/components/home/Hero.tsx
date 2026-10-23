@@ -14,10 +14,10 @@ const IMAGES = [
 ]
 
 const statsData = [
-  { end: 17, label: "Projects Delivered", suffix: "+" },
-  { end: 10, label: "Years Team Experience", suffix: "+" },
-  { end: 12, label: "Major Corporate Clients", suffix: "+" },
-  { end: 1, label: "Class I Contractor", suffix: "" }
+  { end: 14, label: "Projects since 2024", suffix: "" },
+  { end: 10.7, label: "Project Value Delivered", prefix: "₹", suffix: " Cr+" },
+  { end: 27, label: "Capacity Installed", suffix: " MVA+" },
+  { end: 33, label: "Class I Licence Scope", suffix: " kV" }
 ];
 
 const PARTICLES = [
@@ -60,7 +60,7 @@ function StatsCard({ stat, isActive, isMobile, index }: { stat: typeof statsData
       >
         <div className="flex flex-col relative z-10 w-full">
           <div className="font-inter font-bold text-2xl sm:text-3xl leading-none text-[var(--primary)]">
-            {stat.end}<span className="text-lg ml-0.5">{stat.suffix}</span>
+            {(stat as any).prefix || ''}{stat.end}<span className="text-lg ml-0.5">{stat.suffix}</span>
           </div>
           <div className={`font-inter text-[11px] sm:text-[12px] font-semibold mt-1 ${isActive ? 'text-[var(--black)]' : 'text-[var(--gray)]'}`}>
             {stat.label}
@@ -95,7 +95,7 @@ function AutoHighlightingStats() {
             transition={{ delay: 0.45 + i * 0.08 }}
             className="rounded-[1rem] border border-white/15 bg-white/10 p-3 backdrop-blur-xl"
           >
-            <div className="font-inter font-bold text-2xl sm:text-3xl text-white leading-none">{stat.end}{stat.suffix}</div>
+            <div className="font-inter font-bold text-2xl sm:text-3xl text-white leading-none">{(stat as any).prefix || ''}{stat.end}{stat.suffix}</div>
             <div className="mt-1 font-inter text-[10px] sm:text-[11px] font-medium text-white/85">{stat.label}</div>
           </motion.div>
         ))}
@@ -193,50 +193,41 @@ export default function Hero() {
             >
               <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse" />
               <span className="font-inter text-white text-[11px] sm:text-[13px] font-semibold tracking-wide">
-                10+ Years Team Experience | 17+ Projects | Class I Contractor
+                CLASS I ELECTRICAL CONTRACTOR · LICENCE NO. 1CL202315BGM
               </span>
             </motion.div>
 
-            {/* H1 Heading: Inter 600, 40px, 48px, -0.02em */}
+            {/* H1 Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.6 }}
               className="font-inter font-semibold text-[28px] sm:text-[34px] lg:text-[40px] leading-[36px] sm:leading-[42px] lg:leading-[48px] tracking-[-0.02em] text-white mb-4 sm:mb-6 drop-shadow-2xl max-w-3xl"
             >
-              Industrial Electrical Infrastructure. <span className="text-[var(--primary)]">Engineered. Installed. Commissioned.</span>
+              Powering Possibilities. <span className="text-[var(--primary)]">End-to-End Electrical Solutions up to 33 kV.</span>
             </motion.h1>
 
-            {/* Subheading: Inter 400, 18px, 28px, 0 */}
+            {/* Subheading */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
               className="font-inter font-normal text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[25px] lg:leading-[28px] tracking-normal text-white/90 max-w-2xl mb-6 sm:mb-8"
             >
-              End-to-end electrical solutions for manufacturing, aerospace, automotive, food processing and commercial infrastructure — from engineering and panel manufacturing to installation, testing and commissioning.
+              Turnkey HT/LT electrical works for industrial, aerospace, EV and institutional projects. Adler takes every job from design and planning through installation, testing, commissioning and CEIG approval.
             </motion.p>
 
-            {/* Buttons: Inter 700, 14px, 20px, 0 */}
+            {/* Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto"
             >
-              <Link href="/services" className="w-full sm:w-auto">
+              <Link href="/projects" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ y: -2, boxShadow: '0 10px 25px rgba(141,196,62,0.4)' }}
                   className="shimmer-btn bg-[var(--primary)] text-white font-inter font-bold text-[14px] leading-[20px] tracking-normal px-6 sm:px-7 py-3 rounded-lg shadow-xl w-full text-center transition-transform"
-                >
-                  Our Industrial Solutions
-                </motion.button>
-              </Link>
-
-              <Link href="/projects" className="w-full sm:w-auto">
-                <motion.button
-                  whileHover={{ y: -2, backgroundColor: 'rgba(255,255,255,0.15)' }}
-                  className="border border-white/40 text-white bg-black/30 backdrop-blur-md font-inter font-bold text-[14px] leading-[20px] tracking-normal px-6 sm:px-7 py-3 rounded-lg hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors w-full text-center"
                 >
                   View Projects
                 </motion.button>
@@ -244,12 +235,23 @@ export default function Hero() {
 
               <Link href="/contact" className="w-full sm:w-auto">
                 <motion.button
-                  whileHover={{ y: -2, backgroundColor: 'rgba(141,196,62,0.2)' }}
-                  className="border border-[var(--primary)]/60 text-[var(--primary)] bg-black/40 backdrop-blur-md font-inter font-bold text-[14px] leading-[20px] tracking-normal px-5 sm:px-6 py-3 rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all w-full text-center"
+                  whileHover={{ y: -2, backgroundColor: 'rgba(255,255,255,0.15)' }}
+                  className="border border-white/40 text-white bg-black/30 backdrop-blur-md font-inter font-bold text-[14px] leading-[20px] tracking-normal px-6 sm:px-7 py-3 rounded-lg hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors w-full text-center"
                 >
-                  Request a Technical Proposal
+                  Request a Proposal
                 </motion.button>
               </Link>
+            </motion.div>
+
+            {/* Trust Line under buttons */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-6 flex items-center gap-2 text-white/80 font-inter text-xs sm:text-sm font-medium"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)]" />
+              <span>14 projects · ₹10.7 Cr+ project value · 27 MVA+ capacity · Karnataka & Tamil Nadu</span>
             </motion.div>
           </div>
 

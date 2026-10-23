@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import ScrollReveal from '../shared/ScrollReveal'
 
-function Counter({ end, suffix = '' }: { end: number, suffix?: string }) {
+function Counter({ end, prefix = '', suffix = '' }: { end: number, prefix?: string, suffix?: string }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
   const [count, setCount] = useState(0)
@@ -20,7 +20,8 @@ function Counter({ end, suffix = '' }: { end: number, suffix?: string }) {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      setCount(Math.floor(ease * end));
+      const val = ease * end;
+      setCount(end % 1 !== 0 ? parseFloat(val.toFixed(1)) : Math.floor(val));
       if (progress < 1) {
         window.requestAnimationFrame(step);
       }
@@ -28,15 +29,15 @@ function Counter({ end, suffix = '' }: { end: number, suffix?: string }) {
     window.requestAnimationFrame(step);
   }, [end, isInView]);
 
-  return <span ref={ref}>{count}{suffix}</span>
+  return <span ref={ref}>{prefix}{count}{suffix}</span>
 }
 
 export default function StatsCounter() {
   const stats = [
-    { label: 'Projects Completed', value: 17, suffix: '' },
-    { label: 'Years Experience', value: 10, suffix: '+' },
-    { label: 'Happy Clients', value: 14, suffix: '' },
-    { label: 'Strategic Offices', value: 2, suffix: '' },
+    { label: 'Projects since 2024', value: 14, prefix: '', suffix: '' },
+    { label: 'Project value delivered', value: 10.7, prefix: '₹', suffix: ' Cr+' },
+    { label: 'Capacity installed', value: 27, prefix: '', suffix: ' MVA+' },
+    { label: 'Class I licence scope', value: 33, prefix: '', suffix: ' kV' },
   ]
 
   return (
@@ -49,8 +50,8 @@ export default function StatsCounter() {
                 whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(124,179,66,0.1)' }}
                 className="bg-white p-5 md:p-8 rounded-[1.25rem] md:rounded-sm shadow-sm border-t-4 border-[var(--primary)] h-full flex flex-col justify-center text-center"
               >
-                <div className="font-cormorant md:font-bebas text-4xl md:text-6xl text-[var(--primary)] mb-1 md:mb-2">
-                  <Counter end={s.value} suffix={s.suffix} />
+                <div className="font-cormorant md:font-bebas text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-[var(--primary)] mb-1 md:mb-2 whitespace-nowrap">
+                  <Counter end={s.value} prefix={s.prefix} suffix={s.suffix} />
                 </div>
                 <div className="font-poppins md:font-rajdhani text-[11px] md:text-sm uppercase tracking-[0.14em] md:tracking-widest text-[var(--gray)] font-semibold md:font-bold">
                   {s.label}

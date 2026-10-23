@@ -88,7 +88,7 @@ export default function AdminNavbar() {
             <div className="w-[1px] h-6 bg-[var(--border)] mx-2" />
 
             <a
-              href="https://www.adlercontracts.in/"
+              href={process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-full font-poppins text-[13px] font-semibold tracking-wide text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-all mr-2"

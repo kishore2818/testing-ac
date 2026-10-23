@@ -8,36 +8,32 @@ import Link from 'next/link'
 
 const industrialFaqs = [
   { 
-    q: "What industries do you specialize in?", 
-    a: "We specialize in heavy industrial manufacturing, aerospace facilities, automotive & mobility assembly, food processing & cold storage, logistics warehousing, data centers, and major commercial infrastructure developments." 
+    q: "What industries do you work in?", 
+    a: "Aerospace, EV and mobility, industrial and SEZ manufacturing, and institutional projects such as schools and hostels. Recent clients include Thyssenkrupp Aerospace, Aequs, SFS Group and Sterling Tech Mobility." 
   },
   { 
     q: "What voltage levels do you support?", 
-    a: "We handle both High Voltage (HT) systems up to 33kV and Low Voltage (LT) power distribution networks, switchgears, sub-stations, transformers, and plant automation desks." 
+    a: "Our Class I licence covers electrical works up to and including 33 kV. That covers both HT works (HT yards, substations, transformers) and LT distribution." 
   },
   { 
-    q: "Do you handle complete turnkey electrical projects?", 
-    a: "Yes. As a Class I Electrical Contractor, Adler delivers complete turnkey projects from initial site survey and engineering design to BOQ procurement, panel manufacturing, cabling, installation, testing, and commissioning." 
+    q: "Do you handle complete turnkey projects?", 
+    a: "Yes. We take a project from design and planning through supply, installation, testing and commissioning, and we secure the CEIG approval needed to energise the installation." 
   },
   { 
     q: "Do you provide testing and commissioning?", 
-    a: "Absoltely. We perform comprehensive factory acceptance testing (FAT), site acceptance testing (SAT), insulation hi-pot testing, relay calibration, earth resistance audits, and formal joint commissioning." 
+    a: "Yes. Every installation is tested and checked before handover, and the test records are included in the project documentation." 
   },
   { 
-    q: "Do you provide AMC for industrial facilities?", 
-    a: "Yes, we offer structured Annual Maintenance Contracts (AMC) including preventive maintenance schedules, infrared thermography, arc flash hazard audits, transformer oil testing, and rapid emergency response." 
+    q: "Can you get CEIG / Electrical Inspectorate approval?", 
+    a: "Yes. We have secured approvals for high-profile projects such as Thyssenkrupp Aerospace and Inovit Aerospace in Bengaluru." 
   },
   { 
-    q: "Can you work from BOQ/drawings provided by consultants?", 
-    a: "Yes. Our engineering team routinely works with BOQ specifications and single line diagrams (SLD) issued by MEP consultants, offering value engineering and precise execution." 
+    q: "Can you work from BOQs and drawings provided by consultants?", 
+    a: "Yes. Most of our projects are executed for main contractors and consultants against their BOQs and drawings. We provide joint measurement records for billing." 
   },
   { 
-    q: "Do you provide emergency electrical support?", 
-    a: "We offer dedicated emergency breakdown support for facility AMC clients to diagnose power faults, replace damaged switchgear components, and restore uptime swiftly." 
-  },
-  { 
-    q: "What types of electrical panels do you design?", 
-    a: "Adler designs and manufactures LT Distribution Panels, HT Panels up to 33kV, Motor Control Centers (MCC), Power Control Centers (PCC), APFC Panels, VCB Panels, and PLC automation desks." 
+    q: "Where do you work?", 
+    a: "We are headquartered in Belagavi and work across Karnataka (Belagavi, Hubballi, Bengaluru) and Tamil Nadu (Oragadam)." 
   }
 ]
 

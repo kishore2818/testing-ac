@@ -2,7 +2,7 @@
 
 import AdminNavbar from '@/components/AdminNavbar'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Edit2, Trash2, X, Upload, Check, Loader2, Quote, Star, User, Briefcase, MessageSquare, SlidersHorizontal } from 'lucide-react'
+import { Plus, Edit2, Trash2, X, Upload, Loader2, Star, User, Briefcase, MessageSquare, MapPin } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { fetchReviews, createReview, updateReview, deleteReview } from '@/lib/api'
 
@@ -20,6 +20,7 @@ export default function ReviewsManagement() {
     name: '',
     role: '',
     company: '',
+    location: '',
     quote: '',
     rating: 5,
     image: ''
@@ -45,20 +46,22 @@ export default function ReviewsManagement() {
     if (review) {
       setEditingId(review._id)
       setFormData({
-        name: review.name,
-        role: review.role,
-        company: review.company,
-        quote: review.quote,
+        name: review.name || '',
+        role: review.role || '',
+        company: review.company || '',
+        location: review.location || '',
+        quote: review.quote || '',
         rating: review.rating || 5,
-        image: review.image
+        image: review.image || ''
       })
-      setImagePreview(review.image)
+      setImagePreview(review.image || null)
     } else {
       setEditingId(null)
       setFormData({
         name: '',
         role: '',
         company: '',
+        location: '',
         quote: '',
         rating: 5,
         image: ''
@@ -99,6 +102,7 @@ export default function ReviewsManagement() {
     data.append('name', formData.name)
     data.append('role', formData.role)
     data.append('company', formData.company)
+    data.append('location', formData.location)
     data.append('quote', formData.quote)
     data.append('rating', formData.rating.toString())
     
@@ -211,7 +215,6 @@ export default function ReviewsManagement() {
                           size={10}
                           fill={s <= (review.rating || 5) ? 'var(--primary)' : 'none'}
                           stroke={s <= (review.rating || 5) ? 'var(--primary)' : '#d1d5db'}
-                          className=""
                         />
                       ))}
                     </div>
@@ -229,6 +232,12 @@ export default function ReviewsManagement() {
                         <span>{review.role}</span>
                         <span className="text-gray-300">•</span>
                         <span>{review.company}</span>
+                        {review.location && (
+                          <>
+                            <span className="text-gray-300">•</span>
+                            <span className="flex items-center gap-0.5"><MapPin size={9} />{review.location}</span>
+                          </>
+                        )}
                       </p>
                     </div>
                   </div>
@@ -328,6 +337,39 @@ export default function ReviewsManagement() {
                             className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
                             placeholder="e.g. Thyssenkrupp Aerospace"
                           />
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Location</label>
+                          <input 
+                            required
+                            type="text"
+                            value={formData.location}
+                            onChange={e => setFormData({...formData, location: e.target.value})}
+                            className="w-full bg-white border border-[var(--border)] rounded-xl px-5 py-4 text-sm focus:border-[var(--primary)] transition-all outline-none"
+                            placeholder="e.g. Bangalore, Karnataka"
+                          />
+                        </div>
+
+                        {/* Star Rating */}
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-[var(--gray)] mb-2 px-1">Rating</label>
+                          <div className="flex gap-2">
+                            {[1,2,3,4,5].map(s => (
+                              <button
+                                key={s}
+                                type="button"
+                                onClick={() => setFormData({...formData, rating: s})}
+                                className="transition-transform hover:scale-125"
+                              >
+                                <Star
+                                  size={24}
+                                  fill={s <= formData.rating ? 'var(--primary)' : 'none'}
+                                  stroke={s <= formData.rating ? 'var(--primary)' : '#d1d5db'}
+                                />
+                              </button>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </section>

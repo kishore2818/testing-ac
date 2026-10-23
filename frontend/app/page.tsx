@@ -5,6 +5,7 @@ import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import Hero from '@/components/home/Hero'
 import Ticker from '@/components/home/Ticker'
 import AboutSnapshot from '@/components/home/AboutSnapshot'
+import Credentials from '@/components/home/Credentials'
 import Services from '@/components/home/Services'
 import Industries from '@/components/home/Industries'
 import OngoingProjects from '@/components/home/OngoingProjects'
@@ -21,6 +22,7 @@ export default function Home() {
         <Hero />
         <Ticker />
         <AboutSnapshot />
+        <Credentials />
         <Services />
         <Industries />
         <OngoingProjects />

@@ -28,28 +28,22 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: 'Adler Contracts | Electrical Panel Specialists in Bengaluru',
+    default: 'Adler Contracts – Class I Electrical Contractor, HT/LT up to 33 kV | Belagavi',
     template: '%s | Adler Contracts',
   },
   description:
-    'Adler Contracts – India\'s trusted electrical panel manufacturer in Bengaluru. Expert design, manufacturing & installation of MCC panels, PCC panels, APFC panels, control desks & bus ducts. Call now!',
+    'Class I electrical contractor in Belagavi, Karnataka. Turnkey HT/LT works up to 33 kV: substations, transformers, panels, cabling, CEIG approvals. Industrial projects across Karnataka and Tamil Nadu.',
 
   keywords: [
+    'electrical contractor Belagavi',
+    'Class I electrical contractor Karnataka',
+    'HT LT electrical contractor',
+    '33 kV substation contractor',
+    'CEIG approval contractor',
+    'industrial electrical contractor Hubballi',
+    'turnkey electrical works Bengaluru',
     'Adler Contracts',
-    'adler contracts',
     'adlercontracts.in',
-    'electrical panel manufacturer Bengaluru',
-    'MCC panel manufacturer India',
-    'PCC panel manufacturer',
-    'APFC panel',
-    'control panel manufacturer Bangalore',
-    'industrial electrical panels',
-    'bus duct manufacturer',
-    'switchgear manufacturer Bangalore',
-    'electrical contractor Bengaluru',
-    'panel board manufacturer India',
-    'motor control centre',
-    'power control centre',
   ],
 
   authors: [{ name: 'Adler Contracts', url: SITE_URL }],
@@ -67,9 +61,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'Adler Contracts | Electrical Panel Specialists in Bengaluru',
+    title: 'Adler Contracts | Class I Electrical Contractor in Belagavi',
     description:
-      'India\'s trusted electrical panel manufacturer. Turnkey design, manufacturing & installation of MCC, PCC, APFC panels & bus ducts. Based in Bengaluru.',
+      'Karnataka Class I Licensed Electrical Contractor up to 33 kV. Turnkey HT/LT power distribution, substations, and CEIG approvals. Headquartered in Belagavi.',
     url: SITE_URL,
     siteName: 'Adler Contracts',
     images: [
@@ -77,7 +71,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Adler Contracts – Electrical Panel Specialists',
+        alt: 'Adler Contracts – Class I Electrical Contractor',
       },
     ],
     locale: 'en_IN',
@@ -86,9 +80,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Adler Contracts | Electrical Panel Specialists in Bengaluru',
+    title: 'Adler Contracts | Class I Electrical Contractor in Belagavi',
     description:
-      'India\'s trusted electrical panel manufacturer. MCC, PCC, APFC panels & bus ducts. Bengaluru.',
+      'Karnataka Class I Licensed Electrical Contractor up to 33 kV. Turnkey HT/LT power distribution, substations & industrial electrification. Belagavi.',
     images: [`${SITE_URL}/og-image.png`],
   },
 

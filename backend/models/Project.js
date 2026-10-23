@@ -9,6 +9,14 @@ const projectSchema = new mongoose.Schema({
   description: { type: String, required: true },
   progress: { type: Number, required: true, min: 0, max: 100 },
   image: { type: String, required: true },
+  // New fields to match frontend data
+  value: { type: String, default: '' },
+  capacity: { type: String, default: '' },
+  powerCapacity: { type: String, default: '' },
+  workAwarded: { type: String, default: '' },
+  duration: { type: String, default: '' },
+  scope: [{ type: String }],
+  gallery: [{ type: String }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Project', projectSchema);
