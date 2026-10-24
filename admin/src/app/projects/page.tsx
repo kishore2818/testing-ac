@@ -419,19 +419,23 @@ function ProjectsContent() {
                       </div>
                     )}
 
-                    <div className="pt-3 border-t border-[var(--border)] grid grid-cols-2 gap-3">
-                      <div className="flex flex-col">
-                        <span className="text-[8px] font-bold text-[var(--gray)] uppercase tracking-widest mb-0.5">Client</span>
-                        <div className="flex items-center gap-1.5">
+                    <div className="pt-2.5 sm:pt-3 border-t border-[var(--border)] mt-auto grid grid-cols-2 gap-2 min-w-0 overflow-hidden">
+                      <div className="flex flex-col min-w-0 overflow-hidden">
+                        <span className="text-[8px] font-bold text-[var(--gray)] uppercase tracking-widest mb-0.5 truncate block">Client</span>
+                        <div className="flex items-center gap-1 min-w-0 overflow-hidden">
                           <User size={10} className="text-[var(--primary)] shrink-0" />
-                          <span className="font-rajdhani text-[10px] font-bold text-[var(--black)] uppercase tracking-wide truncate">{project.client}</span>
+                          <span className="font-rajdhani text-[10px] font-bold text-[var(--black)] uppercase tracking-wide truncate block" title={project.client}>
+                            {project.client}
+                          </span>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-[8px] font-bold text-[var(--gray)] uppercase tracking-widest mb-0.5">Site</span>
-                        <div className="flex items-center gap-1.5">
+                      <div className="flex flex-col items-end min-w-0 overflow-hidden text-right">
+                        <span className="text-[8px] font-bold text-[var(--gray)] uppercase tracking-widest mb-0.5 truncate block">Site</span>
+                        <div className="flex items-center gap-1 min-w-0 overflow-hidden justify-end w-full">
                           <MapPin size={10} className="text-[var(--gray)] shrink-0" />
-                          <span className="font-rajdhani text-[10px] font-bold text-[var(--gray)] uppercase tracking-wide truncate">{project.location}</span>
+                          <span className="font-rajdhani text-[10px] font-bold text-[var(--gray)] uppercase tracking-wide truncate block text-right" title={project.location}>
+                            {project.location}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -735,7 +739,7 @@ function ProjectsContent() {
                         {/* Add More Gallery */}
                         <div className="relative border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-[var(--primary)] transition-colors cursor-pointer">
                           <p className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-widest">
-                            + Add gallery images (up to 10)
+                            + Add gallery images
                           </p>
                           <input type="file" multiple className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" onChange={handleGalleryChange} />
                         </div>

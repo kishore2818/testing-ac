@@ -150,14 +150,14 @@ export default function ProjectCard({ project, onOpenModal, priority = false }: 
 
         {/* Metadata Specs */}
         <div className="mt-auto pt-2 sm:pt-3 border-t border-[var(--border)] space-y-1 sm:space-y-2 text-[10px] sm:text-xs font-inter">
-          <div className="flex items-center justify-between gap-1 text-[9px] sm:text-[11px]">
-            <span className="text-[var(--gray)] flex items-center gap-1 truncate">
+          <div className="flex items-center justify-between gap-1.5 text-[9px] sm:text-[11px] min-w-0 overflow-hidden">
+            <span className="text-[var(--gray)] flex items-center gap-1 min-w-0 flex-1 overflow-hidden" title={project.client}>
               <Building2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--primary)] shrink-0" />
-              <span className="truncate">{project.client}</span>
+              <span className="truncate block">{project.client}</span>
             </span>
-            <span className="text-[var(--black)] font-medium flex items-center gap-0.5 shrink-0">
+            <span className="text-[var(--black)] font-medium flex items-center gap-0.5 shrink-0 max-w-[45%] overflow-hidden" title={project.location}>
               <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--primary)] shrink-0" />
-              <span>{project.location?.split(',')[0]}</span>
+              <span className="truncate block">{project.location?.split(',')[0]}</span>
             </span>
           </div>
 

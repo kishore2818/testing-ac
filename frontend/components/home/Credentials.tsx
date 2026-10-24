@@ -12,8 +12,8 @@ export default function Credentials() {
       number: '1CL202315BGM',
       scope: 'Works up to and including 33 kV · Valid till 31/01/2031',
       issuer: 'Government of Karnataka',
-      verifyUrl: 'https://vidyuthsuraksha.karnataka.gov.in',
-      verifyText: 'vidyuthsuraksha.karnataka.gov.in',
+      verifyUrl: 'https://ksei.karnataka.gov.in',
+      verifyText: 'ksei.karnataka.gov.in',
       icon: Award,
     },
     {
@@ -21,8 +21,8 @@ export default function Credentials() {
       number: '1SP200879BGM',
       scope: 'Continuous Grade I Licensed On-Site Supervision · Valid till 31/12/2030',
       issuer: 'Government of Karnataka',
-      verifyUrl: 'https://vidyuthsuraksha.karnataka.gov.in',
-      verifyText: 'vidyuthsuraksha.karnataka.gov.in',
+      verifyUrl: 'https://ksei.karnataka.gov.in',
+      verifyText: 'ksei.karnataka.gov.in',
       icon: BadgeCheck,
     },
     {
@@ -30,8 +30,8 @@ export default function Credentials() {
       number: 'UDYAM-KR-04-0120128',
       scope: 'Micro Enterprise · Services · NIC 43219 (Electrical Installation)',
       issuer: 'Ministry of MSME, Govt of India',
-      verifyUrl: 'https://udyamregistration.gov.in',
-      verifyText: 'udyamregistration.gov.in',
+      verifyUrl: 'https://www.msme.gov.in',
+      verifyText: 'msme.gov.in',
       icon: FileText,
     },
     {
@@ -39,8 +39,8 @@ export default function Credentials() {
       number: '29CIZPP4477R1ZK',
       scope: 'Regular Taxpayer · Karnataka Commercial Taxes',
       issuer: 'Goods and Services Tax Portal',
-      verifyUrl: 'https://services.gst.gov.in',
-      verifyText: 'Karnataka GST Portal',
+      verifyUrl: 'https://www.gst.gov.in',
+      verifyText: 'gst.gov.in',
       icon: ShieldCheck,
     },
   ]

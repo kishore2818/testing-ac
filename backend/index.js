@@ -197,10 +197,10 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 
 // ── Project Routes ────────────────────────────────────────────────────────────
 
-// Multi-field upload: imageFile (single main image) + galleryFiles (up to 10 gallery images)
+// Multi-field upload: imageFile (single main image) + galleryFiles (multiple gallery images)
 const projectUpload = upload.fields([
   { name: 'imageFile', maxCount: 1 },
-  { name: 'galleryFiles', maxCount: 10 },
+  { name: 'galleryFiles', maxCount: 50 },
 ]);
 
 app.get('/api/projects', async (req, res) => {
